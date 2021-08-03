@@ -13,3 +13,15 @@
  *= require_tree .
  *= require_self
  */
+
+.grid {
+  display: grid;
+}
+
+.place-items-center {
+  place-items: center;
+}
+
+.h-screen {
+  height: 100vh;
+}
