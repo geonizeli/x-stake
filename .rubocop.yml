@@ -1,0 +1,12 @@
+inherit_gem:
+  rubocop-shopify: rubocop.yml
+
+require:
+  - rubocop-rails
+  - rubocop-rspec
+
+AllCops:
+  NewCops: enable
+  Exclude:
+    - db/schema.rb
+    - bin/**/*
