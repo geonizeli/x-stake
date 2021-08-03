@@ -12,16 +12,17 @@ gem "rails", "~> 6.1.4"
 gem "sass-rails", ">= 6"
 gem "turbolinks", "~> 5"
 gem "webpacker", "~> 5.0"
-
 gem "bootsnap", ">= 1.4.4", require: false
-
-gem "administrate"
 
 gem "devise"
 gem "devise-bootstrap-views", "~> 1.0"
 gem "devise-i18n"
 
+gem "administrate"
+gem "graphql"
+
 group :development, :test do
+  gem "graphql_playground-rails"
   gem "pry-byebug", platforms: [:mri, :mingw, :x64_mingw]
   gem "capybara"
   gem "rspec-rails"
@@ -32,6 +33,7 @@ group :development, :test do
 end
 
 group :development do
+  gem "graphql_playground-rails"
   gem "web-console", ">= 4.1.0"
 
   gem "listen", "~> 3.3"
