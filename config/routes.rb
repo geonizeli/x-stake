@@ -1,9 +1,5 @@
 # frozen_string_literal: true
 Rails.application.routes.draw do
-  mount GraphqlPlayground::Rails::Engine, at: "/playground", graphql_path: "/graphql" if Rails.env.development?
-
-  post "/graphql", to: "graphql#execute"
-
   devise_for :admin_users
 
   namespace :admin do
@@ -11,4 +7,12 @@ Rails.application.routes.draw do
 
     root to: "admin_users#index"
   end
+
+  root to: "home#index"
+  get "*all" => "home#index", constraints: lambda { |req|
+    Rails.env.development? ? req.path.exclude?("playground") : req
+  }
+
+  post "/graphql", to: "graphql#execute"
+  mount GraphqlPlayground::Rails::Engine, at: "/playground", graphql_path: "/graphql" if Rails.env.development?
 end
