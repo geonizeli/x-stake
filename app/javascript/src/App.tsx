@@ -1,27 +1,27 @@
+import type { FC } from "react";
 import React from "react";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { BrowserRouter as Router } from "react-router-dom";
 
+import { Navbar } from "./components/Navbar";
+import { SideNav } from "./components/SideNav";
 import { AppContext } from "./contexts/AppContext";
 import { AuthProvider } from "./contexts/AuthProvider";
-import { Home } from "./pages";
+import { Routes } from "./Routes";
 
-export const App = () => {
+export const App: FC = () => {
   return (
-    <AuthProvider>
-      <AppContext>
-        <main className="min-h-screen w-full bg-gray-50 flex flex-col">
-          <Router>
-            <Switch>
-              <Route path="/hello_about">
-                <div className="bg-gray-600">Hello World!</div>
-              </Route>
-              <Route path="/">
-                <Home />
-              </Route>
-            </Switch>
-          </Router>
-        </main>
-      </AppContext>
-    </AuthProvider>
+    <Router>
+      <AuthProvider>
+        <AppContext>
+          <main className="min-h-screen w-full bg-gray-50 flex flex-col">
+            <Navbar />
+            <div className="flex flex-grow">
+              <SideNav />
+              <Routes />
+            </div>
+          </main>
+        </AppContext>
+      </AuthProvider>
+    </Router>
   );
 };
