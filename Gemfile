@@ -35,6 +35,7 @@ group :development, :test do
 end
 
 group :development do
+  gem "annotate"
   gem "graphql_playground-rails"
   gem "web-console", ">= 4.1.0"
 
