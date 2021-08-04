@@ -15,12 +15,12 @@ gem "webpacker", "~> 5.0"
 gem "bootsnap", ">= 1.4.4", require: false
 
 gem "devise"
-gem "devise-bootstrap-views", "~> 1.0"
+gem "devise-bootstrap-views"
 gem "devise-i18n"
-
 gem "administrate"
 gem "graphql"
 gem "tailwindcss-rails"
+gem "httparty"
 
 group :development, :test do
   gem "dotenv-rails"
