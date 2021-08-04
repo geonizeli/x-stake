@@ -9,10 +9,10 @@ export const App = () => (
   <Router>
     <Switch>
       <Route path="/about">
-      <div>About!</div>
+        <div>About!</div>
       </Route>
       <Route path="/">
-        <div>Hello World!</div>
+        <div className="bg-gray-600">Hello World!</div>
       </Route>
     </Switch>
   </Router>

@@ -20,6 +20,7 @@ gem "devise-i18n"
 
 gem "administrate"
 gem "graphql"
+gem "tailwindcss-rails"
 
 group :development, :test do
   gem "graphql_playground-rails"
