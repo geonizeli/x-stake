@@ -21,6 +21,7 @@ gem "administrate"
 gem "graphql"
 gem "tailwindcss-rails"
 gem "httparty"
+gem "pundit"
 
 group :development, :test do
   gem "dotenv-rails"
