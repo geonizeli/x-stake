@@ -13,4 +13,3 @@
 // ActiveStorage.start()
 
 import "stylesheets/application"
-import './src/index'

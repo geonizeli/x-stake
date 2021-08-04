@@ -1,9 +1,6 @@
 module.exports = function(api) {
   var validEnv = ['development', 'test', 'production']
   var currentEnv = api.env()
-  var isDevelopmentEnv = api.env('development')
-  var isProductionEnv = api.env('production')
-  var isTestEnv = api.env('test')
 
   if (!validEnv.includes(currentEnv)) {
     throw new Error(
@@ -17,66 +14,33 @@ module.exports = function(api) {
 
   return {
     presets: [
-      isTestEnv && [
-        '@babel/preset-env',
-        {
-          targets: {
-            node: 'current'
-          },
-          modules: 'commonjs'
-        },
-        '@babel/preset-react'
-      ],
-      (isProductionEnv || isDevelopmentEnv) && [
-        '@babel/preset-env',
-        {
-          forceAllTransforms: true,
-          useBuiltIns: 'entry',
-          corejs: 3,
-          modules: false,
-          exclude: ['transform-typeof-symbol']
-        }
-      ],
-      [
-        '@babel/preset-react',
-        {
-          development: isDevelopmentEnv || isTestEnv,
-          useBuiltIns: true
-        }
-      ],
-      ['@babel/preset-typescript', { 'allExtensions': true, 'isTSX': true }]
-    ].filter(Boolean),
+      '@babel/preset-env',
+      '@babel/preset-react',
+      '@babel/preset-typescript',
+    ],
+    env: {
+      test: {
+        presets: [
+          [
+            '@babel/preset-env',
+            {
+              targets: {
+                node: '12',
+              },
+              modules: 'commonjs',
+              useBuiltIns: false,
+              debug: false,
+            }
+          ],
+          '@babel/preset-react',
+          'jest'
+        ]
+      }
+    },
     plugins: [
-      'babel-plugin-macros',
       '@babel/plugin-syntax-dynamic-import',
-      isTestEnv && 'babel-plugin-dynamic-import-node',
-      '@babel/plugin-transform-destructuring',
-      [
-        '@babel/plugin-proposal-class-properties',
-        {
-          loose: true
-        }
-      ],
-      [
-        '@babel/plugin-proposal-object-rest-spread',
-        {
-          useBuiltIns: true
-        }
-      ],
-      [
-        '@babel/plugin-transform-runtime',
-        {
-          helpers: false,
-          regenerator: true,
-          corejs: false
-        }
-      ],
-      [
-        '@babel/plugin-transform-regenerator',
-        {
-          async: false
-        }
-      ],
-    ].filter(Boolean)
+      '@babel/plugin-proposal-object-rest-spread',
+      '@babel/plugin-proposal-class-properties',
+    ],
   }
 }
