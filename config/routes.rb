@@ -3,9 +3,10 @@ Rails.application.routes.draw do
   devise_for :admin_users
 
   namespace :admin do
+    resources :users
     resources :admin_users
 
-    root to: "admin_users#index"
+    root to: "users#index"
   end
 
   root to: "home#index"
