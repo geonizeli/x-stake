@@ -1,9 +1,11 @@
-import React, { FC } from 'react'
-import { Container } from '../../components/Container'
-import { Header } from '../../components/Header'
-import { Navbar } from '../../components/Navbar'
-import { PoolListing } from '../../components/PoolListing'
-import { SideNav } from '../../components/SideNav'
+import type { FC } from "react";
+import React from "react";
+
+import { Container } from "../../components/Container";
+import { Header } from "../../components/Header";
+import { Navbar } from "../../components/Navbar";
+import { PoolListing } from "../../components/PoolListing";
+import { SideNav } from "../../components/SideNav";
 
 export const Home: FC = () => {
   return (
@@ -26,5 +28,5 @@ export const Home: FC = () => {
         </div>
       </div>
     </>
-  )
-}
+  );
+};

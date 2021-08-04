@@ -7,8 +7,8 @@ module.exports = {
     extend: {
       spacing: {
         ...defaultTheme.spacing,
-        'full': '100%',
-      }
+        full: "100%",
+      },
     },
   },
   variants: {

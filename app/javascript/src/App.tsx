@@ -1,9 +1,6 @@
-import React from "react"
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-} from "react-router-dom";
+import React from "react";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+
 import { AppContext } from "./contexts/AppContext";
 import { AuthProvider } from "./contexts/AuthProvider";
 import { Home } from "./pages";
@@ -26,5 +23,5 @@ export const App = () => {
         </main>
       </AppContext>
     </AuthProvider>
-  )
-}
+  );
+};

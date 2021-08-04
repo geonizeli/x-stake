@@ -1,0 +1,13 @@
+{
+  "extends": ["vtex"],
+  "ignorePatterns": [
+    "__mocks__/",
+    "__generated__/"
+  ],
+  "overrides": [
+    {
+      "files": ["**/*.tsx"],
+      "extends": ["vtex-react"]
+    }
+  ]
+}

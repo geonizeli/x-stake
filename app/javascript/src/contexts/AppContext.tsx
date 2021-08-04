@@ -1,11 +1,12 @@
-import React, { createContext, Dispatch, FC, SetStateAction, useContext, useState } from 'react'
+import type { Dispatch, FC, SetStateAction } from "react";
+import React, { createContext, useContext, useState } from "react";
 
 export type AppContext = {
-  setSideNavExpanded: Dispatch<SetStateAction<boolean>>
-  sideNavExpanded: boolean
-}
+  setSideNavExpanded: Dispatch<SetStateAction<boolean>>;
+  sideNavExpanded: boolean;
+};
 
-const Context = createContext<AppContext | null>(null)
+const Context = createContext<AppContext | null>(null);
 
 export const useAppContext = (): AppContext => {
   const context = useContext(Context);
@@ -18,11 +19,11 @@ export const useAppContext = (): AppContext => {
 };
 
 export const AppContext: FC = ({ children }) => {
-  const [sideNavExpanded, setSideNavExpanded] = useState(false)
+  const [sideNavExpanded, setSideNavExpanded] = useState(false);
 
-    return (
+  return (
     <Context.Provider value={{ sideNavExpanded, setSideNavExpanded }}>
       {children}
     </Context.Provider>
-  )
-}
+  );
+};

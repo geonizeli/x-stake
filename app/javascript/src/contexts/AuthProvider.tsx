@@ -1,13 +1,15 @@
-import { Auth0Provider } from '@auth0/auth0-react'
-import React, { FC } from 'react'
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+import { Auth0Provider } from "@auth0/auth0-react";
+import type { FC } from "react";
+import React from "react";
 
-export const AuthProvider: FC = ({children}) => {
+export const AuthProvider: FC = ({ children }) => {
   // @ts-ignore
-  const domain = window.AUTH_DOMAIN
+  const domain = window.AUTH_DOMAIN;
   // @ts-ignore
-  const clientId = window.AUTH_CLIENT_ID
+  const clientId = window.AUTH_CLIENT_ID;
   // @ts-ignore
-  const audience = window.AUTH_AUDIENCE
+  const audience = window.AUTH_AUDIENCE;
 
   return (
     <Auth0Provider
@@ -18,5 +20,5 @@ export const AuthProvider: FC = ({children}) => {
     >
       {children}
     </Auth0Provider>
-  )
-}
+  );
+};

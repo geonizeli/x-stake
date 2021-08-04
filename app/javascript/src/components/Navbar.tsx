@@ -1,10 +1,11 @@
 import * as React from "react";
 import { useAuth0 } from "@auth0/auth0-react";
-import XStakeLogo from '../images/logo.png'
+
+import XStakeLogo from "../images/logo.png";
 import { useAppContext } from "../contexts/AppContext";
 
 export const Navbar = () => {
-  const { setSideNavExpanded } = useAppContext()
+  const { setSideNavExpanded } = useAppContext();
 
   const handleExpandSideNav = () => {
     setSideNavExpanded((prevState) => !prevState);
@@ -35,9 +36,9 @@ export const Navbar = () => {
       </button>
       <img
         src={XStakeLogo}
-        alt={"XStake Logo"}
+        alt="XStake Logo"
         width={64}
-        placeholder={"blurred"}
+        placeholder="blurred"
       />
       <h1 className="text-2xl font-bold">XStake</h1>
       <div className="w-full h-full flex items-center justify-end">
