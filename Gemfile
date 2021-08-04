@@ -23,6 +23,7 @@ gem "graphql"
 gem "tailwindcss-rails"
 
 group :development, :test do
+  gem "dotenv-rails"
   gem "pry-byebug", platforms: [:mri, :mingw, :x64_mingw]
   gem "capybara"
   gem "rspec-rails"
@@ -33,7 +34,6 @@ group :development, :test do
 end
 
 group :development do
-  gem "dotenv-rails"
   gem "graphql_playground-rails"
   gem "web-console", ">= 4.1.0"
 
