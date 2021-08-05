@@ -6,3 +6,7 @@ declare module "*.png" {
   const png: string;
   export default png;
 }
+
+declare module "babel-plugin-relay/macro" {
+  export { graphql } from "react-relay";
+}
