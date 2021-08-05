@@ -10,3 +10,9 @@ AllCops:
   Exclude:
     - db/schema.rb
     - bin/**/*
+
+RSpec/ExampleLength:
+  Enabled: false
+
+RSpec/MultipleExpectations:
+  Enabled: false

@@ -19,6 +19,7 @@ class User < ApplicationRecord
   has_many :documents, class_name: "UserDocument", dependent: :destroy
 
   validates :first_name, :last_name, :email, presence: true
+  validates :email, uniqueness: true
 
   def full_name
     "#{first_name} #{last_name}"

@@ -48,4 +48,5 @@ end
 
 group :test do
   gem "shoulda-matchers", "~> 5.0"
+  gem "rspec-graphql_matchers", "~> 1.3"
 end
