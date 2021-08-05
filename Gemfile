@@ -5,7 +5,6 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby "2.7.4"
 
-gem "jbuilder", "~> 2.7"
 gem "pg", "~> 1.1"
 gem "puma", "~> 5.0"
 gem "rails", "~> 6.1.4"
@@ -13,14 +12,19 @@ gem "sass-rails", ">= 6"
 gem "turbolinks", "~> 5"
 gem "webpacker", "~> 5.0"
 gem "bootsnap", ">= 1.4.4", require: false
+gem "image_processing", "~> 1.12"
 
 gem "devise"
-gem "devise-bootstrap-views"
 gem "devise-i18n"
-gem "administrate"
-gem "graphql"
+gem "devise-bootstrap-views"
+
+gem "administrate-field-active_storage"
 gem "tailwindcss-rails"
+gem "administrate"
+gem "enumerize"
 gem "httparty"
+gem "graphql"
+gem "pundit"
 
 group :development, :test do
   gem "dotenv-rails"
@@ -34,9 +38,15 @@ group :development, :test do
 end
 
 group :development do
+  gem "annotate"
   gem "graphql_playground-rails"
   gem "web-console", ">= 4.1.0"
 
   gem "listen", "~> 3.3"
   gem "spring"
+end
+
+group :test do
+  gem "shoulda-matchers", "~> 5.0"
+  gem "rspec-graphql_matchers", "~> 1.3"
 end

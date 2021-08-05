@@ -8,6 +8,8 @@ module Auth
     end
 
     def profile
+      return nil if jwt_token.blank?
+
       Auth0Client.find_profile(jwt_token)
     end
   end

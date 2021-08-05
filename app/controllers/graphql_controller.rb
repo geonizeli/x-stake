@@ -9,8 +9,8 @@ class GraphqlController < ApplicationController
     query = params[:query]
     operation_name = params[:operationName]
     context = {
-      current_user: current_admin_user, # || current_auth.current_user,
       current_auth: current_auth,
+      current_user: current_admin_user, # || current_auth.current_user,
     }
     result = XStakeSchema.execute(query, variables: variables, context: context, operation_name: operation_name)
     render(json: result)
