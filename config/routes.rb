@@ -4,6 +4,7 @@ Rails.application.routes.draw do
 
   namespace :admin do
     resources :users
+    resources :user_documents
     resources :admin_users
 
     root to: "users#index"
@@ -11,7 +12,7 @@ Rails.application.routes.draw do
 
   root to: "home#index"
   get "*all" => "home#index", constraints: lambda { |req|
-    Rails.env.development? ? req.path.exclude?("playground") : req
+    req.path.exclude?("playground") && req.path.exclude?("rails")
   }
 
   post "/graphql", to: "graphql#execute"

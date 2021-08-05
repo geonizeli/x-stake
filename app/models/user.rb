@@ -16,6 +16,8 @@
 #  index_users_on_email  (email) UNIQUE
 #
 class User < ApplicationRecord
+  has_many :documents, class_name: "UserDocument", dependent: :destroy
+
   validates :first_name, :last_name, :email, presence: true
 
   def full_name

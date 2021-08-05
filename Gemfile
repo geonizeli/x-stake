@@ -18,10 +18,12 @@ gem "devise"
 gem "devise-i18n"
 gem "devise-bootstrap-views"
 
+gem "administrate-field-active_storage"
 gem "tailwindcss-rails"
 gem "administrate"
-gem "graphql"
+gem "enumerize"
 gem "httparty"
+gem "graphql"
 gem "pundit"
 
 group :development, :test do
