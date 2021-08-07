@@ -4,14 +4,9 @@ module Types
     include GraphQL::Types::Relay::HasNodeField
     include GraphQL::Types::Relay::HasNodesField
 
-    # TODO: remove me
-    field :test_field, [String], null: false,
-      description: "An example field added by the generator"
-    def test_field
-      [
-        SecureRandom.uuid,
-        SecureRandom.uuid,
-      ]
+    field :current_user, UserType, null: true
+    def current_user
+      context[:current_user]
     end
   end
 end
