@@ -35,10 +35,15 @@ type Mutation {
 }
 
 type Query {
-  """
-  An example field added by the generator
-  """
-  testField: [String!]!
+  currentUser: User
+}
+
+type User {
+  email: String!
+  firstName: String!
+  fullName: String!
+  id: ID!
+  lastName: String!
 }
 
 input UserAttributesInput {

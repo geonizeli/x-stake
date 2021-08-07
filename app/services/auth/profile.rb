@@ -8,8 +8,8 @@ module Auth
       @email = attributes[:email]
     end
 
-    def customer
-      @customer ||= Customer.find_by(email: email, auth_id: id)
+    def user
+      @user ||= User.find_by(email: email)
     end
   end
 end
