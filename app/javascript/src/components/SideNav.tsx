@@ -2,7 +2,7 @@ import * as React from "react";
 import cx from "classnames";
 import { Link } from "react-router-dom";
 
-import { useAppContext } from "../contexts/AppContext";
+import { useApp } from "../contexts/AppProvider";
 
 type MenuItem = {
   label: string;
@@ -25,7 +25,7 @@ const MenuItems: MenuItem[] = [
 ];
 
 export const SideNav = () => {
-  const { sideNavExpanded, setSideNavExpanded } = useAppContext();
+  const { sideNavExpanded, setSideNavExpanded } = useApp();
 
   const handleCloseSideNav = () => {
     setSideNavExpanded(false);

@@ -1,33 +1,37 @@
+import { graphql } from "babel-plugin-relay/macro";
 import type { FC } from "react";
-import React, { Suspense } from "react";
-import { RelayEnvironmentProvider } from "react-relay";
-import { BrowserRouter as Router } from "react-router-dom";
+import React from "react";
+import { useLazyLoadQuery } from "react-relay";
 
-import { environment } from "../relay/environment";
-import { Navbar } from "./components/Navbar";
-import { SideNav } from "./components/SideNav";
-import { AppContext } from "./contexts/AppContext";
-import { AuthProvider } from "./contexts/AuthProvider";
+import { Navbar, SideNav } from "./components";
+import { AppProvider } from "./contexts/AppProvider";
+import { UserProvider } from "./contexts/UserProvider";
 import { Routes } from "./Routes";
+import type { AppQuery } from "./__generated__/AppQuery.graphql";
 
 export const App: FC = () => {
+  const { currentUser } = useLazyLoadQuery<AppQuery>(
+    graphql`
+      query AppQuery {
+        currentUser {
+          firstName
+        }
+      }
+    `,
+    {}
+  );
+
   return (
-    <RelayEnvironmentProvider environment={environment}>
-      <Suspense fallback="Carregando...">
-        <Router>
-          <AuthProvider>
-            <AppContext>
-              <main className="min-h-screen w-full bg-gray-50 flex flex-col">
-                <Navbar />
-                <div className="flex flex-grow">
-                  <SideNav />
-                  <Routes />
-                </div>
-              </main>
-            </AppContext>
-          </AuthProvider>
-        </Router>
-      </Suspense>
-    </RelayEnvironmentProvider>
+    <AppProvider>
+      <UserProvider user={currentUser}>
+        <main className="min-h-screen w-full bg-gray-50 flex flex-col">
+          <Navbar />
+          <div className="flex flex-grow">
+            <SideNav />
+            <Routes />
+          </div>
+        </main>
+      </UserProvider>
+    </AppProvider>
   );
 };

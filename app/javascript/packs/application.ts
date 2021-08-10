@@ -12,5 +12,6 @@
 // Turbolinks.start()
 // ActiveStorage.start()
 
-import "regenerator-runtime";
 import "stylesheets/application";
+import "regenerator-runtime";
+import "../src/index";

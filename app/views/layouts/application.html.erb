@@ -7,15 +7,7 @@
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-
-    <script>
-      window.AUTH_DOMAIN = "<%= ENV['AUTH_DOMAIN'] %>"
-      window.AUTH_CLIENT_ID = "<%= ENV['AUTH_CLIENT_ID'] %>"
-      window.AUTH_AUDIENCE = "<%= ENV['AUTH_AUDIENCE'] %>"
-    </script>
-
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_pack_tag 'react', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
