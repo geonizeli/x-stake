@@ -14,4 +14,3 @@
 
 import "stylesheets/application";
 import "regenerator-runtime";
-import "../src/index";

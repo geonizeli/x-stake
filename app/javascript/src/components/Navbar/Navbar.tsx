@@ -5,7 +5,7 @@ import { useApp } from "../../contexts/AppProvider";
 import { useCurrentUser } from "../../contexts/UserProvider";
 
 const linkStyles =
-  "cursor-pointer hover:bg-gray-100 h-full px-4 font-bold flex items-center";
+  "cursor-pointer bg-transparent hover:bg-gray-100 h-full px-4 font-bold flex items-center";
 
 export const Navbar = () => {
   const { setSideNavExpanded } = useApp();
@@ -60,14 +60,9 @@ export const Navbar = () => {
             <input type="hidden" name="_method" value="delete" />
           </form>
         ) : (
-          <form className="h-full" method="post" action="/users/sign_in">
-            <input className={linkStyles} type="submit" value="Entrar" />
-            <input
-              type="hidden"
-              name="authenticity_token"
-              defaultValue={csrfToken}
-            />
-          </form>
+          <a href="/users/sign_in" className={linkStyles}>
+            Entrar
+          </a>
         )}
       </div>
     </nav>
