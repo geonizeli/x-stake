@@ -1,0 +1,13 @@
+pt-BR:
+  activerecord:
+    models:
+      user_document:
+        one: Documentos de Usuário
+        other: Documentos de Usuários
+      admin_user:
+        one: Usuário Administrador
+        other: Usuários Administradores
+    attributes:
+      user:
+        first_name: Primeiro nome
+        last_name: Último nome
