@@ -8,7 +8,7 @@ export type AppContext = {
 
 const Context = createContext<AppContext | null>(null);
 
-export const useAppContext = (): AppContext => {
+export const useApp = (): AppContext => {
   const context = useContext(Context);
 
   if (context === null) {
@@ -18,7 +18,7 @@ export const useAppContext = (): AppContext => {
   return context;
 };
 
-export const AppContext: FC = ({ children }) => {
+export const AppProvider: FC = ({ children }) => {
   const [sideNavExpanded, setSideNavExpanded] = useState(false);
 
   return (

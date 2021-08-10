@@ -1,0 +1,5 @@
+pt-BR:
+  administrate:
+    navigation:
+      sign_out: Encerrar sessão
+      sign_out_confirmation: Tem certeza que deseja encerrar a sessão?

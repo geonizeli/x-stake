@@ -1,15 +1,21 @@
 import type { Variables, RequestParameters, CacheConfig } from "relay-runtime";
 import { Environment, Network, RecordSource, Store } from "relay-runtime";
 
-async function fetchRelay(
+export const fetchRelay = async (
   params: RequestParameters,
   variables: Variables,
   _cacheConfig: CacheConfig
-) {
+) => {
+  const csrfToken =
+    document
+      .querySelector('meta[name="csrf-token"]')
+      ?.getAttribute("content") ?? "";
+
   const response = await fetch("/graphql", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
+      "X-CSRF-Token": csrfToken,
     },
     body: JSON.stringify({
       query: params.text,
@@ -30,7 +36,7 @@ async function fetchRelay(
   }
 
   return json;
-}
+};
 
 export const environment = new Environment({
   network: Network.create(fetchRelay),
