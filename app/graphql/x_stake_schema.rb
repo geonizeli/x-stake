@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 class XStakeSchema < GraphQL::Schema
-  mutation(Types::MutationType)
+  # mutation(Types::MutationType)
   query(Types::QueryType)
 
   def self.resolve_type(abstract_type, obj, ctx)
