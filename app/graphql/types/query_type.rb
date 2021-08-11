@@ -8,5 +8,10 @@ module Types
     def current_user
       context[:current_user]
     end
+
+    field :balances, BalanceType.connection_type, null: false
+    def balances
+      Pundit.policy_scope(current_user, Balance)
+    end
   end
 end
