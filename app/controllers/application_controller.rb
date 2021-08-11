@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 class ApplicationController < ActionController::Base
-  include Pundit
-
   before_action :configure_devise_permitted_parameters, if: :devise_controller?
 
   protected

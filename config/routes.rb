@@ -5,7 +5,8 @@ Rails.application.routes.draw do
 
   namespace :admin do
     resources :users
-    resources :user_documents
+    resources :balances
+    resources :currencies
     resources :admin_users
 
     root to: "users#index"

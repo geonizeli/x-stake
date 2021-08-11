@@ -5,9 +5,16 @@ pt-BR:
         one: Documentos de Usuário
         other: Documentos de Usuários
       admin_user:
-        one: Usuário Administrador
-        other: Usuários Administradores
+        one: Administrador
+        other: Administradores
+      currency:
+        one: Moeda
+        other: Moedas
+      balance:
+        one: Saldo
+        other: Saldos
     attributes:
       user:
         first_name: Primeiro nome
         last_name: Último nome
+        full_name: Nome completo

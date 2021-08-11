@@ -15,10 +15,6 @@ const MenuItems: MenuItem[] = [
     path: "/",
   },
   {
-    label: "Stake",
-    path: "/stake",
-  },
-  {
     label: "Carteira",
     path: "/wallet",
   },
