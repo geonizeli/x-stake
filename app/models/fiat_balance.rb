@@ -24,5 +24,7 @@ class FiatBalance < ApplicationRecord
 
   monetize :amount_cents
 
-  validates :amount, presence: true
+  def amount_formatted
+    amount.format
+  end
 end
