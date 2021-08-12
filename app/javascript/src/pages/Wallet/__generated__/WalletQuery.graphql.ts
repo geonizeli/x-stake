@@ -3,16 +3,14 @@
 // @ts-nocheck
 
 import { ConcreteRequest } from "relay-runtime";
+import { FragmentRefs } from "relay-runtime";
 export type WalletQueryVariables = {};
 export type WalletQueryResponse = {
+    readonly fiatBalances: {
+        readonly " $fragmentRefs": FragmentRefs<"FiatBalances_fiatBalances">;
+    };
     readonly balances: {
-        readonly nodes: ReadonlyArray<{
-            readonly id: string;
-            readonly amount: number;
-            readonly currency: {
-                readonly name: string;
-            };
-        } | null> | null;
+        readonly " $fragmentRefs": FragmentRefs<"Balances_balances">;
     };
 };
 export type WalletQuery = {
@@ -24,15 +22,30 @@ export type WalletQuery = {
 
 /*
 query WalletQuery {
+  fiatBalances {
+    ...FiatBalances_fiatBalances
+  }
   balances {
-    nodes {
+    ...Balances_balances
+  }
+}
+
+fragment Balances_balances on BalanceConnection {
+  nodes {
+    id
+    amount
+    currency {
+      name
       id
-      amount
-      currency {
-        name
-        id
-      }
     }
+  }
+}
+
+fragment FiatBalances_fiatBalances on FiatBalanceConnection {
+  nodes {
+    id
+    amountCents
+    amountCurrency
   }
 }
 */
@@ -43,20 +56,6 @@ var v0 = {
   "args": null,
   "kind": "ScalarField",
   "name": "id",
-  "storageKey": null
-},
-v1 = {
-  "alias": null,
-  "args": null,
-  "kind": "ScalarField",
-  "name": "amount",
-  "storageKey": null
-},
-v2 = {
-  "alias": null,
-  "args": null,
-  "kind": "ScalarField",
-  "name": "name",
   "storageKey": null
 };
 return {
@@ -69,35 +68,31 @@ return {
       {
         "alias": null,
         "args": null,
+        "concreteType": "FiatBalanceConnection",
+        "kind": "LinkedField",
+        "name": "fiatBalances",
+        "plural": false,
+        "selections": [
+          {
+            "args": null,
+            "kind": "FragmentSpread",
+            "name": "FiatBalances_fiatBalances"
+          }
+        ],
+        "storageKey": null
+      },
+      {
+        "alias": null,
+        "args": null,
         "concreteType": "BalanceConnection",
         "kind": "LinkedField",
         "name": "balances",
         "plural": false,
         "selections": [
           {
-            "alias": null,
             "args": null,
-            "concreteType": "Balance",
-            "kind": "LinkedField",
-            "name": "nodes",
-            "plural": true,
-            "selections": [
-              (v0/*: any*/),
-              (v1/*: any*/),
-              {
-                "alias": null,
-                "args": null,
-                "concreteType": "Currency",
-                "kind": "LinkedField",
-                "name": "currency",
-                "plural": false,
-                "selections": [
-                  (v2/*: any*/)
-                ],
-                "storageKey": null
-              }
-            ],
-            "storageKey": null
+            "kind": "FragmentSpread",
+            "name": "Balances_balances"
           }
         ],
         "storageKey": null
@@ -115,6 +110,43 @@ return {
       {
         "alias": null,
         "args": null,
+        "concreteType": "FiatBalanceConnection",
+        "kind": "LinkedField",
+        "name": "fiatBalances",
+        "plural": false,
+        "selections": [
+          {
+            "alias": null,
+            "args": null,
+            "concreteType": "FiatBalance",
+            "kind": "LinkedField",
+            "name": "nodes",
+            "plural": true,
+            "selections": [
+              (v0/*: any*/),
+              {
+                "alias": null,
+                "args": null,
+                "kind": "ScalarField",
+                "name": "amountCents",
+                "storageKey": null
+              },
+              {
+                "alias": null,
+                "args": null,
+                "kind": "ScalarField",
+                "name": "amountCurrency",
+                "storageKey": null
+              }
+            ],
+            "storageKey": null
+          }
+        ],
+        "storageKey": null
+      },
+      {
+        "alias": null,
+        "args": null,
         "concreteType": "BalanceConnection",
         "kind": "LinkedField",
         "name": "balances",
@@ -129,7 +161,13 @@ return {
             "plural": true,
             "selections": [
               (v0/*: any*/),
-              (v1/*: any*/),
+              {
+                "alias": null,
+                "args": null,
+                "kind": "ScalarField",
+                "name": "amount",
+                "storageKey": null
+              },
               {
                 "alias": null,
                 "args": null,
@@ -138,7 +176,13 @@ return {
                 "name": "currency",
                 "plural": false,
                 "selections": [
-                  (v2/*: any*/),
+                  {
+                    "alias": null,
+                    "args": null,
+                    "kind": "ScalarField",
+                    "name": "name",
+                    "storageKey": null
+                  },
                   (v0/*: any*/)
                 ],
                 "storageKey": null
@@ -152,14 +196,14 @@ return {
     ]
   },
   "params": {
-    "cacheID": "6b8d0c664bd2d9df4d323c19c4a823a5",
+    "cacheID": "82d013e2bf418b53aeec5412f2f92661",
     "id": null,
     "metadata": {},
     "name": "WalletQuery",
     "operationKind": "query",
-    "text": "query WalletQuery {\n  balances {\n    nodes {\n      id\n      amount\n      currency {\n        name\n        id\n      }\n    }\n  }\n}\n"
+    "text": "query WalletQuery {\n  fiatBalances {\n    ...FiatBalances_fiatBalances\n  }\n  balances {\n    ...Balances_balances\n  }\n}\n\nfragment Balances_balances on BalanceConnection {\n  nodes {\n    id\n    amount\n    currency {\n      name\n      id\n    }\n  }\n}\n\nfragment FiatBalances_fiatBalances on FiatBalanceConnection {\n  nodes {\n    id\n    amountCents\n    amountCurrency\n  }\n}\n"
   }
 };
 })();
-(node as any).hash = '428f4f1ab769f9056dd38ec641a30733';
+(node as any).hash = '855efce679c691a77938b64376a1a805';
 export default node;

@@ -214,3 +214,5 @@ currencies.each do |currency|
     amount: random_floating_number
   )
 end
+
+FiatBalance.create(user_id: user.id)
