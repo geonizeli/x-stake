@@ -13,5 +13,10 @@ module Types
     def balances
       Pundit.policy_scope(current_user, Balance)
     end
+
+    field :fiat_balances, FiatBalanceType.connection_type, null: false
+    def fiat_balances
+      Pundit.policy_scope(current_user, FiatBalance)
+    end
   end
 end
