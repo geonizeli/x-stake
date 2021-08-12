@@ -7,7 +7,7 @@ import { PoolListing } from "../../components/PoolListing";
 
 export const Home: FC = () => {
   return (
-    <div className="flex flex-col h-full w-full overflow-x-hidden mt-16">
+    <div className="flex flex-col h-full w-full overflow-x-hidden">
       <Header>
         <Container className="flex-col">
           <h1 className="text-5xl text-white font-medium">XStake</h1>

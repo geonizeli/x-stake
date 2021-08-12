@@ -3,7 +3,7 @@ import type { FC } from "react";
 import React from "react";
 import { useLazyLoadQuery } from "react-relay";
 
-import { tokens } from "../../constants/pancake/Tokens";
+import { getCurrencyLogo } from "../../utils/getCurrencyLogo";
 import type { WalletQuery } from "./__generated__/WalletQuery.graphql";
 
 export const Wallet: FC = () => {
@@ -24,10 +24,8 @@ export const Wallet: FC = () => {
     {}
   );
 
-  const tokensList = Object.values(tokens);
-
   return (
-    <div className="flex flex-col h-full w-full overflow-x-hidden mt-16">
+    <div className="flex flex-col h-full w-full overflow-x-hidden">
       <div className="container mx-auto px-4 sm:px-8 max-w-3xl">
         <div className="py-8">
           <div className="-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto">
@@ -51,22 +49,16 @@ export const Wallet: FC = () => {
                 </thead>
                 <tbody>
                   {balances.nodes?.map((balance) => {
-                    const token = tokensList.find(
-                      ({ symbol }) => symbol === balance?.currency.name
-                    );
-
                     return (
                       <tr key={balance?.id}>
                         <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                           <div className="flex items-center">
                             <div className="flex-shrink-0">
-                              <a href="/" className="block relative">
-                                <img
-                                  alt="profil"
-                                  src={`https://pancakeswap.finance/images/tokens/${token?.address["56"]}.svg`}
-                                  className="mx-auto object-cover rounded-full h-10 w-10 "
-                                />
-                              </a>
+                              <img
+                                alt={`${balance?.currency.name} icon`}
+                                src={getCurrencyLogo(balance?.currency.name)}
+                                className="mx-auto object-cover rounded-full h-10 w-10 "
+                              />
                             </div>
                             <div className="ml-3">
                               <p className="text-gray-900 whitespace-no-wrap">

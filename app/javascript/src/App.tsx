@@ -1,6 +1,6 @@
 import { graphql } from "babel-plugin-relay/macro";
 import type { FC } from "react";
-import React from "react";
+import React, { Suspense } from "react";
 import { useLazyLoadQuery } from "react-relay";
 
 import { Navbar, SideNav } from "./components";
@@ -28,7 +28,9 @@ export const App: FC = () => {
           <Navbar />
           <div className="flex flex-grow">
             <SideNav />
-            <Routes />
+            <Suspense fallback="Carregando...">
+              <Routes />
+            </Suspense>
           </div>
         </main>
       </UserProvider>

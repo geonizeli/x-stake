@@ -21,7 +21,7 @@ export const Navbar = () => {
       ?.getAttribute("content") ?? "";
 
   return (
-    <nav className="fixed w-full h-16 flex bg-white shadow items-center px-4 space-x-2 z-50">
+    <nav className="w-full h-16 flex bg-white shadow items-center px-4 space-x-2 z-50">
       <button
         className="w-10 h-10 xl:hidden"
         onClick={() => handleExpandSideNav()}
