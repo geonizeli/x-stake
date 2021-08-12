@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   namespace :admin do
     resources :users
     resources :balances
+    resources :fiat_balances
     resources :currencies
     resources :admin_users
 

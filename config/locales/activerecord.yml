@@ -4,17 +4,34 @@ pt-BR:
       user_document:
         one: Documentos de Usuário
         other: Documentos de Usuários
+
       admin_user:
         one: Administrador
         other: Administradores
+
       currency:
         one: Moeda
         other: Moedas
+
       balance:
         one: Saldo
         other: Saldos
+
+      fiat_balance:
+        one: Saldo Fiat
+        other: Saldos Fiat
+
     attributes:
       user:
         first_name: Primeiro nome
         last_name: Último nome
         full_name: Nome completo
+
+      balance:
+        amount: Quantia
+
+      fiat_balance:
+        amount_formatted: Quantia
+
+      currency:
+        name: Nome
