@@ -48,33 +48,28 @@ export const SideNav = () => {
         <div
           role="none"
           onKeyPress={handleKeyPress}
-          onClick={() => handleCloseSideNav()}
+          onClick={handleCloseSideNav}
           className="xl:hidden absolute w-full h-full bg-black bg-opacity-60"
         />
       </Transition>
-
-      <Transition
-        className="z-40"
-        show={sideNavExpanded || window.screen.width >= 1280}
-        enter="transition-opacity duration-500"
-        enterFrom="opacity-0"
-        enterTo="opacity-100"
-        leave="transition-opacity duration-500"
-        leaveFrom="opacity-100"
-        leaveTo="opacity-0"
+      <aside
+        className={`bg-white w-4/6 md:w-1/6 overflow-hidden absolute h-screen drop-shadow-xl drop border-r border-gray-200 z-40 transition-all duration-500 xl:transition-none xl:mx-0 xl:static ${
+          sideNavExpanded ? "mx-0" : "-mx-full"
+        }`}
       >
-        <aside className="bg-white w-5/6 md:w-2/6 overflow-hidden absolute xl:static h-full drop-shadow-xl drop border-r border-gray-200 z-40 xl:transition-none xl:mx-0 xl:w-64 mx-0">
-          <ul>
-            {MenuItems.map((item) => (
-              <Link to={item.path} key={item.label} role="menuitem">
-                <li className="text-xl p-4 px-8 hover:bg-gray-100 cursor-pointer">
-                  {item.label}
-                </li>
-              </Link>
-            ))}
-          </ul>
-        </aside>
-      </Transition>
+        <ul>
+          {MenuItems.map((item) => (
+            <Link to={item.path} key={item.label}>
+              <li
+                key={item.label}
+                className="text-xl p-4 px-8 hover:bg-gray-100 cursor-pointer"
+              >
+                {item.label}
+              </li>
+            </Link>
+          ))}
+        </ul>
+      </aside>
     </>
   );
 };
