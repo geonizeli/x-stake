@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import XStakeLogo from "../../images/logo.png";
+import XStakeLogo from "../../assets/images/logo.png";
 import { useApp } from "../../contexts/AppProvider";
 import { useCurrentUser } from "../../contexts/UserProvider";
 

@@ -5,13 +5,15 @@
 import { ReaderFragment } from "relay-runtime";
 import { FragmentRefs } from "relay-runtime";
 export type Balances_balances = {
-    readonly nodes: ReadonlyArray<{
-        readonly id: string;
-        readonly amount: string;
-        readonly currency: {
-            readonly name: string;
+    readonly edges: ReadonlyArray<{
+        readonly node: {
+            readonly id: string;
+            readonly amount: string;
+            readonly currency: {
+                readonly name: string;
+            };
         };
-    } | null> | null;
+    }>;
     readonly " $refType": "Balances_balances";
 };
 export type Balances_balances$data = Balances_balances;
@@ -31,38 +33,49 @@ const node: ReaderFragment = {
     {
       "alias": null,
       "args": null,
-      "concreteType": "Balance",
+      "concreteType": "BalanceEdge",
       "kind": "LinkedField",
-      "name": "nodes",
+      "name": "edges",
       "plural": true,
       "selections": [
         {
           "alias": null,
           "args": null,
-          "kind": "ScalarField",
-          "name": "id",
-          "storageKey": null
-        },
-        {
-          "alias": null,
-          "args": null,
-          "kind": "ScalarField",
-          "name": "amount",
-          "storageKey": null
-        },
-        {
-          "alias": null,
-          "args": null,
-          "concreteType": "Currency",
+          "concreteType": "Balance",
           "kind": "LinkedField",
-          "name": "currency",
+          "name": "node",
           "plural": false,
           "selections": [
             {
               "alias": null,
               "args": null,
               "kind": "ScalarField",
-              "name": "name",
+              "name": "id",
+              "storageKey": null
+            },
+            {
+              "alias": null,
+              "args": null,
+              "kind": "ScalarField",
+              "name": "amount",
+              "storageKey": null
+            },
+            {
+              "alias": null,
+              "args": null,
+              "concreteType": "Currency",
+              "kind": "LinkedField",
+              "name": "currency",
+              "plural": false,
+              "selections": [
+                {
+                  "alias": null,
+                  "args": null,
+                  "kind": "ScalarField",
+                  "name": "name",
+                  "storageKey": null
+                }
+              ],
               "storageKey": null
             }
           ],
@@ -75,5 +88,5 @@ const node: ReaderFragment = {
   "type": "BalanceConnection",
   "abstractKey": null
 };
-(node as any).hash = '2704da1dc9949b1becbd9ec947c5ec33';
+(node as any).hash = 'f42e01739ec72a194e05843169435d96';
 export default node;

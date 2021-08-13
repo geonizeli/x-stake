@@ -11,12 +11,7 @@ type BalanceConnection {
   """
   A list of edges.
   """
-  edges: [BalanceEdge]
-
-  """
-  A list of nodes.
-  """
-  nodes: [Balance]
+  edges: [BalanceEdge!]!
 
   """
   Information to aid in pagination.
@@ -36,7 +31,7 @@ type BalanceEdge {
   """
   The item at the end of the edge.
   """
-  node: Balance
+  node: Balance!
 }
 
 type Currency implements Node {
@@ -59,12 +54,7 @@ type FiatBalanceConnection {
   """
   A list of edges.
   """
-  edges: [FiatBalanceEdge]
-
-  """
-  A list of nodes.
-  """
-  nodes: [FiatBalance]
+  edges: [FiatBalanceEdge!]!
 
   """
   Information to aid in pagination.
@@ -84,7 +74,7 @@ type FiatBalanceEdge {
   """
   The item at the end of the edge.
   """
-  node: FiatBalance
+  node: FiatBalance!
 }
 
 """
