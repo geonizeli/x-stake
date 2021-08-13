@@ -9,26 +9,28 @@ type Props = {
   fiatBalancesRef: FiatBalances_fiatBalances$key;
 };
 export const FiatBalances: FC<Props> = ({ fiatBalancesRef }) => {
-  const { nodes } = useFragment<FiatBalances_fiatBalances$key>(
+  const { edges } = useFragment<FiatBalances_fiatBalances$key>(
     graphql`
       fragment FiatBalances_fiatBalances on FiatBalanceConnection {
-        nodes {
-          id
-          amountCents
-          amountCurrency
+        edges {
+          node {
+            id
+            amountCents
+            amountCurrency
+          }
         }
       }
     `,
     fiatBalancesRef
   );
 
-  if (!nodes?.length) return null;
+  if (!edges.length) return null;
 
-  const [firstResult] = nodes;
+  const [firstResult] = edges;
 
-  const amount = (
-    firstResult?.amountCents ? firstResult?.amountCents / 100 : 0
-  ).toFixed(2);
+  const { amountCents, amountCurrency } = firstResult.node;
+
+  const amount = (amountCents ? amountCents / 100 : 0).toFixed(2);
 
   return (
     <div className="shadow rounded-lg p-4 bg-white dark:bg-gray-800">
@@ -50,7 +52,7 @@ export const FiatBalances: FC<Props> = ({ fiatBalancesRef }) => {
       <div className="flex flex-col justify-start">
         <p className="text-gray-700 dark:text-gray-100 text-4xl text-left font-bold my-4">
           {amount}
-          <span className="text-sm">{firstResult?.amountCurrency}</span>
+          <span className="text-sm">{amountCurrency}</span>
         </p>
       </div>
     </div>

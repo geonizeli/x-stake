@@ -31,21 +31,25 @@ query WalletQuery {
 }
 
 fragment Balances_balances on BalanceConnection {
-  nodes {
-    id
-    amount
-    currency {
-      name
+  edges {
+    node {
       id
+      amount
+      currency {
+        name
+        id
+      }
     }
   }
 }
 
 fragment FiatBalances_fiatBalances on FiatBalanceConnection {
-  nodes {
-    id
-    amountCents
-    amountCurrency
+  edges {
+    node {
+      id
+      amountCents
+      amountCurrency
+    }
   }
 }
 */
@@ -118,24 +122,35 @@ return {
           {
             "alias": null,
             "args": null,
-            "concreteType": "FiatBalance",
+            "concreteType": "FiatBalanceEdge",
             "kind": "LinkedField",
-            "name": "nodes",
+            "name": "edges",
             "plural": true,
             "selections": [
-              (v0/*: any*/),
               {
                 "alias": null,
                 "args": null,
-                "kind": "ScalarField",
-                "name": "amountCents",
-                "storageKey": null
-              },
-              {
-                "alias": null,
-                "args": null,
-                "kind": "ScalarField",
-                "name": "amountCurrency",
+                "concreteType": "FiatBalance",
+                "kind": "LinkedField",
+                "name": "node",
+                "plural": false,
+                "selections": [
+                  (v0/*: any*/),
+                  {
+                    "alias": null,
+                    "args": null,
+                    "kind": "ScalarField",
+                    "name": "amountCents",
+                    "storageKey": null
+                  },
+                  {
+                    "alias": null,
+                    "args": null,
+                    "kind": "ScalarField",
+                    "name": "amountCurrency",
+                    "storageKey": null
+                  }
+                ],
                 "storageKey": null
               }
             ],
@@ -155,35 +170,46 @@ return {
           {
             "alias": null,
             "args": null,
-            "concreteType": "Balance",
+            "concreteType": "BalanceEdge",
             "kind": "LinkedField",
-            "name": "nodes",
+            "name": "edges",
             "plural": true,
             "selections": [
-              (v0/*: any*/),
               {
                 "alias": null,
                 "args": null,
-                "kind": "ScalarField",
-                "name": "amount",
-                "storageKey": null
-              },
-              {
-                "alias": null,
-                "args": null,
-                "concreteType": "Currency",
+                "concreteType": "Balance",
                 "kind": "LinkedField",
-                "name": "currency",
+                "name": "node",
                 "plural": false,
                 "selections": [
+                  (v0/*: any*/),
                   {
                     "alias": null,
                     "args": null,
                     "kind": "ScalarField",
-                    "name": "name",
+                    "name": "amount",
                     "storageKey": null
                   },
-                  (v0/*: any*/)
+                  {
+                    "alias": null,
+                    "args": null,
+                    "concreteType": "Currency",
+                    "kind": "LinkedField",
+                    "name": "currency",
+                    "plural": false,
+                    "selections": [
+                      {
+                        "alias": null,
+                        "args": null,
+                        "kind": "ScalarField",
+                        "name": "name",
+                        "storageKey": null
+                      },
+                      (v0/*: any*/)
+                    ],
+                    "storageKey": null
+                  }
                 ],
                 "storageKey": null
               }
@@ -196,12 +222,12 @@ return {
     ]
   },
   "params": {
-    "cacheID": "82d013e2bf418b53aeec5412f2f92661",
+    "cacheID": "3c87fba4bacbbbe14fd4b584bfb1f7bb",
     "id": null,
     "metadata": {},
     "name": "WalletQuery",
     "operationKind": "query",
-    "text": "query WalletQuery {\n  fiatBalances {\n    ...FiatBalances_fiatBalances\n  }\n  balances {\n    ...Balances_balances\n  }\n}\n\nfragment Balances_balances on BalanceConnection {\n  nodes {\n    id\n    amount\n    currency {\n      name\n      id\n    }\n  }\n}\n\nfragment FiatBalances_fiatBalances on FiatBalanceConnection {\n  nodes {\n    id\n    amountCents\n    amountCurrency\n  }\n}\n"
+    "text": "query WalletQuery {\n  fiatBalances {\n    ...FiatBalances_fiatBalances\n  }\n  balances {\n    ...Balances_balances\n  }\n}\n\nfragment Balances_balances on BalanceConnection {\n  edges {\n    node {\n      id\n      amount\n      currency {\n        name\n        id\n      }\n    }\n  }\n}\n\nfragment FiatBalances_fiatBalances on FiatBalanceConnection {\n  edges {\n    node {\n      id\n      amountCents\n      amountCurrency\n    }\n  }\n}\n"
   }
 };
 })();

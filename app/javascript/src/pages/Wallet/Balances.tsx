@@ -10,14 +10,16 @@ type Props = {
   balancesRef: Balances_balances$key;
 };
 export const Balances: FC<Props> = ({ balancesRef }) => {
-  const { nodes } = useFragment<Balances_balances$key>(
+  const { edges } = useFragment<Balances_balances$key>(
     graphql`
       fragment Balances_balances on BalanceConnection {
-        nodes {
-          id
-          amount
-          currency {
-            name
+        edges {
+          node {
+            id
+            amount
+            currency {
+              name
+            }
           }
         }
       }
@@ -25,7 +27,7 @@ export const Balances: FC<Props> = ({ balancesRef }) => {
     balancesRef
   );
 
-  if (!nodes?.length) return null;
+  if (!edges.length) return null;
 
   return (
     <div className="-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto">
@@ -48,28 +50,28 @@ export const Balances: FC<Props> = ({ balancesRef }) => {
             </tr>
           </thead>
           <tbody>
-            {nodes?.map((balance) => {
+            {edges.map(({ node }) => {
               return (
-                <tr key={balance?.id}>
+                <tr key={node.id}>
                   <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                     <div className="flex items-center">
                       <div className="flex-shrink-0">
                         <img
-                          alt={`${balance?.currency.name} icon`}
-                          src={getCurrencyLogo(balance?.currency.name)}
+                          alt={`${node.currency.name} icon`}
+                          src={getCurrencyLogo(node.currency.name)}
                           className="mx-auto object-cover rounded-full h-10 w-10 "
                         />
                       </div>
                       <div className="ml-3">
                         <p className="text-gray-900 whitespace-no-wrap">
-                          {balance?.currency.name}
+                          {node.currency.name}
                         </p>
                       </div>
                     </div>
                   </td>
                   <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                     <p className="text-gray-900 whitespace-no-wrap">
-                      {balance?.amount}
+                      {node.amount}
                     </p>
                   </td>
                 </tr>
