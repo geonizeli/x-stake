@@ -1,24 +1,44 @@
-# README
+# X Stake
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## 💻 Pré-requisitos
 
-Things you may want to cover:
+* Ruby 2.7.4
+* Node.js >= 14.x
+* Postgres 13.x
+* [Watchman](https://github.com/facebook/watchman) (opcional)
 
-* Ruby version
 
-* System dependencies
+## 🚀 Instalando
 
-* Configuration
+Comandos para a instalação:
 
-* Database creation
+```
+bundle install
+```
+```
+yarn install
+```
+```
+rails db:create db:migrate db:seed
+```
 
-* Database initialization
+## ☕ Desenvolvimento
 
-* How to run the test suite
+Inicie o Rails com:
 
-* Services (job queues, cache servers, search engines, etc.)
+```
+rails server
+```
 
-* Deployment instructions
+Para ter auto-reload enquanto desenvolve nas telas React inicie o webpack-dev-server com:
+```
+yarn dev
+```
 
-* ...
+Para gerar os types do Relay use um dos comandos:
+```
+yarn relay
+```
+```
+yarn relay:watch // requer a instalação do watchman
+```
