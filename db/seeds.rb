@@ -14,7 +14,7 @@ currency = Currency.create!(name: "CAKE")
 Balance.create!(
   user_id: user.id,
   currency_id: currency.id,
-  amount: (rand * (10000 - 0) + 0)
+  amount: rand * 10000
 )
 
 FiatBalance.create!(user_id: user.id, amount_cents: 15000)
