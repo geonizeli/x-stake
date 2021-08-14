@@ -8,20 +8,14 @@ export type ExchangeQueryResponse = {
     readonly fiatBalances: {
         readonly edges: ReadonlyArray<{
             readonly node: {
-                readonly id: string;
                 readonly amountCents: number;
-                readonly amountCurrency: string;
             };
         }>;
     };
     readonly balances: {
         readonly edges: ReadonlyArray<{
             readonly node: {
-                readonly id: string;
                 readonly amount: string;
-                readonly currency: {
-                    readonly name: string;
-                };
             };
         }>;
     };
@@ -38,21 +32,16 @@ query ExchangeQuery {
   fiatBalances {
     edges {
       node {
-        id
         amountCents
-        amountCurrency
+        id
       }
     }
   }
   balances {
     edges {
       node {
-        id
         amount
-        currency {
-          name
-          id
-        }
+        id
       }
     }
   }
@@ -64,69 +53,21 @@ var v0 = {
   "alias": null,
   "args": null,
   "kind": "ScalarField",
-  "name": "id",
+  "name": "amountCents",
   "storageKey": null
 },
 v1 = {
-  "alias": null,
-  "args": null,
-  "concreteType": "FiatBalanceConnection",
-  "kind": "LinkedField",
-  "name": "fiatBalances",
-  "plural": false,
-  "selections": [
-    {
-      "alias": null,
-      "args": null,
-      "concreteType": "FiatBalanceEdge",
-      "kind": "LinkedField",
-      "name": "edges",
-      "plural": true,
-      "selections": [
-        {
-          "alias": null,
-          "args": null,
-          "concreteType": "FiatBalance",
-          "kind": "LinkedField",
-          "name": "node",
-          "plural": false,
-          "selections": [
-            (v0/*: any*/),
-            {
-              "alias": null,
-              "args": null,
-              "kind": "ScalarField",
-              "name": "amountCents",
-              "storageKey": null
-            },
-            {
-              "alias": null,
-              "args": null,
-              "kind": "ScalarField",
-              "name": "amountCurrency",
-              "storageKey": null
-            }
-          ],
-          "storageKey": null
-        }
-      ],
-      "storageKey": null
-    }
-  ],
-  "storageKey": null
-},
-v2 = {
   "alias": null,
   "args": null,
   "kind": "ScalarField",
   "name": "amount",
   "storageKey": null
 },
-v3 = {
+v2 = {
   "alias": null,
   "args": null,
   "kind": "ScalarField",
-  "name": "name",
+  "name": "id",
   "storageKey": null
 };
 return {
@@ -136,7 +77,40 @@ return {
     "metadata": null,
     "name": "ExchangeQuery",
     "selections": [
-      (v1/*: any*/),
+      {
+        "alias": null,
+        "args": null,
+        "concreteType": "FiatBalanceConnection",
+        "kind": "LinkedField",
+        "name": "fiatBalances",
+        "plural": false,
+        "selections": [
+          {
+            "alias": null,
+            "args": null,
+            "concreteType": "FiatBalanceEdge",
+            "kind": "LinkedField",
+            "name": "edges",
+            "plural": true,
+            "selections": [
+              {
+                "alias": null,
+                "args": null,
+                "concreteType": "FiatBalance",
+                "kind": "LinkedField",
+                "name": "node",
+                "plural": false,
+                "selections": [
+                  (v0/*: any*/)
+                ],
+                "storageKey": null
+              }
+            ],
+            "storageKey": null
+          }
+        ],
+        "storageKey": null
+      },
       {
         "alias": null,
         "args": null,
@@ -161,20 +135,7 @@ return {
                 "name": "node",
                 "plural": false,
                 "selections": [
-                  (v0/*: any*/),
-                  (v2/*: any*/),
-                  {
-                    "alias": null,
-                    "args": null,
-                    "concreteType": "Currency",
-                    "kind": "LinkedField",
-                    "name": "currency",
-                    "plural": false,
-                    "selections": [
-                      (v3/*: any*/)
-                    ],
-                    "storageKey": null
-                  }
+                  (v1/*: any*/)
                 ],
                 "storageKey": null
               }
@@ -194,7 +155,41 @@ return {
     "kind": "Operation",
     "name": "ExchangeQuery",
     "selections": [
-      (v1/*: any*/),
+      {
+        "alias": null,
+        "args": null,
+        "concreteType": "FiatBalanceConnection",
+        "kind": "LinkedField",
+        "name": "fiatBalances",
+        "plural": false,
+        "selections": [
+          {
+            "alias": null,
+            "args": null,
+            "concreteType": "FiatBalanceEdge",
+            "kind": "LinkedField",
+            "name": "edges",
+            "plural": true,
+            "selections": [
+              {
+                "alias": null,
+                "args": null,
+                "concreteType": "FiatBalance",
+                "kind": "LinkedField",
+                "name": "node",
+                "plural": false,
+                "selections": [
+                  (v0/*: any*/),
+                  (v2/*: any*/)
+                ],
+                "storageKey": null
+              }
+            ],
+            "storageKey": null
+          }
+        ],
+        "storageKey": null
+      },
       {
         "alias": null,
         "args": null,
@@ -219,21 +214,8 @@ return {
                 "name": "node",
                 "plural": false,
                 "selections": [
-                  (v0/*: any*/),
-                  (v2/*: any*/),
-                  {
-                    "alias": null,
-                    "args": null,
-                    "concreteType": "Currency",
-                    "kind": "LinkedField",
-                    "name": "currency",
-                    "plural": false,
-                    "selections": [
-                      (v3/*: any*/),
-                      (v0/*: any*/)
-                    ],
-                    "storageKey": null
-                  }
+                  (v1/*: any*/),
+                  (v2/*: any*/)
                 ],
                 "storageKey": null
               }
@@ -246,14 +228,14 @@ return {
     ]
   },
   "params": {
-    "cacheID": "7a42b2fc93f97505aaaf21867de36321",
+    "cacheID": "bb1b8283beba2daf38bacec716816383",
     "id": null,
     "metadata": {},
     "name": "ExchangeQuery",
     "operationKind": "query",
-    "text": "query ExchangeQuery {\n  fiatBalances {\n    edges {\n      node {\n        id\n        amountCents\n        amountCurrency\n      }\n    }\n  }\n  balances {\n    edges {\n      node {\n        id\n        amount\n        currency {\n          name\n          id\n        }\n      }\n    }\n  }\n}\n"
+    "text": "query ExchangeQuery {\n  fiatBalances {\n    edges {\n      node {\n        amountCents\n        id\n      }\n    }\n  }\n  balances {\n    edges {\n      node {\n        amount\n        id\n      }\n    }\n  }\n}\n"
   }
 };
 })();
-(node as any).hash = '80cac44f2e6288dfb573d0037b7d4148';
+(node as any).hash = '517d3bf7bc6330021f8eb615e78417f5';
 export default node;

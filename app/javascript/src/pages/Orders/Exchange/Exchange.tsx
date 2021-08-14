@@ -30,20 +30,14 @@ export const Exchange: FC = () => {
         fiatBalances {
           edges {
             node {
-              id
               amountCents
-              amountCurrency
             }
           }
         }
         balances {
           edges {
             node {
-              id
               amount
-              currency {
-                name
-              }
             }
           }
         }
