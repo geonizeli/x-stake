@@ -1,5 +1,5 @@
 {
-  "extends": ["vtex"],
+  "extends": ["vtex", "plugin:relay/recommended"],
   "ignorePatterns": [
     "__mocks__/",
     "__generated__/"
@@ -9,5 +9,9 @@
       "files": ["**/*.tsx"],
       "extends": ["vtex-react"]
     }
-  ]
+  ],
+  "rules": {
+    "relay/generated-flow-types": "false"
+  },
+  "plugins": ["relay"]
 }

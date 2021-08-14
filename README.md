@@ -7,7 +7,6 @@
 * Postgres 13.x
 * [Watchman](https://github.com/facebook/watchman) (opcional)
 
-
 ## 🚀 Instalando
 
 Comandos para a instalação:
@@ -42,3 +41,6 @@ yarn relay
 ```
 yarn relay:watch // requer a instalação do watchman
 ```
+
+## ⛳ Modelo De Domínio
+![](./erd.svg)

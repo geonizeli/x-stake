@@ -18,6 +18,10 @@ const MenuItems: MenuItem[] = [
     label: "Carteira",
     path: "/wallet",
   },
+  {
+    label: "Ordem de Troca",
+    path: "/orders/exchange",
+  },
 ];
 
 export const SideNav = () => {

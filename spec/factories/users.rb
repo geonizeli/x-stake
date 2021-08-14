@@ -20,18 +20,11 @@
 #  index_users_on_email                 (email) UNIQUE
 #  index_users_on_reset_password_token  (reset_password_token) UNIQUE
 #
-class User < ApplicationRecord
-  devise :database_authenticatable, :registerable,
-    :recoverable, :rememberable, :validatable
-
-  has_many :documents, class_name: "UserDocument", dependent: :destroy
-  has_one :balance, dependent: :restrict_with_error
-  has_one :fiat_balance, dependent: :restrict_with_error
-
-  validates :first_name, :last_name, :email, presence: true
-  validates :email, uniqueness: true
-
-  def full_name
-    "#{first_name} #{last_name}"
+FactoryBot.define do
+  factory :user do
+    first_name { Faker::Name.first_name }
+    last_name { Faker::Name.last_name }
+    email { Faker::Internet.email }
+    password { "password" }
   end
 end

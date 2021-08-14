@@ -17,4 +17,4 @@ Balance.create!(
   amount: (rand * (10000 - 0) + 0)
 )
 
-FiatBalance.create!(user_id: user.id)
+FiatBalance.create!(user_id: user.id, amount_cents: 15000)

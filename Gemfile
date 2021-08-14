@@ -28,8 +28,11 @@ gem "pundit"
 group :development, :test do
   gem "dotenv-rails"
   gem "pry-byebug", platforms: [:mri, :mingw, :x64_mingw]
-  gem "capybara"
+  gem "rails-erd"
+
   gem "rspec-rails"
+  gem "faker", "~> 2.18"
+  gem "factory_bot_rails", "~> 6.2"
 
   gem "rubocop-rails", require: false
   gem "rubocop-rspec", require: false
