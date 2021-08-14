@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_12_011039) do
+ActiveRecord::Schema.define(version: 2021_08_14_194513) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -65,6 +65,18 @@ ActiveRecord::Schema.define(version: 2021_08_12_011039) do
     t.index ["user_id"], name: "index_balances_on_user_id"
   end
 
+  create_table "buy_crypto_orders", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "currency_id", null: false
+    t.string "status", null: false
+    t.integer "paid_amount_cents", default: 0, null: false
+    t.decimal "received_amount", precision: 20, scale: 10
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["currency_id"], name: "index_buy_crypto_orders_on_currency_id"
+    t.index ["user_id"], name: "index_buy_crypto_orders_on_user_id"
+  end
+
   create_table "currencies", force: :cascade do |t|
     t.string "name", null: false
     t.datetime "created_at", precision: 6, null: false
@@ -78,6 +90,18 @@ ActiveRecord::Schema.define(version: 2021_08_12_011039) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id"], name: "index_fiat_balances_on_user_id"
+  end
+
+  create_table "sell_crypto_orders", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "currency_id", null: false
+    t.string "status", null: false
+    t.decimal "paid_amount", precision: 20, scale: 10, default: "0.0", null: false
+    t.integer "received_amount_cents"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["currency_id"], name: "index_sell_crypto_orders_on_currency_id"
+    t.index ["user_id"], name: "index_sell_crypto_orders_on_user_id"
   end
 
   create_table "user_documents", force: :cascade do |t|
@@ -106,6 +130,10 @@ ActiveRecord::Schema.define(version: 2021_08_12_011039) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "balances", "currencies"
   add_foreign_key "balances", "users"
+  add_foreign_key "buy_crypto_orders", "currencies"
+  add_foreign_key "buy_crypto_orders", "users"
   add_foreign_key "fiat_balances", "users"
+  add_foreign_key "sell_crypto_orders", "currencies"
+  add_foreign_key "sell_crypto_orders", "users"
   add_foreign_key "user_documents", "users"
 end
