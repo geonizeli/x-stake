@@ -2,5 +2,9 @@
 require "rails_helper"
 
 RSpec.describe("home/index.html.erb", type: :view) do
-  pending "add some examples to (or delete) #{__FILE__}"
+  it "render div with id root" do
+    render
+
+    expect(rendered).to(eq("<div id=\"root\"></div>"))
+  end
 end
