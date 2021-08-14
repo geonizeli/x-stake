@@ -11,7 +11,7 @@ module Types
 
     field :currency, CurrencyType, null: false
     def currency
-      dataloader.with(Sources::ActiveRecord, Currency).load(object.currency_id)
+      dataloader.with(Dataloader::Source, Currency).load(object.currency_id)
     end
   end
 end

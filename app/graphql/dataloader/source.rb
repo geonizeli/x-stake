@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-module Sources
-  class ActiveRecord < GraphQL::Dataloader::Source
+module Dataloader
+  class Source < GraphQL::Dataloader::Source
     # rubocop:disable Lint/MissingSuper
     def initialize(model_class)
       @model_class = model_class
