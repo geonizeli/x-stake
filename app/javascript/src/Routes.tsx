@@ -2,7 +2,7 @@ import type { FC } from "react";
 import React from "react";
 import { Switch, Route } from "react-router-dom";
 
-import { Home, Wallet } from "./pages";
+import { Home, Orders, Wallet } from "./pages";
 
 export const Routes: FC = () => {
   return (
@@ -12,6 +12,9 @@ export const Routes: FC = () => {
       </Route>
       <Route exact path="/wallet">
         <Wallet />
+      </Route>
+      <Route exact path="/orders/exchange">
+        <Orders.Exchange />
       </Route>
     </Switch>
   );
