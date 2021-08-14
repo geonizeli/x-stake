@@ -28,6 +28,7 @@ gem "pundit"
 group :development, :test do
   gem "dotenv-rails"
   gem "pry-byebug", platforms: [:mri, :mingw, :x64_mingw]
+  gem "rails-erd"
 
   gem "rspec-rails"
   gem "faker", "~> 2.18"
