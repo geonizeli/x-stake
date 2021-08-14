@@ -9,3 +9,6 @@ exclude:
   - ActiveRecord::SchemaMigration
   - primary::SchemaMigration
   - Audited::Audit
+  - ActiveStorage::Attachment
+  - ActiveStorage::Blob
+  - ActiveStorage::VariantRecord
