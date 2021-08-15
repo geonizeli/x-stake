@@ -1,0 +1,3 @@
+rails: bundle exec rails server
+webpack: yarn dev
+relay: yarn relay:watch

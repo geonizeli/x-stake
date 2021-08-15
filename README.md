@@ -42,5 +42,10 @@ yarn relay
 yarn relay:watch // requer a instalação do watchman
 ```
 
+Ou inicie rode todos os comandos acima com:
+```
+foreman start -f .foreman.yml
+```
+
 ## ⛳ Modelo De Domínio
 ![](./erd.svg)

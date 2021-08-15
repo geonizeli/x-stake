@@ -44,6 +44,7 @@ group :development do
   gem "graphql_playground-rails"
   gem "web-console", ">= 4.1.0"
 
+  gem "foreman"
   gem "listen", "~> 3.3"
   gem "spring"
 end
