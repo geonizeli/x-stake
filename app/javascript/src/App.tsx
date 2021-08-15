@@ -10,11 +10,11 @@ import { Routes } from "./Routes";
 import type { AppQuery } from "./__generated__/AppQuery.graphql";
 
 export const App: FC = () => {
-  const { currentUser } = useLazyLoadQuery<AppQuery>(
+  const data = useLazyLoadQuery<AppQuery>(
     graphql`
       query AppQuery {
         currentUser {
-          firstName
+          ...UserProvider_user
         }
       }
     `,
@@ -23,7 +23,7 @@ export const App: FC = () => {
 
   return (
     <AppProvider>
-      <UserProvider user={currentUser}>
+      <UserProvider userRef={data.currentUser}>
         <main className="min-h-screen w-full bg-gray-50 flex flex-col">
           <Navbar />
           <div className="flex flex-grow">

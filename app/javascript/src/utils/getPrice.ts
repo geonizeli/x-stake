@@ -1,13 +1,13 @@
+import type { Contract } from "ethers";
 import { ethers } from "ethers";
 
 import { tokens } from "../constants/pancake/Tokens";
 import type { Token } from "../constants/pancake/Tokens";
-import type { BscContext } from "../contexts/BscProvider";
 
 // 1 Wei = 1*10^18 Ether
 const ONE_BUSD_IN_WEI = ethers.utils.parseUnits("1", 18);
 
-export const getPriceInBusd = async (router: any, token: Token) => {
+export const getPriceInBusd = async (router: Contract, token: Token) => {
   try {
     const result = await router.getAmountsOut(ONE_BUSD_IN_WEI, [
       token.address["56"],

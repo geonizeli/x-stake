@@ -1,3 +1,4 @@
+import type { FC } from "react";
 import React, { useContext } from "react";
 import { ethers } from "ethers";
 
@@ -37,7 +38,7 @@ export const useBsc = () => {
   return context;
 };
 
-export const BscProvider = ({ children }: React.PropsWithChildren<any>) => {
+export const BscProvider: FC = ({ children }) => {
   const value: BscContext = {
     provider,
     pancake: {

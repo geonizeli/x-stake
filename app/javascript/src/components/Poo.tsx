@@ -1,5 +1,4 @@
 import React from "react";
-import BigNumber from "bignumber.js";
 
 import type { PoolConfig } from "../types";
 import { useBsc } from "../contexts/BscProvider";
@@ -32,6 +31,7 @@ export const Pool = ({ pool }: PoolProps) => {
 
       const totalStaked = await getTotalStaked(provider, pool);
 
+      // eslint-disable-next-line no-console
       console.log(
         `Total Staked for ${pool.stakingToken.symbol} - ${
           pool.earningToken.symbol
@@ -52,7 +52,7 @@ export const Pool = ({ pool }: PoolProps) => {
         });
       }
     })();
-  }, []);
+  }, [pool, provider, router]);
 
   return (
     <div

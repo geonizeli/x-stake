@@ -14,7 +14,6 @@ export const FiatBalances: FC<Props> = ({ fiatBalancesRef }) => {
       fragment FiatBalances_fiatBalances on FiatBalanceConnection {
         edges {
           node {
-            id
             amountCents
             amountCurrency
           }
