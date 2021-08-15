@@ -2,12 +2,19 @@ import BigNumber from "bignumber.js";
 
 import { BLOCKS_PER_YEAR } from "../constants";
 
-export const getApr = (
-  stakingTokenPrice: number,
-  rewardTokenPrice: number,
-  totalStaked: number,
-  tokenPerBlock: number
-) => {
+type Props = {
+  stakingTokenPrice: number;
+  rewardTokenPrice: number;
+  totalStaked: number;
+  tokenPerBlock: number;
+};
+
+export const getApr = ({
+  rewardTokenPrice,
+  stakingTokenPrice,
+  tokenPerBlock,
+  totalStaked,
+}: Props) => {
   const totalRewardPricePerYear = new BigNumber(rewardTokenPrice)
     .times(tokenPerBlock)
     .times(BLOCKS_PER_YEAR);
