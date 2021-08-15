@@ -39,7 +39,7 @@ type BuyCryptoOrder implements Node {
   currency: Currency!
   id: ID!
   paidAmountCents: Int!
-  receivedAmount: Float
+  receivedAmount: String
   status: ProcessStatus!
   updatedAt: ISO8601DateTime!
 }
@@ -78,7 +78,7 @@ input CreateBuyCryptoOrderAttributesInput {
   """
   Amount to be paid
   """
-  amount: Float!
+  amountCents: Int!
   currencyId: ID!
 }
 
@@ -105,15 +105,15 @@ type CreateBuyCryptoOrderPayload {
   """
   Errors encountered during execution of the mutation.
   """
-  errors: [String!]
-  order: BuyCryptoOrder!
+  errors: [RecordInvalid!]
+  order: BuyCryptoOrder
 }
 
 input CreateSellCryptoOrderAttributesInput {
   """
   Amount to be paid
   """
-  amount: Float!
+  amount: String!
   currencyId: ID!
 }
 
@@ -140,8 +140,8 @@ type CreateSellCryptoOrderPayload {
   """
   Errors encountered during execution of the mutation.
   """
-  errors: [String!]
-  order: SellCryptoOrder!
+  errors: [RecordInvalid!]
+  order: SellCryptoOrder
 }
 
 type Currency implements Node {
@@ -152,9 +152,7 @@ type Currency implements Node {
 type FiatBalance implements Node {
   amountCents: Int!
   amountCurrency: String!
-  createdAt: ISO8601DateTime!
   id: ID!
-  updatedAt: ISO8601DateTime!
 }
 
 """
@@ -356,11 +354,18 @@ type Query {
   ): SellCryptoOrderConnection!
 }
 
+type RecordInvalid {
+  fieldName: String
+  fullMessages: [String!]!
+  messages: [String!]
+  path: [String!]
+}
+
 type SellCryptoOrder implements Node {
   createdAt: ISO8601DateTime!
   currency: Currency!
   id: ID!
-  paidAmount: Float!
+  paidAmount: String!
   receivedAmountCents: Int
   status: ProcessStatus!
   updatedAt: ISO8601DateTime!

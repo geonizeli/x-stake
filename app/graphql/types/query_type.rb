@@ -21,12 +21,12 @@ module Types
 
     field :sell_crypto_orders, SellCryptoOrderType.connection_type, null: false
     def sell_crypto_orders
-      []
+      Pundit.policy_scope(current_user, SellCryptoOrder)
     end
 
     field :buy_crypto_orders, BuyCryptoOrderType.connection_type, null: false
     def buy_crypto_orders
-      []
+      Pundit.policy_scope(current_user, BuyCryptoOrder)
     end
   end
 end

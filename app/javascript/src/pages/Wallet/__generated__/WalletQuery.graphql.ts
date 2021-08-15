@@ -46,9 +46,9 @@ fragment Balances_balances on BalanceConnection {
 fragment FiatBalances_fiatBalances on FiatBalanceConnection {
   edges {
     node {
-      id
       amountCents
       amountCurrency
+      id
     }
   }
 }
@@ -135,7 +135,6 @@ return {
                 "name": "node",
                 "plural": false,
                 "selections": [
-                  (v0/*: any*/),
                   {
                     "alias": null,
                     "args": null,
@@ -149,7 +148,8 @@ return {
                     "kind": "ScalarField",
                     "name": "amountCurrency",
                     "storageKey": null
-                  }
+                  },
+                  (v0/*: any*/)
                 ],
                 "storageKey": null
               }
@@ -222,12 +222,12 @@ return {
     ]
   },
   "params": {
-    "cacheID": "3c87fba4bacbbbe14fd4b584bfb1f7bb",
+    "cacheID": "6acfc80d1e8d7c882a03e25cc7902d72",
     "id": null,
     "metadata": {},
     "name": "WalletQuery",
     "operationKind": "query",
-    "text": "query WalletQuery {\n  fiatBalances {\n    ...FiatBalances_fiatBalances\n  }\n  balances {\n    ...Balances_balances\n  }\n}\n\nfragment Balances_balances on BalanceConnection {\n  edges {\n    node {\n      id\n      amount\n      currency {\n        name\n        id\n      }\n    }\n  }\n}\n\nfragment FiatBalances_fiatBalances on FiatBalanceConnection {\n  edges {\n    node {\n      id\n      amountCents\n      amountCurrency\n    }\n  }\n}\n"
+    "text": "query WalletQuery {\n  fiatBalances {\n    ...FiatBalances_fiatBalances\n  }\n  balances {\n    ...Balances_balances\n  }\n}\n\nfragment Balances_balances on BalanceConnection {\n  edges {\n    node {\n      id\n      amount\n      currency {\n        name\n        id\n      }\n    }\n  }\n}\n\nfragment FiatBalances_fiatBalances on FiatBalanceConnection {\n  edges {\n    node {\n      amountCents\n      amountCurrency\n      id\n    }\n  }\n}\n"
   }
 };
 })();

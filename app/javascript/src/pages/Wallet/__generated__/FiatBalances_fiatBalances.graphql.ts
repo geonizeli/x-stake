@@ -7,7 +7,6 @@ import { FragmentRefs } from "relay-runtime";
 export type FiatBalances_fiatBalances = {
     readonly edges: ReadonlyArray<{
         readonly node: {
-            readonly id: string;
             readonly amountCents: number;
             readonly amountCurrency: string;
         };
@@ -48,13 +47,6 @@ const node: ReaderFragment = {
               "alias": null,
               "args": null,
               "kind": "ScalarField",
-              "name": "id",
-              "storageKey": null
-            },
-            {
-              "alias": null,
-              "args": null,
-              "kind": "ScalarField",
               "name": "amountCents",
               "storageKey": null
             },
@@ -75,5 +67,5 @@ const node: ReaderFragment = {
   "type": "FiatBalanceConnection",
   "abstractKey": null
 };
-(node as any).hash = '106c8efa69b9cde5af510a15c2493ba6';
+(node as any).hash = 'a1454d1a8afc3cffb17cbfbe9e3555f7';
 export default node;

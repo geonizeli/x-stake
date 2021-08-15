@@ -11,7 +11,7 @@
     }
   ],
   "rules": {
-    "relay/generated-flow-types": "false"
+    "relay/generated-flow-types": "off"
   },
   "plugins": ["relay"]
 }

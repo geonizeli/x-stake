@@ -1,6 +1,7 @@
 {
   "name": "x-stake",
   "private": true,
+  "version": "0.1.0",
   "scripts": {
     "dev": "./bin/webpack-dev-server",
     "lint": "eslint --ext .jsx,.js,.tsx,.ts app/javascript/",
@@ -8,6 +9,11 @@
     "tsc": "tsc --noEmit",
     "relay": "relay-compiler --schema app/javascript/__generated__/schema.graphql --src app/javascript/src --extensions tsx --language typescript",
     "relay:watch": "relay-compiler --schema app/javascript/__generated__/schema.graphql --src app/javascript/src --extensions tsx --language typescript --watch"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "yarn lint:fix"
+    }
   },
   "dependencies": {
     "@babel/preset-react": "^7.14.5",
@@ -39,7 +45,6 @@
     "webpack": "^4.46.0",
     "webpack-cli": "^3.3.12"
   },
-  "version": "0.1.0",
   "devDependencies": {
     "@types/ramda": "^0.27.44",
     "@types/react-relay": "^11.0.2",
@@ -50,6 +55,7 @@
     "eslint-config-vtex-react": "^8.1.0",
     "eslint-plugin-relay": "^1.8.2",
     "graphql": "^15.5.1",
+    "husky": "^4.2.1",
     "prettier": "^2.3.2",
     "relay-compiler": "^11.0.2",
     "relay-compiler-language-typescript": "^14.0.0",

@@ -12,6 +12,10 @@ class XStakeSchema < GraphQL::Schema
       Types::BalanceType
     when FiatBalance
       Types::FiatBalanceType
+    when SellCryptoOrder
+      Types::SellCryptoOrderType
+    when BuyCryptoOrder
+      Types::BuyCryptoOrderType
     else
       raise(GraphQL::RequiredImplementationMissingError, "Unexpected object: #{obj}")
     end

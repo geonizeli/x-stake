@@ -9,7 +9,9 @@ export const PoolListing = () => {
       {pools
         .filter((pool) => !pool.isFinished)
         .sort((a, b) => (a.sortOrder ?? 0) - (b.sortOrder ?? 0))
-        .map((pool) => <Pool key={pool.sousId} pool={pool} />)}
+        .map((pool) => (
+          <Pool key={pool.sousId} pool={pool} />
+        ))}
     </div>
   );
 };

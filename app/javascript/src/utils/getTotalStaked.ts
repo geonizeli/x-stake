@@ -2,7 +2,6 @@ import { ethers } from "ethers";
 import BigNumber from "bignumber.js";
 
 import erc20 from "../abi/erc20.json";
-import { Token } from "../constants/pancake/Tokens";
 import type { PoolConfig } from "../types";
 
 export const getTotalStaked = async (
