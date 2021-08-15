@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 class XStakeSchema < GraphQL::Schema
-  # mutation(Types::MutationType)
+  mutation(Types::MutationType)
   query(Types::QueryType)
   use GraphQL::Dataloader
 

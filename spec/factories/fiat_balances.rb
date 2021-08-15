@@ -23,6 +23,6 @@ FactoryBot.define do
   factory :fiat_balance do
     association :user
     amount_currency { "BRL" }
-    amount_cents { Faker::Number.number(digits: 10) }
+    amount_cents { Faker::Number.number(digits: 4) }
   end
 end

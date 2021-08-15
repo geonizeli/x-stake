@@ -32,4 +32,32 @@ RSpec.describe(Balance, type: :model) do
     it { is_expected.to(belong_to(:user)) }
     it { is_expected.to(belong_to(:currency)) }
   end
+
+  describe ".withdrwal!" do
+    context "when value is greater than the balance" do
+      it "raise ActiveRecord::RecordInvalid" do
+        balance = build(:balance, amount: 70.342)
+
+        expect { balance.withdrawal!(80) }.to(
+          raise_error(ActiveRecord::RecordInvalid, "A validação falhou: Quantia saldo insuficiente")
+        )
+      end
+    end
+
+    context "when value is equals to the balance" do
+      it "returns true" do
+        balance = build(:balance, amount: 70.342)
+
+        expect(balance.withdrawal!(70.342)).to(eq(true))
+      end
+    end
+
+    context "when value is smaller than the balance" do
+      it "returns true" do
+        balance = build(:balance, amount: 70.342)
+
+        expect(balance.withdrawal!(20)).to(eq(true))
+      end
+    end
+  end
 end

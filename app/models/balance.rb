@@ -25,5 +25,13 @@ class Balance < ApplicationRecord
   belongs_to :user
   belongs_to :currency
 
-  validates :amount, presence: true
+  validates :amount, presence: true, numericality: { greater_than_or_equal_to: 0 }
+
+  def withdrawal!(value)
+    update!(amount: amount - value)
+  end
+
+  def deposit!(value)
+    update!(amount: amount + value)
+  end
 end

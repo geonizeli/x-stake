@@ -24,7 +24,17 @@ class FiatBalance < ApplicationRecord
 
   monetize :amount_cents
 
+  validates :amount_cents, numericality: { greater_than_or_equal_to: 0 }
+
   def amount_formatted
     amount.format
+  end
+
+  def withdrawal!(value)
+    update!(amount_cents: amount_cents - value)
+  end
+
+  def deposit!(value)
+    update!(amount_cents: amount_cents + value)
   end
 end

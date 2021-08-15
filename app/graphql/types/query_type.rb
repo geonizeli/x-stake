@@ -18,5 +18,15 @@ module Types
     def fiat_balances
       Pundit.policy_scope(current_user, FiatBalance)
     end
+
+    field :sell_crypto_orders, SellCryptoOrderType.connection_type, null: false
+    def sell_crypto_orders
+      []
+    end
+
+    field :buy_crypto_orders, BuyCryptoOrderType.connection_type, null: false
+    def buy_crypto_orders
+      []
+    end
   end
 end

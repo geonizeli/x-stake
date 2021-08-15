@@ -32,6 +32,18 @@ pt-BR:
 
       fiat_balance:
         amount_formatted: Quantia
+        amount_cents: Quantia
 
       currency:
         name: Nome
+
+    errors:
+      models:
+        balance:
+          attributes:
+            amount:
+              greater_than_or_equal_to: "saldo insuficiente"
+        fiat_balance:
+          attributes:
+            amount_cents:
+              greater_than_or_equal_to: "saldo insuficiente"
