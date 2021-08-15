@@ -39,10 +39,10 @@ export const Pool = ({ pool }: PoolProps) => {
       );
 
       const aprValue = getApr({
-        rewardTokenPrice: stakingPrice,
-        stakingTokenPrice: earningPrice,
-        tokenPerBlock: totalStaked,
-        totalStaked: parseFloat(pool.tokenPerBlock) / 1e-18,
+        rewardTokenPrice: earningPrice,
+        stakingTokenPrice: stakingPrice,
+        tokenPerBlock: parseFloat(pool.tokenPerBlock) / 1e-18,
+        totalStaked: totalStaked,
       });
 
       if (aprValue) {
