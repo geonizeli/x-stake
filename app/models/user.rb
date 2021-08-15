@@ -34,4 +34,12 @@ class User < ApplicationRecord
   def full_name
     "#{first_name} #{last_name}"
   end
+
+  after_create do
+    create_balances
+  end
+
+  def create_balances
+    CreateUserBalances.new(self).call
+  end
 end
