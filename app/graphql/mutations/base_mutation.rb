@@ -6,8 +6,16 @@ module Mutations
     input_object_class Types::BaseInputObject
     object_class Types::BaseObject
 
-    field :errors, [String],
+    field :errors, [Types::RecordInvalidType],
       null: true,
       description: "Errors encountered during execution of the mutation."
+
+    def current_user
+      context[:current_user]
+    end
+
+    def decode_id(encoded_id)
+      GraphQL::Schema::UniqueWithinType.decode(encoded_id).last
+    end
   end
 end
