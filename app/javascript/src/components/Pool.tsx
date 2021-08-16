@@ -42,7 +42,7 @@ export const Pool = ({ pool }: PoolProps) => {
         rewardTokenPrice: earningPrice,
         stakingTokenPrice: stakingPrice,
         tokenPerBlock: parseFloat(pool.tokenPerBlock) / 1e-18,
-        totalStaked: totalStaked,
+        totalStaked,
       });
 
       if (aprValue) {

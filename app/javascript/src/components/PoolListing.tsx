@@ -1,7 +1,7 @@
 import React from "react";
 
 import { pools } from "../constants/Pools";
-import { Pool } from "./Poo";
+import { Pool } from "./Pool";
 
 export const PoolListing = () => {
   return (

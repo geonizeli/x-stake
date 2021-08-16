@@ -83,8 +83,8 @@ export const ExchangeHistory: FC<Props> = ({
 
   const allResultsOrdeneds = allResults.sort((item1, item2) => {
     return (
-      new Date(item1.node.createdAt as string).getTime() -
-      new Date(item2.node.createdAt as string).getTime()
+      new Date(item2.node.createdAt as string).getTime() -
+      new Date(item1.node.createdAt as string).getTime()
     );
   }) as SellOrBuyOrder[];
 
@@ -116,6 +116,8 @@ export const ExchangeHistory: FC<Props> = ({
 
       return null;
     });
+
+  if (!orderRows.length) return null;
 
   return (
     <div className="container mx-auto px-4 sm:px-8">

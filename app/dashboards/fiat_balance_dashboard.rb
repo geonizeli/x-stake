@@ -12,6 +12,7 @@ class FiatBalanceDashboard < Administrate::BaseDashboard
     id: Field::Number,
     user: Field::BelongsTo,
     amount_formatted: Field::String,
+    amount_cents: Field::String,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
   }.freeze
@@ -30,7 +31,7 @@ class FiatBalanceDashboard < Administrate::BaseDashboard
   # FORM_ATTRIBUTES
   # an array of attributes that will be displayed
   # on the model's form (`new` and `edit`) pages.
-  FORM_ATTRIBUTES = [:user, :amount_formatted].freeze
+  FORM_ATTRIBUTES = [:user, :amount_cents].freeze
 
   # COLLECTION_FILTERS
   # a hash that defines filters that can be used while searching via the search

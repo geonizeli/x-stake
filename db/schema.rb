@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_14_194513) do
+ActiveRecord::Schema.define(version: 2021_08_16_015156) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -70,7 +70,7 @@ ActiveRecord::Schema.define(version: 2021_08_14_194513) do
     t.bigint "currency_id", null: false
     t.string "status", null: false
     t.integer "paid_amount_cents", default: 0, null: false
-    t.decimal "received_amount", precision: 20, scale: 10
+    t.decimal "received_amount", precision: 20, scale: 10, default: "0.0", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["currency_id"], name: "index_buy_crypto_orders_on_currency_id"
@@ -97,7 +97,7 @@ ActiveRecord::Schema.define(version: 2021_08_14_194513) do
     t.bigint "currency_id", null: false
     t.string "status", null: false
     t.decimal "paid_amount", precision: 20, scale: 10, default: "0.0", null: false
-    t.integer "received_amount_cents"
+    t.integer "received_amount_cents", default: 0, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["currency_id"], name: "index_sell_crypto_orders_on_currency_id"

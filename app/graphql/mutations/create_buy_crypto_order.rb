@@ -9,7 +9,9 @@ module Mutations
       currency_id = decode_id(order[:currency_id])
 
       ActiveRecord::Base.transaction do
-        current_user.fiat_balance.withdrawal!(order[:amount_cents])
+        current_user
+          .fiat_balance
+          .withdrawal!(order[:amount_cents])
 
         record = BuyCryptoOrder.create!(
           paid_amount_cents: order[:amount_cents],
