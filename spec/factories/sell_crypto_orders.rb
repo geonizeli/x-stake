@@ -6,7 +6,7 @@
 #
 #  id                    :bigint           not null, primary key
 #  paid_amount           :decimal(20, 10)  default(0.0), not null
-#  received_amount_cents :integer
+#  received_amount_cents :integer          default(0), not null
 #  status                :string           not null
 #  created_at            :datetime         not null
 #  updated_at            :datetime         not null

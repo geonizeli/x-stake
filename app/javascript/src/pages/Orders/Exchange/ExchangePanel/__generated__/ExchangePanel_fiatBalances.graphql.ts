@@ -4,18 +4,18 @@
 
 import { ReaderFragment } from "relay-runtime";
 import { FragmentRefs } from "relay-runtime";
-export type CreateExchangeOrderModal_balances = {
+export type ExchangePanel_fiatBalances = {
     readonly edges: ReadonlyArray<{
         readonly node: {
-            readonly amount: string;
+            readonly amountCents: number;
         };
     }>;
-    readonly " $refType": "CreateExchangeOrderModal_balances";
+    readonly " $refType": "ExchangePanel_fiatBalances";
 };
-export type CreateExchangeOrderModal_balances$data = CreateExchangeOrderModal_balances;
-export type CreateExchangeOrderModal_balances$key = {
-    readonly " $data"?: CreateExchangeOrderModal_balances$data;
-    readonly " $fragmentRefs": FragmentRefs<"CreateExchangeOrderModal_balances">;
+export type ExchangePanel_fiatBalances$data = ExchangePanel_fiatBalances;
+export type ExchangePanel_fiatBalances$key = {
+    readonly " $data"?: ExchangePanel_fiatBalances$data;
+    readonly " $fragmentRefs": FragmentRefs<"ExchangePanel_fiatBalances">;
 };
 
 
@@ -24,12 +24,12 @@ const node: ReaderFragment = {
   "argumentDefinitions": [],
   "kind": "Fragment",
   "metadata": null,
-  "name": "CreateExchangeOrderModal_balances",
+  "name": "ExchangePanel_fiatBalances",
   "selections": [
     {
       "alias": null,
       "args": null,
-      "concreteType": "BalanceEdge",
+      "concreteType": "FiatBalanceEdge",
       "kind": "LinkedField",
       "name": "edges",
       "plural": true,
@@ -37,7 +37,7 @@ const node: ReaderFragment = {
         {
           "alias": null,
           "args": null,
-          "concreteType": "Balance",
+          "concreteType": "FiatBalance",
           "kind": "LinkedField",
           "name": "node",
           "plural": false,
@@ -46,7 +46,7 @@ const node: ReaderFragment = {
               "alias": null,
               "args": null,
               "kind": "ScalarField",
-              "name": "amount",
+              "name": "amountCents",
               "storageKey": null
             }
           ],
@@ -56,8 +56,8 @@ const node: ReaderFragment = {
       "storageKey": null
     }
   ],
-  "type": "BalanceConnection",
+  "type": "FiatBalanceConnection",
   "abstractKey": null
 };
-(node as any).hash = '42aad1bd63f1135b4d99ec236cd945b5';
+(node as any).hash = '14b79d15c8353d856f3e74bb7c181cf7';
 export default node;

@@ -1,14 +1,16 @@
 import React, { useState } from "react";
 import type { FC } from "react";
 import { graphql } from "babel-plugin-relay/macro";
-import { useFragment } from "react-relay";
+import { useFragment, useRelayEnvironment } from "react-relay";
 import { BigNumber } from "bignumber.js";
 import cx from "classnames";
 
 import { useCurrentUser } from "../../../../contexts/UserProvider";
 import { Unauthenticated } from "../../../../messages/Unauthenticated";
-import type { CreateExchangeOrderModal_fiatBalances$key } from "./__generated__/CreateExchangeOrderModal_fiatBalances.graphql";
-import type { CreateExchangeOrderModal_balances$key } from "./__generated__/CreateExchangeOrderModal_balances.graphql";
+import type { ExchangePanel_fiatBalances$key } from "./__generated__/ExchangePanel_fiatBalances.graphql";
+import type { ExchangePanel_balances$key } from "./__generated__/ExchangePanel_balances.graphql";
+import { commitCreateSellCryptoOrderMutation } from "./createSellCryptoOrder";
+import { commitCreateBuyCryptoOrderMutation } from "./createBuyCryptoOrder";
 
 const tabBaseStyles =
   "w-full text-base font-bold text-black px-4 py-2 focus:ring-blue-500";
@@ -20,22 +22,23 @@ const inputBaseStyles =
   "rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent mb-3";
 
 type Props = {
-  fiatBalancesRefs: CreateExchangeOrderModal_fiatBalances$key;
-  balancesRefs: CreateExchangeOrderModal_balances$key;
+  fiatBalancesRefs: ExchangePanel_fiatBalances$key;
+  balancesRefs: ExchangePanel_balances$key;
 };
 
-export const CreateExchangeOrderModal: FC<Props> = ({
+export const ExchangePanel: FC<Props> = ({
   fiatBalancesRefs,
   balancesRefs,
 }) => {
   const { isAuthenticated } = useCurrentUser();
+  const environment = useRelayEnvironment();
   const [exchangeOption, setExchangeOption] = useState<"BUY" | "SELL">("BUY");
   const [cryptoDock, setCryptoDock] = useState<string>("0");
   const [fiatDock, setFiatDock] = useState<string>("0.00");
 
-  const fiatBalances = useFragment<CreateExchangeOrderModal_fiatBalances$key>(
+  const fiatBalances = useFragment<ExchangePanel_fiatBalances$key>(
     graphql`
-      fragment CreateExchangeOrderModal_fiatBalances on FiatBalanceConnection {
+      fragment ExchangePanel_fiatBalances on FiatBalanceConnection {
         edges {
           node {
             amountCents
@@ -46,12 +49,15 @@ export const CreateExchangeOrderModal: FC<Props> = ({
     fiatBalancesRefs
   );
 
-  const balances = useFragment<CreateExchangeOrderModal_balances$key>(
+  const balances = useFragment<ExchangePanel_balances$key>(
     graphql`
-      fragment CreateExchangeOrderModal_balances on BalanceConnection {
+      fragment ExchangePanel_balances on BalanceConnection {
         edges {
           node {
             amount
+            currency {
+              id
+            }
           }
         }
       }
@@ -60,6 +66,7 @@ export const CreateExchangeOrderModal: FC<Props> = ({
   );
 
   if (!isAuthenticated) return <Unauthenticated />;
+
   const [crypto] = balances.edges;
   const [fiat] = fiatBalances.edges;
 
@@ -83,7 +90,10 @@ export const CreateExchangeOrderModal: FC<Props> = ({
   }: React.ChangeEvent<HTMLInputElement>) => {
     const newCryptoAmount = new BigNumber(value);
 
-    if (newCryptoAmount.isLessThanOrEqualTo(avaliableCrypto)) {
+    if (
+      newCryptoAmount.isLessThanOrEqualTo(avaliableCrypto) &&
+      newCryptoAmount.isGreaterThanOrEqualTo(0)
+    ) {
       setCryptoDock(value);
     }
   };
@@ -91,9 +101,10 @@ export const CreateExchangeOrderModal: FC<Props> = ({
   const handleFiatAmountChange = ({
     currentTarget: { value },
   }: React.ChangeEvent<HTMLInputElement>) => {
-    const newFiatAmount = Number(value);
+    const newFiatAmount = parseInt(value, 10);
+    const avaliableFiatAmount = parseInt(avaliableFiat, 10);
 
-    if (Number(avaliableFiat) >= newFiatAmount) {
+    if (newFiatAmount <= avaliableFiatAmount && newFiatAmount >= 0) {
       setFiatDock(value);
     }
   };
@@ -106,8 +117,33 @@ export const CreateExchangeOrderModal: FC<Props> = ({
     setCryptoDock(avaliableCrypto.toString());
   };
 
+  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    if (exchangeOption === "SELL") {
+      commitCreateSellCryptoOrderMutation(environment, {
+        amount: cryptoDock,
+        currencyId: crypto.node.currency.id,
+      });
+    }
+
+    if (exchangeOption === "BUY") {
+      const [amountCents] = fiatDock.split(".");
+
+      commitCreateBuyCryptoOrderMutation(environment, {
+        amountCents: parseInt(amountCents, 10),
+        currencyId: crypto.node.currency.id,
+      });
+    }
+  };
+
+  const submitDisabled =
+    (exchangeOption === "BUY" && parseInt(fiatDock, 10) <= 0) ||
+    (exchangeOption === "SELL" &&
+      new BigNumber(cryptoDock).isLessThanOrEqualTo(0));
+
   return (
-    <div className="max-w-lg">
+    <div className="max-w-lg mx-auto mt-16">
       <div className="flex items-center bg-white rounded-full border border-gray-200 mb-3">
         <button
           type="button"
@@ -132,7 +168,10 @@ export const CreateExchangeOrderModal: FC<Props> = ({
           Vender
         </button>
       </div>
-      <form className="bg-white p-4 rounded-2xl border border-gray-200">
+      <form
+        onSubmit={onSubmit}
+        className="bg-white p-4 rounded-2xl border border-gray-200"
+      >
         <span className="mb-2">
           {exchangeOption === "SELL" ? "CAKE" : "BRL"} disponível:{" "}
           {exchangeOption === "SELL" ? crypto.node.amount : avaliableFiat}
@@ -176,8 +215,9 @@ export const CreateExchangeOrderModal: FC<Props> = ({
         </div>
 
         <button
-          className="cursor-pointer py-2 px-4  bg-blue-600 hover:bg-blue-700 focus:ring-blue-500 focus:ring-offset-blue-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg"
+          className="cursor-pointer py-2 px-4 disabled:opacity-50 disabled:cursor-default bg-blue-600 hover:bg-blue-700 focus:ring-blue-500 focus:ring-offset-blue-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg"
           type="submit"
+          disabled={submitDisabled}
         >
           {exchangeOption === "BUY" ? "Comprar" : "Vender"} CAKE
         </button>
