@@ -3,24 +3,13 @@ import React from "react";
 import cx from "classnames";
 
 import type { ProcessStatus } from "../__generated__/ExchangeHistory_buyCryptoOrders.graphql";
+import { getStatusTextAndColors } from "../../../utils/processStatus";
 
 export type CryptoExchangeOrderProps = {
   payed?: string;
   received?: string;
   status?: ProcessStatus;
   createdAt?: string;
-};
-
-const getStatusTextAndColors = (status: ProcessStatus) => {
-  if (status === "PROCESSING") {
-    return ["Processando", "text-yellow-900", "bg-yellow-200"];
-  }
-
-  if (status === "CANCELED") {
-    return ["Cancelado", "text-red-900", "bg-red-200"];
-  }
-
-  return ["Completado", "text-green-900", "bg-green-200"];
 };
 
 export const CryptoExchangeOrder: FC<CryptoExchangeOrderProps> = ({

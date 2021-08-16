@@ -39,7 +39,7 @@ pt-BR:
 
       fiat_balance:
         amount_formatted: Quantia
-        amount_cents: Quantia em centavos
+        amount_cents: Quantia
 
       currency:
         name: Nome

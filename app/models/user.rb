@@ -25,6 +25,7 @@ class User < ApplicationRecord
     :recoverable, :rememberable, :validatable
 
   has_many :documents, class_name: "UserDocument", dependent: :destroy
+  has_many :stake_orders, dependent: :restrict_with_error
   has_many :balances, dependent: :restrict_with_error
   has_one :fiat_balance, dependent: :restrict_with_error
 

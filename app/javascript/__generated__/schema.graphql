@@ -352,6 +352,27 @@ type Query {
     """
     last: Int
   ): SellCryptoOrderConnection!
+  stakeOrders(
+    """
+    Returns the elements in the list that come after the specified cursor.
+    """
+    after: String
+
+    """
+    Returns the elements in the list that come before the specified cursor.
+    """
+    before: String
+
+    """
+    Returns the first _n_ elements from the list.
+    """
+    first: Int
+
+    """
+    Returns the last _n_ elements from the list.
+    """
+    last: Int
+  ): StakeOrderConnection!
 }
 
 type RecordInvalid {
@@ -399,6 +420,45 @@ type SellCryptoOrderEdge {
   The item at the end of the edge.
   """
   node: SellCryptoOrder!
+}
+
+type StakeOrder implements Node {
+  amount: String!
+  createdAt: ISO8601DateTime!
+  id: ID!
+  poolName: String!
+  status: ProcessStatus!
+  updatedAt: ISO8601DateTime!
+}
+
+"""
+The connection type for StakeOrder.
+"""
+type StakeOrderConnection {
+  """
+  A list of edges.
+  """
+  edges: [StakeOrderEdge!]!
+
+  """
+  Information to aid in pagination.
+  """
+  pageInfo: PageInfo!
+}
+
+"""
+An edge in a connection.
+"""
+type StakeOrderEdge {
+  """
+  A cursor for use in pagination.
+  """
+  cursor: String!
+
+  """
+  The item at the end of the edge.
+  """
+  node: StakeOrder!
 }
 
 type User {

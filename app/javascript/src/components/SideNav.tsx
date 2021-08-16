@@ -22,6 +22,10 @@ const MenuItems: MenuItem[] = [
     label: "Ordem de Troca",
     path: "/orders/exchange",
   },
+  {
+    label: "Ordem de Stake",
+    path: "/orders/stake",
+  },
 ];
 
 export const SideNav = () => {

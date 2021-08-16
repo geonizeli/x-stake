@@ -64,7 +64,7 @@ RSpec.describe(Mutations::CreateBuyCryptoOrder, type: :mutation) do
             "order" => {
               "status" => "PROCESSING",
               "paidAmountCents" => 90_00,
-              "receivedAmount" => nil,
+              "receivedAmount" => "0.0",
               "currency" => {
                 "name" => "CAKE",
               },

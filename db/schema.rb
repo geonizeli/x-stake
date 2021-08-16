@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_16_015156) do
+ActiveRecord::Schema.define(version: 2021_08_16_032056) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -104,6 +104,16 @@ ActiveRecord::Schema.define(version: 2021_08_16_015156) do
     t.index ["user_id"], name: "index_sell_crypto_orders_on_user_id"
   end
 
+  create_table "stake_orders", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "pool_name", null: false
+    t.string "status", null: false
+    t.decimal "amount", precision: 20, scale: 10, default: "0.0", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_stake_orders_on_user_id"
+  end
+
   create_table "user_documents", force: :cascade do |t|
     t.string "status", null: false
     t.bigint "user_id", null: false
@@ -135,5 +145,6 @@ ActiveRecord::Schema.define(version: 2021_08_16_015156) do
   add_foreign_key "fiat_balances", "users"
   add_foreign_key "sell_crypto_orders", "currencies"
   add_foreign_key "sell_crypto_orders", "users"
+  add_foreign_key "stake_orders", "users"
   add_foreign_key "user_documents", "users"
 end
