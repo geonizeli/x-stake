@@ -58,7 +58,7 @@ export const Pool = ({ pool }: PoolProps) => {
     <div
       key={pool.sousId}
       id={pool.sousId.toString()}
-      className="flex items-center w-full h-auto bg-white px-16 p-4 rounded-xl shadow flex-col relative z-0 overflow-hidden hover:shadow-lg transition-all duration-300 cursor-pointer"
+      className="flex items-center w-full h-auto bg-white px-16 p-4 rounded-xl shadow flex-col relative z-0 overflow-hidden hover:shadow-lg transition-all duration-300"
     >
       <div
         className="box-border h-full w-full absolute left-0 top-0 rounded-xl opacity-20 filter blur-2xl bg-cover"

@@ -28,5 +28,10 @@ module Types
     def buy_crypto_orders
       Pundit.policy_scope(current_user, BuyCryptoOrder)
     end
+
+    field :stake_orders, StakeOrderType.connection_type, null: false
+    def stake_orders
+      Pundit.policy_scope(current_user, StakeOrder)
+    end
   end
 end
