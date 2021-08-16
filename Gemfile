@@ -19,6 +19,7 @@ gem "devise"
 gem "devise-i18n"
 
 gem "administrate-field-active_storage"
+gem "administrate-field-enumerize"
 gem "tailwindcss-rails"
 gem "administrate"
 gem "money-rails"

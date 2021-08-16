@@ -21,6 +21,13 @@ pt-BR:
         one: Saldo Fiat
         other: Saldos Fiat
 
+      sell_crypto_order:
+        one: Pedido de Venda
+        other: Pedidos de Venda
+
+      buy_crypto_order:
+        one: Pedido de Compra
+        other: Pedidos de Compra
     attributes:
       user:
         first_name: Primeiro nome
