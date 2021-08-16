@@ -128,10 +128,8 @@ export const ExchangePanel: FC<Props> = ({
     }
 
     if (exchangeOption === "BUY") {
-      const [amountCents] = fiatDock.split(".");
-
       commitCreateBuyCryptoOrderMutation(environment, {
-        amountCents: parseInt(amountCents, 10),
+        amountCents: parseFloat(fiatDock) * 100,
         currencyId: crypto.node.currency.id,
       });
     }
