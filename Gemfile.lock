@@ -73,6 +73,10 @@ GEM
     administrate-field-active_storage (0.3.7)
       administrate (>= 0.2.2)
       rails (>= 6.0)
+    administrate-field-enumerize (1.0.0)
+      administrate (~> 0.8)
+      enumerize (~> 2.1)
+      rails (>= 5.0.0)
     annotate (3.1.1)
       activerecord (>= 3.2, < 7.0)
       rake (>= 10.4, < 14.0)
@@ -334,6 +338,7 @@ PLATFORMS
 DEPENDENCIES
   administrate
   administrate-field-active_storage
+  administrate-field-enumerize
   annotate
   bootsnap (>= 1.4.4)
   devise

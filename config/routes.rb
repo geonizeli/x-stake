@@ -7,7 +7,8 @@ Rails.application.routes.draw do
     resources :users
     resources :balances
     resources :fiat_balances
-    resources :currencies
+    resources :buy_crypto_orders
+    resources :sell_crypto_orders
     resources :admin_users
 
     root to: "users#index"
