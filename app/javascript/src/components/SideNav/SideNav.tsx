@@ -2,7 +2,7 @@ import * as React from "react";
 import { Link } from "react-router-dom";
 import { Transition } from "@headlessui/react";
 
-import { useApp } from "../contexts/AppProvider";
+import { useApp } from "../../contexts/AppProvider";
 
 type MenuItem = {
   label: string;

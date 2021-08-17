@@ -1,16 +1,20 @@
+import type { FC } from "react";
 import React from "react";
 
-import type { PoolConfig } from "../types";
-import { useBsc } from "../contexts/BscProvider";
-import { getPriceInBusd } from "../utils/getPrice";
-import { getApr } from "../utils/apr";
-import { getTotalStaked } from "../utils/getTotalStaked";
+import type { PoolConfig } from "../../types";
+import { useBsc } from "../../contexts/BscProvider";
+import { getApr } from "../../utils/apr";
+import { getPriceInBusd } from "../../utils/getPrice";
+import { getTotalStaked } from "../../utils/getTotalStaked";
+import { StakeOrderModal } from "./StakeOrderModal";
 
 type PoolProps = {
   pool: PoolConfig;
+  balance: string;
+  currencyId: string;
 };
 
-export const Pool = ({ pool }: PoolProps) => {
+export const Pool: FC<PoolProps> = ({ pool, balance, currencyId }) => {
   const {
     provider,
     pancake: { router },
@@ -77,12 +81,7 @@ export const Pool = ({ pool }: PoolProps) => {
       />
       <div className="mt-4 p-2">
         <p>
-          <span className="font-medium">Investir:</span>{" "}
-          {pool.stakingToken.symbol}
-        </p>
-        <p>
-          <span className="font-medium">Receber:</span>{" "}
-          {pool.earningToken.symbol}
+          <span className="font-medium">Pool:</span> {pool.earningToken.symbol}
         </p>
         <div className="flex items-center">
           <span className="font-medium mr-1">Rendimento:</span>
@@ -92,6 +91,11 @@ export const Pool = ({ pool }: PoolProps) => {
             `${apr.value}%`
           )}
         </div>
+        <StakeOrderModal
+          poolName={pool.earningToken.symbol}
+          balance={balance}
+          currencyId={currencyId}
+        />
       </div>
     </div>
   );

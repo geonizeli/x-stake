@@ -1,9 +1,9 @@
 import type { FC } from "react";
 import React from "react";
 
-import { Container } from "../../components/Container";
-import { Header } from "../../components/Header";
-import { PoolListing } from "../../components/PoolListing";
+import { Container } from "./Container";
+import { Header } from "./Header";
+import { PoolListing } from "./PoolListing";
 
 export const Home: FC = () => {
   return (
