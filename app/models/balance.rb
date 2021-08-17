@@ -22,6 +22,8 @@
 #  fk_rails_...  (user_id => users.id)
 #
 class Balance < ApplicationRecord
+  include Trackable
+
   belongs_to :user
   belongs_to :currency
 

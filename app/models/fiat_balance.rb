@@ -20,6 +20,8 @@
 #  fk_rails_...  (user_id => users.id)
 #
 class FiatBalance < ApplicationRecord
+  include Trackable
+
   belongs_to :user
 
   monetize :amount_cents
