@@ -25,6 +25,7 @@
 #
 class SellCryptoOrder < ApplicationRecord
   include Processable
+  include Notifiable
 
   belongs_to :user
   belongs_to :currency
@@ -33,4 +34,14 @@ class SellCryptoOrder < ApplicationRecord
 
   validates :paid_amount, presence: true, numericality: { greater_than: 0 }
   validates :received_amount_cents, presence: true, if: :completed?
+
+  private
+
+  def notification_message
+    "
+    💸 New sell crypto order! 💸\n
+    user: #{user.email} \n
+    amount: #{paid_amount} #{currency.name}
+    "
+  end
 end

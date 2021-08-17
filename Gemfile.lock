@@ -297,6 +297,7 @@ GEM
     semantic_range (3.0.0)
     shoulda-matchers (5.0.0)
       activesupport (>= 5.2.0)
+    slack-notifier (2.4.0)
     spring (2.1.1)
     sprockets (4.0.2)
       concurrent-ruby (~> 1.0)
@@ -367,6 +368,7 @@ DEPENDENCIES
   rubocop-shopify
   sass-rails (>= 6)
   shoulda-matchers (~> 5.0)
+  slack-notifier
   spring
   tailwindcss-rails
   turbolinks (~> 5)
