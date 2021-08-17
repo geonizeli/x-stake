@@ -25,6 +25,7 @@
 #
 class BuyCryptoOrder < ApplicationRecord
   include Processable
+  include Notifiable
 
   belongs_to :user
   belongs_to :currency
@@ -33,4 +34,14 @@ class BuyCryptoOrder < ApplicationRecord
 
   validates :paid_amount_cents, presence: true, numericality: { greater_than: 0 }
   validates :received_amount, presence: true, if: :completed?
+
+  private
+
+  def notification_message
+    "
+    💸 New buy crypto order! 💸 \n
+    user: #{user.email} \n
+    amount: #{paid_amount.format}
+    "
+  end
 end

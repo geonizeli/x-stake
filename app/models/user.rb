@@ -21,6 +21,8 @@
 #  index_users_on_reset_password_token  (reset_password_token) UNIQUE
 #
 class User < ApplicationRecord
+  include Notifiable
+
   devise :database_authenticatable, :registerable,
     :recoverable, :rememberable, :validatable
 
@@ -42,5 +44,11 @@ class User < ApplicationRecord
 
   def create_balances
     CreateUserBalances.new(self).call
+  end
+
+  private
+
+  def notification_message
+    "🎉 New user: #{email} 🎉"
   end
 end
