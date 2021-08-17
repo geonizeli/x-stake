@@ -2,29 +2,43 @@ import type { ChangeEvent, FC } from "react";
 import React, { useState } from "react";
 import cx from "classnames";
 import { BigNumber } from "bignumber.js";
+import { useRelayEnvironment } from "react-relay";
 
-import { Modal } from "../../components";
+import { Modal } from "../../../components";
+import { commitCreateStakeOrderMutation } from "./createStakeOrder";
 
 type Props = {
   poolName: string;
-  cakeBalance: string;
+  balance: string;
+  currencyId: string;
 };
 
 const inputBaseStyles =
   "rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent mb-3";
 
-export const StakeOrderModal: FC<Props> = ({ poolName, cakeBalance }) => {
+export const StakeOrderModal: FC<Props> = ({
+  poolName,
+  balance,
+  currencyId,
+}) => {
+  const environment = useRelayEnvironment();
   const [isOpen, setIsOpen] = useState(false);
   const [investAmountInput, setInvestAmountInput] = useState("0");
 
-  const avaliableCake = new BigNumber(cakeBalance);
+  const avaliableCake = new BigNumber(balance);
   const investAmount = new BigNumber(investAmountInput);
 
   const handleButtonClick = () => {
     setIsOpen((prevState) => !prevState);
   };
 
-  const onSubmit = () => {};
+  const onSubmit = () => {
+    commitCreateStakeOrderMutation(environment, {
+      currencyId,
+      amount: investAmountInput,
+      poolName,
+    });
+  };
 
   const handleInvestInput = ({
     currentTarget: { value },
@@ -37,6 +51,10 @@ export const StakeOrderModal: FC<Props> = ({ poolName, cakeBalance }) => {
     ) {
       setInvestAmountInput(value);
     }
+  };
+
+  const handleMaxButton = () => {
+    setInvestAmountInput(balance);
   };
 
   const stakeAvaliable =
@@ -57,7 +75,7 @@ export const StakeOrderModal: FC<Props> = ({ poolName, cakeBalance }) => {
         setIsOpen={setIsOpen}
         title={`Invista em ${poolName}`}
       >
-        <span className="mb-2">CAKE disponível: {cakeBalance}</span>
+        <span className="mb-2">CAKE disponível: {balance}</span>
         <form onSubmit={onSubmit} className="bg-white py-2">
           <div className="flex flex-row">
             <input
@@ -68,9 +86,9 @@ export const StakeOrderModal: FC<Props> = ({ poolName, cakeBalance }) => {
             />
             <button
               type="button"
-              disabled={investAmountInput === cakeBalance}
+              disabled={investAmountInput === balance}
               className="flex items-center mb-3 ml-3 font-bold rounded-full text-red-500"
-              onClick={() => {}}
+              onClick={handleMaxButton}
             >
               Max
             </button>

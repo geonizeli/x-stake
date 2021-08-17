@@ -14,6 +14,7 @@ export const PoolListing = () => {
           edges {
             node {
               currency {
+                id
                 name
               }
               amount
@@ -25,9 +26,12 @@ export const PoolListing = () => {
     {}
   );
 
-  const cakeBalance =
-    balances.edges.find((edge) => edge.node.currency.name === "CAKE")?.node
-      .amount ?? "0";
+  const cakeBalance = balances.edges.find(
+    (edge) => edge.node.currency.name === "CAKE"
+  )?.node;
+
+  const balance = cakeBalance?.amount ?? "0";
+  const currencyId = cakeBalance?.currency.id ?? "????";
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 place-items-center w-full gap-8 py-4 -mt-16 overflow-x-hidden">
@@ -35,7 +39,12 @@ export const PoolListing = () => {
         .filter((pool) => !pool.isFinished)
         .sort((a, b) => (a.sortOrder ?? 0) - (b.sortOrder ?? 0))
         .map((pool) => (
-          <Pool key={pool.sousId} pool={pool} cakeBalance={cakeBalance} />
+          <Pool
+            key={pool.sousId}
+            pool={pool}
+            balance={balance}
+            currencyId={currencyId}
+          />
         ))}
     </div>
   );

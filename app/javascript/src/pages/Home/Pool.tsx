@@ -10,10 +10,11 @@ import { StakeOrderModal } from "./StakeOrderModal";
 
 type PoolProps = {
   pool: PoolConfig;
-  cakeBalance: string;
+  balance: string;
+  currencyId: string;
 };
 
-export const Pool: FC<PoolProps> = ({ pool, cakeBalance }) => {
+export const Pool: FC<PoolProps> = ({ pool, balance, currencyId }) => {
   const {
     provider,
     pancake: { router },
@@ -92,7 +93,8 @@ export const Pool: FC<PoolProps> = ({ pool, cakeBalance }) => {
         </div>
         <StakeOrderModal
           poolName={pool.earningToken.symbol}
-          cakeBalance={cakeBalance}
+          balance={balance}
+          currencyId={currencyId}
         />
       </div>
     </div>

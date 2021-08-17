@@ -9,6 +9,7 @@ export type PoolListingQueryResponse = {
         readonly edges: ReadonlyArray<{
             readonly node: {
                 readonly currency: {
+                    readonly id: string;
                     readonly name: string;
                 };
                 readonly amount: string;
@@ -29,8 +30,8 @@ query PoolListingQuery {
     edges {
       node {
         currency {
-          name
           id
+          name
         }
         amount
         id
@@ -45,21 +46,33 @@ var v0 = {
   "alias": null,
   "args": null,
   "kind": "ScalarField",
-  "name": "name",
+  "name": "id",
   "storageKey": null
 },
 v1 = {
   "alias": null,
   "args": null,
-  "kind": "ScalarField",
-  "name": "amount",
+  "concreteType": "Currency",
+  "kind": "LinkedField",
+  "name": "currency",
+  "plural": false,
+  "selections": [
+    (v0/*: any*/),
+    {
+      "alias": null,
+      "args": null,
+      "kind": "ScalarField",
+      "name": "name",
+      "storageKey": null
+    }
+  ],
   "storageKey": null
 },
 v2 = {
   "alias": null,
   "args": null,
   "kind": "ScalarField",
-  "name": "id",
+  "name": "amount",
   "storageKey": null
 };
 return {
@@ -93,19 +106,8 @@ return {
                 "name": "node",
                 "plural": false,
                 "selections": [
-                  {
-                    "alias": null,
-                    "args": null,
-                    "concreteType": "Currency",
-                    "kind": "LinkedField",
-                    "name": "currency",
-                    "plural": false,
-                    "selections": [
-                      (v0/*: any*/)
-                    ],
-                    "storageKey": null
-                  },
-                  (v1/*: any*/)
+                  (v1/*: any*/),
+                  (v2/*: any*/)
                 ],
                 "storageKey": null
               }
@@ -149,21 +151,9 @@ return {
                 "name": "node",
                 "plural": false,
                 "selections": [
-                  {
-                    "alias": null,
-                    "args": null,
-                    "concreteType": "Currency",
-                    "kind": "LinkedField",
-                    "name": "currency",
-                    "plural": false,
-                    "selections": [
-                      (v0/*: any*/),
-                      (v2/*: any*/)
-                    ],
-                    "storageKey": null
-                  },
                   (v1/*: any*/),
-                  (v2/*: any*/)
+                  (v2/*: any*/),
+                  (v0/*: any*/)
                 ],
                 "storageKey": null
               }
@@ -176,14 +166,14 @@ return {
     ]
   },
   "params": {
-    "cacheID": "6abf5e963429e49993af50df156f8e1c",
+    "cacheID": "06c9467183eb0e89329ec630a8cc4880",
     "id": null,
     "metadata": {},
     "name": "PoolListingQuery",
     "operationKind": "query",
-    "text": "query PoolListingQuery {\n  balances {\n    edges {\n      node {\n        currency {\n          name\n          id\n        }\n        amount\n        id\n      }\n    }\n  }\n}\n"
+    "text": "query PoolListingQuery {\n  balances {\n    edges {\n      node {\n        currency {\n          id\n          name\n        }\n        amount\n        id\n      }\n    }\n  }\n}\n"
   }
 };
 })();
-(node as any).hash = '4fefb238e24b79198799686599255e6c';
+(node as any).hash = '570efc1d3b5dac09303b8692d6830bb2';
 export default node;
