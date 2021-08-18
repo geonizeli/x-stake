@@ -1,3 +1,4 @@
+export * from "./Dashboard";
 export * from "./Home";
-export * from "./Wallet";
 export * from "./Orders";
+export * from "./Wallet";
