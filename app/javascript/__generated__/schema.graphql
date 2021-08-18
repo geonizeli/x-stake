@@ -506,7 +506,7 @@ type StakeOrderEdge {
 type User {
   email: String!
   firstName: String!
-  fullName: String!
   id: ID!
   lastName: String!
+  walletAddress: String
 }
