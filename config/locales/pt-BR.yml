@@ -28,6 +28,11 @@ pt-BR:
       buy_crypto_order:
         one: Pedido de Compra
         other: Pedidos de Compra
+
+      stake_order:
+        one: Pedido de Stake
+        other: Pedidos de Stake
+
     attributes:
       user:
         first_name: Primeiro nome
