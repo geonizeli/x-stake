@@ -10,10 +10,10 @@ class UserDashboard < Administrate::BaseDashboard
   # on pages throughout the dashboard.
   ATTRIBUTE_TYPES = {
     id: Field::Number,
-    full_name: Field::String,
+    email: Field::String,
     first_name: Field::String,
     last_name: Field::String,
-    email: Field::String,
+    wallet_address: Field::String,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
   }.freeze
@@ -23,16 +23,16 @@ class UserDashboard < Administrate::BaseDashboard
   #
   # By default, it's limited to four items to reduce clutter on index pages.
   # Feel free to add, remove, or rearrange items.
-  COLLECTION_ATTRIBUTES = [:full_name, :email].freeze
+  COLLECTION_ATTRIBUTES = [:id, :first_name, :last_name, :wallet_address, :email].freeze
 
   # SHOW_PAGE_ATTRIBUTES
   # an array of attributes that will be displayed on the model's show page.
-  SHOW_PAGE_ATTRIBUTES = [:id, :first_name, :last_name, :email, :created_at, :updated_at].freeze
+  SHOW_PAGE_ATTRIBUTES = [:id, :first_name, :last_name, :wallet_address, :email, :created_at, :updated_at].freeze
 
   # FORM_ATTRIBUTES
   # an array of attributes that will be displayed
   # on the model's form (`new` and `edit`) pages.
-  FORM_ATTRIBUTES = [:first_name, :last_name].freeze
+  FORM_ATTRIBUTES = [:first_name, :last_name, :wallet_address].freeze
 
   # COLLECTION_FILTERS
   # a hash that defines filters that can be used while searching via the search

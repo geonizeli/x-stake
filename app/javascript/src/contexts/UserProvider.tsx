@@ -8,6 +8,7 @@ import type { UserProvider_user$key } from "./__generated__/UserProvider_user.gr
 type CurrentUserContext = {
   user: {
     firstName: string;
+    walletAddress: string | null;
   } | null;
   isAuthenticated: boolean;
 };
@@ -32,6 +33,7 @@ export const UserProvider: FC<Props> = ({ userRef, children }) => {
     graphql`
       fragment UserProvider_user on User {
         firstName
+        walletAddress
       }
     `,
     userRef
@@ -40,6 +42,7 @@ export const UserProvider: FC<Props> = ({ userRef, children }) => {
   const user = userData
     ? {
         firstName: userData.firstName,
+        walletAddress: userData.walletAddress,
       }
     : null;
 

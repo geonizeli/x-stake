@@ -12,6 +12,7 @@
 #  remember_created_at    :datetime
 #  reset_password_sent_at :datetime
 #  reset_password_token   :string
+#  wallet_address         :string
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
 #
@@ -33,10 +34,6 @@ class User < ApplicationRecord
 
   validates :first_name, :last_name, :email, presence: true
   validates :email, uniqueness: true
-
-  def full_name
-    "#{first_name} #{last_name}"
-  end
 
   after_create do
     create_balances
