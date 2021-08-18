@@ -1,4 +1,6 @@
 # frozen_string_literal: true
+require "sidekiq/web"
+
 Rails.application.routes.draw do
   devise_for :users
   devise_for :admin_users
@@ -16,9 +18,15 @@ Rails.application.routes.draw do
 
   root to: "home#index"
   get "*all" => "home#index", constraints: lambda { |req|
-    req.path.exclude?("playground") && req.path.exclude?("rails")
+    ["playground", "rails", "sidekiq"].filter do |path|
+      req.path != path
+    end.blank?
   }
 
   post "/graphql", to: "graphql#execute"
-  mount GraphqlPlayground::Rails::Engine, at: "/playground", graphql_path: "/graphql" if Rails.env.development?
+
+  if Rails.env.development?
+    mount GraphqlPlayground::Rails::Engine, at: "/playground", graphql_path: "/graphql"
+    mount Sidekiq::Web => "/sidekiq"
+  end
 end
