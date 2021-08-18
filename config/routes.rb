@@ -11,6 +11,7 @@ Rails.application.routes.draw do
     resources :fiat_balances
     resources :buy_crypto_orders
     resources :sell_crypto_orders
+    resources :stake_orders
     resources :admin_users
 
     root to: "users#index"

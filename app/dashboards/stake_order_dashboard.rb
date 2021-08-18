@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 require "administrate/base_dashboard"
 
-class FiatBalanceDashboard < Administrate::BaseDashboard
+class StakeOrderDashboard < Administrate::BaseDashboard
   # ATTRIBUTE_TYPES
   # a hash that describes the type of each of the model's fields.
   #
@@ -9,10 +9,12 @@ class FiatBalanceDashboard < Administrate::BaseDashboard
   # which determines how the attribute is displayed
   # on pages throughout the dashboard.
   ATTRIBUTE_TYPES = {
-    id: Field::Number,
     user: Field::BelongsTo,
-    amount_formatted: Field::String,
-    amount_cents: Field::String,
+    currency: Field::BelongsTo,
+    id: Field::Number,
+    pool_name: Field::String,
+    status: Field::Enumerize,
+    amount: Field::String.with_options(searchable: false),
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
   }.freeze
@@ -22,16 +24,16 @@ class FiatBalanceDashboard < Administrate::BaseDashboard
   #
   # By default, it's limited to four items to reduce clutter on index pages.
   # Feel free to add, remove, or rearrange items.
-  COLLECTION_ATTRIBUTES = [:user, :id, :amount_formatted].freeze
+  COLLECTION_ATTRIBUTES = [:user, :currency, :id, :pool_name].freeze
 
   # SHOW_PAGE_ATTRIBUTES
   # an array of attributes that will be displayed on the model's show page.
-  SHOW_PAGE_ATTRIBUTES = [:user, :id, :amount_formatted, :created_at, :updated_at].freeze
+  SHOW_PAGE_ATTRIBUTES = [:user, :currency, :id, :pool_name, :status, :amount, :created_at, :updated_at].freeze
 
   # FORM_ATTRIBUTES
   # an array of attributes that will be displayed
   # on the model's form (`new` and `edit`) pages.
-  FORM_ATTRIBUTES = [:user, :amount_cents].freeze
+  FORM_ATTRIBUTES = [:user, :currency, :pool_name, :status, :amount].freeze
 
   # COLLECTION_FILTERS
   # a hash that defines filters that can be used while searching via the search
@@ -45,10 +47,10 @@ class FiatBalanceDashboard < Administrate::BaseDashboard
   #   }.freeze
   COLLECTION_FILTERS = {}.freeze
 
-  # Overwrite this method to customize how fiat balances are displayed
+  # Overwrite this method to customize how stake orders are displayed
   # across all pages of the admin dashboard.
   #
-  # def display_resource(fiat_balance)
-  #   "FiatBalance ##{fiat_balance.id}"
+  # def display_resource(stake_order)
+  #   "StakeOrder ##{stake_order.id}"
   # end
 end
