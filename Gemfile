@@ -17,6 +17,7 @@ gem "image_processing", "~> 1.12"
 
 gem "devise"
 gem "devise-i18n"
+gem "paper_trail"
 gem "slack-notifier"
 gem "administrate-field-active_storage"
 gem "administrate-field-enumerize"

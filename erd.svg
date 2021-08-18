@@ -69,8 +69,8 @@
 <!-- m_Currency&#45;&gt;m_Balance -->
 <g id="edge9" class="edge">
 <title>m_Currency&#45;&gt;m_Balance</title>
-<path fill="none" stroke="black" d="M98.77,-441.41C119.93,-468.12 158.38,-513.63 198,-545.5 201.86,-548.61 205.95,-551.65 210.15,-554.6"/>
-<polygon fill="black" stroke="black" points="208.6,-557.35 217.82,-559.79 212.14,-552.14 208.6,-557.35"/>
+<path fill="none" stroke="black" d="M142.18,-441.08C149.45,-445.41 156.3,-450.52 162,-456.5 191.43,-487.4 170.07,-513.24 198,-545.5 200.55,-548.44 203.32,-551.25 206.25,-553.93"/>
+<polygon fill="black" stroke="black" points="204.45,-556.54 213.36,-559.94 208.52,-551.73 204.45,-556.54"/>
 </g>
 <!-- m_Currency&#45;&gt;m_BuyCryptoOrder -->
 <g id="edge6" class="edge">
@@ -79,7 +79,7 @@
 <polygon fill="black" stroke="black" points="188.23,-456.27 197.76,-455.97 190.13,-450.26 188.23,-456.27"/>
 </g>
 <!-- m_SellCryptoOrder -->
-<g id="node6" class="node">
+<g id="node7" class="node">
 <title>m_SellCryptoOrder</title>
 <path fill="none" stroke="black" d="M214.5,-310C214.5,-310 351.5,-310 351.5,-310 357.5,-310 363.5,-316 363.5,-322 363.5,-322 363.5,-393 363.5,-393 363.5,-399 357.5,-405 351.5,-405 351.5,-405 214.5,-405 214.5,-405 208.5,-405 202.5,-399 202.5,-393 202.5,-393 202.5,-322 202.5,-322 202.5,-316 208.5,-310 214.5,-310"/>
 <text text-anchor="start" x="238" y="-392.2" font-family="Arial Bold" font-size="11.00">SellCryptoOrder</text>
@@ -102,7 +102,7 @@
 <polygon fill="black" stroke="black" points="194.78,-387.84 202.45,-382.16 192.92,-381.82 194.78,-387.84"/>
 </g>
 <!-- m_StakeOrder -->
-<g id="node7" class="node">
+<g id="node8" class="node">
 <title>m_StakeOrder</title>
 <path fill="none" stroke="black" d="M223,-185C223,-185 343,-185 343,-185 349,-185 355,-191 355,-197 355,-197 355,-268 355,-268 355,-274 349,-280 343,-280 343,-280 223,-280 223,-280 217,-280 211,-274 211,-268 211,-268 211,-197 211,-197 211,-191 217,-185 223,-185"/>
 <text text-anchor="start" x="251" y="-267.2" font-family="Arial Bold" font-size="11.00">StakeOrder</text>
@@ -137,8 +137,25 @@
 <text text-anchor="start" x="218" y="-95.5" font-family="Arial" font-size="10.00">user_id </text>
 <text text-anchor="start" x="253" y="-95.5" font-family="Arial Italic" font-size="10.00" fill="#999999">integer (8) ∗ FK</text>
 </g>
+<!-- m_PaperTrail::Version -->
+<g id="node6" class="node">
+<title>m_PaperTrail::Version</title>
+<path fill="none" stroke="black" d="M21,-471C21,-471 141,-471 141,-471 147,-471 153,-477 153,-483 153,-483 153,-554 153,-554 153,-560 147,-566 141,-566 141,-566 21,-566 21,-566 15,-566 9,-560 9,-554 9,-554 9,-483 9,-483 9,-477 15,-471 21,-471"/>
+<text text-anchor="start" x="28.5" y="-553.2" font-family="Arial Bold" font-size="11.00">PaperTrail::Version</text>
+<polyline fill="none" stroke="black" points="9,-546 153,-546 "/>
+<text text-anchor="start" x="16" y="-532.5" font-family="Arial" font-size="10.00">event </text>
+<text text-anchor="start" x="44" y="-532.5" font-family="Arial Italic" font-size="10.00" fill="#999999">string ∗</text>
+<text text-anchor="start" x="16" y="-519.5" font-family="Arial" font-size="10.00">item_id </text>
+<text text-anchor="start" x="51" y="-519.5" font-family="Arial Italic" font-size="10.00" fill="#999999">integer (8) ∗</text>
+<text text-anchor="start" x="16" y="-506.5" font-family="Arial" font-size="10.00">item_type </text>
+<text text-anchor="start" x="62" y="-506.5" font-family="Arial Italic" font-size="10.00" fill="#999999">string ∗</text>
+<text text-anchor="start" x="16" y="-493.5" font-family="Arial" font-size="10.00">object </text>
+<text text-anchor="start" x="46" y="-493.5" font-family="Arial Italic" font-size="10.00" fill="#999999">text</text>
+<text text-anchor="start" x="16" y="-480.5" font-family="Arial" font-size="10.00">whodunnit </text>
+<text text-anchor="start" x="64" y="-480.5" font-family="Arial Italic" font-size="10.00" fill="#999999">string</text>
+</g>
 <!-- m_User -->
-<g id="node8" class="node">
+<g id="node9" class="node">
 <title>m_User</title>
 <path fill="none" stroke="black" d="M12,-172C12,-172 150,-172 150,-172 156,-172 162,-178 162,-184 162,-184 162,-281 162,-281 162,-287 156,-293 150,-293 150,-293 12,-293 12,-293 6,-293 0,-287 0,-281 0,-281 0,-184 0,-184 0,-178 6,-172 12,-172"/>
 <text text-anchor="start" x="66.5" y="-280.2" font-family="Arial Bold" font-size="11.00">User</text>
@@ -188,7 +205,7 @@
 <polygon fill="black" stroke="black" points="201.83,-235.65 210.83,-232.5 201.83,-229.35 201.83,-235.65"/>
 </g>
 <!-- m_UserDocument -->
-<g id="node9" class="node">
+<g id="node10" class="node">
 <title>m_UserDocument</title>
 <path fill="none" stroke="black" d="M223,-0.5C223,-0.5 343,-0.5 343,-0.5 349,-0.5 355,-6.5 355,-12.5 355,-12.5 355,-44.5 355,-44.5 355,-50.5 349,-56.5 343,-56.5 343,-56.5 223,-56.5 223,-56.5 217,-56.5 211,-50.5 211,-44.5 211,-44.5 211,-12.5 211,-12.5 211,-6.5 217,-0.5 223,-0.5"/>
 <text text-anchor="start" x="241.5" y="-43.7" font-family="Arial Bold" font-size="11.00">UserDocument</text>
