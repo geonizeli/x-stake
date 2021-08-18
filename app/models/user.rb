@@ -51,4 +51,8 @@ class User < ApplicationRecord
   def notification_message
     "🎉 New user: #{email} 🎉"
   end
+
+  def send_devise_notification(notification, *args)
+    devise_mailer.send(notification, self, *args).deliver_later
+  end
 end
