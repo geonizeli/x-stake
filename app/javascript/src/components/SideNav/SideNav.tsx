@@ -15,7 +15,7 @@ const MenuItems: MenuItem[] = [
     path: "/",
   },
   {
-    label: "Dashbaord",
+    label: "Minhas Posições",
     path: "/dashboard",
   },
   {
