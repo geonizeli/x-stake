@@ -56,9 +56,31 @@ type TotalUSDValues3 = {
   total: number;
 };
 
+type PoolInfo = {
+  apr: number;
+};
+
+type Vault = {
+  type: string;
+  name: string;
+  platform: string;
+  chainId: number;
+  depositToken: string;
+  rewardToken: string;
+  depositedTokens: number;
+  pendingRewards: number;
+  harvestedRewards: number;
+  totalRewards: number;
+  priceInUSDRewardToken: number;
+  priceInUSDDepositToken: number;
+  stakingTx: any[];
+  apy: number;
+  poolInfo: PoolInfo;
+};
+
 type Staking = {
   totalUSDValues: TotalUSDValues3;
-  vaults: any[];
+  vaults: Vault[];
 };
 
 type PancakeSwap = {
@@ -76,10 +98,11 @@ type Result = {
   watchBalance: WatchBalance;
   currencies: Currencies;
   PancakeSwap: PancakeSwap;
+  walletBalance: WalletBalance;
 };
 
 export type YieldwatchResponse = {
-  status: "0" | "1";
+  status: string;
   message: string;
   result: Result;
 };
