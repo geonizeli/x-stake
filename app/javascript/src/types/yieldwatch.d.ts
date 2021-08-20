@@ -60,7 +60,7 @@ type PoolInfo = {
   apr: number;
 };
 
-type Vault = {
+export type Vault = {
   type: string;
   name: string;
   platform: string;
