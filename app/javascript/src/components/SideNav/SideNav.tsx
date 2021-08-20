@@ -15,6 +15,10 @@ const MenuItems: MenuItem[] = [
     path: "/",
   },
   {
+    label: "Dashbaord",
+    path: "/dashboard",
+  },
+  {
     label: "Carteira",
     path: "/wallet",
   },

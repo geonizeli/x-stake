@@ -20,7 +20,7 @@ Rails.application.routes.draw do
   root to: "home#index"
   get "*all" => "home#index", constraints: lambda { |req|
     ["playground", "rails", "sidekiq"].filter do |path|
-      req.path != path
+      req.path.include?(path)
     end.blank?
   }
 

@@ -2,13 +2,16 @@ import type { FC } from "react";
 import React from "react";
 import { Switch, Route } from "react-router-dom";
 
-import { Home, Orders, Wallet } from "./pages";
+import { Dashbaord, Home, Orders, Wallet } from "./pages";
 
 export const Routes: FC = () => {
   return (
     <Switch>
       <Route exact path="/">
         <Home />
+      </Route>
+      <Route exact path="/dashboard">
+        <Dashbaord />
       </Route>
       <Route exact path="/wallet">
         <Wallet />

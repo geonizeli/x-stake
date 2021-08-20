@@ -1,7 +1,7 @@
 import type { Variables, RequestParameters, CacheConfig } from "relay-runtime";
 import { Environment, Network, RecordSource, Store } from "relay-runtime";
 
-export const fetchRelay = async (
+const fetchRelay = async (
   params: RequestParameters,
   variables: Variables,
   _cacheConfig: CacheConfig
