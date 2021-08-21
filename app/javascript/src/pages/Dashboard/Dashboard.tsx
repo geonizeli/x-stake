@@ -26,11 +26,11 @@ export const Dashbaord: FC = () => {
 
   return (
     <div className="grid place-items-center w-full h-5 mt-32">
-      <div className="inline-block max-w-3xl shadow rounded-lg overflow-hidden">
+      <div className="max-w-3xl grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {vaults?.map((vault) => (
           <div
             key={vault.chainId}
-            className="shadow-lg px-4 py-6 w-full bg-white dark:bg-gray-800 relative"
+            className="shadow-lg px-4 py-6 w-full bg-white dark:bg-gray-800 rounded-lg"
           >
             <p className="text-sm w-max text-gray-700 dark:text-white font-semibold border-b border-gray-200">
               {vault.name}
