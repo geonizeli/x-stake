@@ -25,10 +25,21 @@
 #
 class StakeOrder < ApplicationRecord
   include Processable
+  include Notifiable
 
   belongs_to :user
   belongs_to :currency
 
   validates :pool_name, presence: true
   validates :amount, presence: true
+
+  private
+
+  def notification_message
+    "
+    💸 New stake order! 💸\n
+    user: #{user.email}
+    amount: #{amount}
+    "
+  end
 end
