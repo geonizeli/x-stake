@@ -26,7 +26,7 @@ export const App: FC = () => {
       <UserProvider userRef={data.currentUser}>
         <main className="min-h-screen w-full bg-gray-50 flex flex-col">
           <Navbar />
-          <div className="flex flex-grow">
+          <div className="flex" style={{ minHeight: "calc(100vh - 4rem)" }}>
             <SideNav />
             <Suspense fallback="Carregando...">
               <Routes />
