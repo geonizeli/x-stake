@@ -11,7 +11,7 @@ type MenuItem = {
 
 const MenuItems: MenuItem[] = [
   {
-    label: "Início",
+    label: "Posições",
     path: "/",
   },
   {
@@ -65,7 +65,7 @@ export const SideNav = () => {
         />
       </Transition>
       <aside
-        className={`bg-white w-4/6 md:w-1/6 overflow-hidden absolute h-screen drop-shadow-xl drop border-r border-gray-200 z-40 transition-all duration-500 xl:transition-none xl:mx-0 xl:static ${
+        className={`bg-white w-4/6 md:w-2/6 lg:w-1/6 overflow-hidden absolute min-h-full drop-shadow-xl drop border-r border-gray-200 z-40 transition-all duration-500 xl:transition-none xl:mx-0 xl:static ${
           sideNavExpanded ? "mx-0" : "-mx-full"
         }`}
       >
