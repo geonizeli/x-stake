@@ -7,8 +7,8 @@
     "lint": "eslint --ext .jsx,.js,.tsx,.ts app/javascript/",
     "lint:fix": "eslint --fix --ext .jsx,.js,.tsx,.ts app/javascript/",
     "tsc": "tsc --noEmit",
-    "relay": "relay-compiler --schema app/javascript/__generated__/schema.graphql --src app/javascript/src --extensions tsx --language typescript",
-    "relay:watch": "relay-compiler --schema app/javascript/__generated__/schema.graphql --src app/javascript/src --extensions tsx --language typescript --watch"
+    "relay": "relay-compiler",
+    "relay:watch": "yarn relay --watch"
   },
   "husky": {
     "hooks": {
@@ -19,6 +19,7 @@
     "@babel/preset-react": "^7.14.5",
     "@babel/preset-typescript": "^7.14.5",
     "@headlessui/react": "^1.4.0",
+    "@heroicons/react": "^1.0.4",
     "@rails/actioncable": "^6.0.0",
     "@rails/activestorage": "^6.0.0",
     "@rails/ujs": "^6.0.0",
@@ -61,6 +62,7 @@
     "prettier": "^2.3.2",
     "relay-compiler": "^11.0.2",
     "relay-compiler-language-typescript": "^14.0.0",
+    "relay-config": "^11.0.2",
     "webpack-dev-server": "^3.11.2"
   }
 }
