@@ -3,31 +3,25 @@ import type { FC } from "react";
 import React from "react";
 import { useFragment } from "react-relay";
 
-import type { FiatBalances_fiatBalances$key } from "./__generated__/FiatBalances_fiatBalances.graphql";
+import type { FiatBalance_fiatBalance$key } from "./__generated__/FiatBalance_fiatBalance.graphql";
 
 type Props = {
-  fiatBalancesRef: FiatBalances_fiatBalances$key;
+  fiatBalancesRef: FiatBalance_fiatBalance$key;
 };
-export const FiatBalances: FC<Props> = ({ fiatBalancesRef }) => {
-  const { edges } = useFragment<FiatBalances_fiatBalances$key>(
+export const FiatBalance: FC<Props> = ({ fiatBalancesRef }) => {
+  const userFiatBalance = useFragment<FiatBalance_fiatBalance$key>(
     graphql`
-      fragment FiatBalances_fiatBalances on FiatBalanceConnection {
-        edges {
-          node {
-            amountCents
-            amountCurrency
-          }
-        }
+      fragment FiatBalance_fiatBalance on FiatBalance {
+        amountCents
+        amountCurrency
       }
     `,
     fiatBalancesRef
   );
 
-  if (!edges.length) return null;
+  if (!userFiatBalance) return null;
 
-  const [firstResult] = edges;
-
-  const { amountCents, amountCurrency } = firstResult.node;
+  const { amountCents, amountCurrency } = userFiatBalance;
 
   const amount = (amountCents ? amountCents / 100 : 0).toFixed(2);
 

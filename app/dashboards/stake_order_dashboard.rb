@@ -10,7 +10,6 @@ class StakeOrderDashboard < Administrate::BaseDashboard
   # on pages throughout the dashboard.
   ATTRIBUTE_TYPES = {
     user: Field::BelongsTo,
-    currency: Field::BelongsTo,
     id: Field::Number,
     pool_name: Field::String,
     status: Field::Enumerize,
@@ -24,16 +23,16 @@ class StakeOrderDashboard < Administrate::BaseDashboard
   #
   # By default, it's limited to four items to reduce clutter on index pages.
   # Feel free to add, remove, or rearrange items.
-  COLLECTION_ATTRIBUTES = [:user, :currency, :id, :pool_name].freeze
+  COLLECTION_ATTRIBUTES = [:user, :id, :pool_name].freeze
 
   # SHOW_PAGE_ATTRIBUTES
   # an array of attributes that will be displayed on the model's show page.
-  SHOW_PAGE_ATTRIBUTES = [:user, :currency, :id, :pool_name, :status, :amount, :created_at, :updated_at].freeze
+  SHOW_PAGE_ATTRIBUTES = [:user, :id, :pool_name, :status, :amount, :created_at, :updated_at].freeze
 
   # FORM_ATTRIBUTES
   # an array of attributes that will be displayed
   # on the model's form (`new` and `edit`) pages.
-  FORM_ATTRIBUTES = [:user, :currency, :pool_name, :status, :amount].freeze
+  FORM_ATTRIBUTES = [:user, :pool_name, :status, :amount].freeze
 
   # COLLECTION_FILTERS
   # a hash that defines filters that can be used while searching via the search

@@ -10,17 +10,14 @@
 #  status            :string           not null
 #  created_at        :datetime         not null
 #  updated_at        :datetime         not null
-#  currency_id       :bigint           not null
 #  user_id           :bigint           not null
 #
 # Indexes
 #
-#  index_buy_crypto_orders_on_currency_id  (currency_id)
-#  index_buy_crypto_orders_on_user_id      (user_id)
+#  index_buy_crypto_orders_on_user_id  (user_id)
 #
 # Foreign Keys
 #
-#  fk_rails_...  (currency_id => currencies.id)
 #  fk_rails_...  (user_id => users.id)
 #
 class BuyCryptoOrder < ApplicationRecord
@@ -28,7 +25,6 @@ class BuyCryptoOrder < ApplicationRecord
   include Notifiable
 
   belongs_to :user
-  belongs_to :currency
 
   monetize :paid_amount_cents
 

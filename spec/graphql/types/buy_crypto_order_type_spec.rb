@@ -6,7 +6,6 @@ RSpec.describe(Types::BuyCryptoOrderType) do
 
   describe "arguments" do
     it { is_expected.to(have_a_field(:id).of_type("ID!")) }
-    it { is_expected.to(have_a_field(:currency).of_type("Currency!")) }
     it { is_expected.to(have_a_field(:paid_amount_cents).of_type("Int!")) }
     it { is_expected.to(have_a_field(:received_amount).of_type("String")) }
     it { is_expected.to(have_a_field(:status).of_type("ProcessStatus!")) }

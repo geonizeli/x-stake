@@ -5,10 +5,9 @@ require "rails_helper"
 RSpec.describe(Mutations::CreateSellCryptoOrder, type: :mutation) do
   let(:query_string) do
     <<~GQL
-      mutation($currencyId: ID!, $amount: String!) {
+      mutation($amount: String!) {
         createSellCryptoOrder(input: {
           order: {
-            currencyId: $currencyId,
             amount: $amount,
           }
         }) {
@@ -22,9 +21,6 @@ RSpec.describe(Mutations::CreateSellCryptoOrder, type: :mutation) do
             status
             paidAmount
             receivedAmountCents
-            currency {
-              name
-            }
           }
         }
       }
@@ -33,18 +29,12 @@ RSpec.describe(Mutations::CreateSellCryptoOrder, type: :mutation) do
 
   context "when the user has enough balance" do
     it "withdraws from his account and creates a buy order" do
-      currency = create(:currency)
       user = create(
         :user,
-        balances: [
-          build(:balance, currency: currency, amount: 1.0034),
-        ]
+        balance: build(:balance, amount: 1.0034)
       )
 
-      currency_global_id = GraphQL::Schema::UniqueWithinType.encode("Currency", currency.id)
-
       variables = {
-        "currencyId": currency_global_id,
         "amount": "0.80",
       }
 
@@ -64,32 +54,23 @@ RSpec.describe(Mutations::CreateSellCryptoOrder, type: :mutation) do
               "status" => "PROCESSING",
               "paidAmount" => "0.8",
               "receivedAmountCents" => 0,
-              "currency" => {
-                "name" => "CAKE",
-              },
             },
           },
         },
       }))
 
-      expect(user.balances.first.reload.amount.to_s).to(eq("0.2034"))
+      expect(user.balance.reload.amount.to_s).to(eq("0.2034"))
     end
   end
 
   context "when the user does not have enough balance" do
     it "returns withdrawl error" do
-      currency = create(:currency)
       user = create(
         :user,
-        balances: [
-          build(:balance, currency: currency, amount: 0.0034),
-        ]
+        balance: build(:balance, amount: 0.0034)
       )
 
-      currency_global_id = GraphQL::Schema::UniqueWithinType.encode("Currency", currency.id)
-
       variables = {
-        "currencyId": currency_global_id,
         "amount": "0.80",
       }
 
@@ -115,7 +96,7 @@ RSpec.describe(Mutations::CreateSellCryptoOrder, type: :mutation) do
         },
       }))
 
-      expect(user.balances.first.reload.amount.to_s).to(eq("0.0034"))
+      expect(user.balance.reload.amount.to_s).to(eq("0.0034"))
     end
   end
 end

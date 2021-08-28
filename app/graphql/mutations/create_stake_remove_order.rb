@@ -6,14 +6,12 @@ module Mutations
     argument :order, Inputs::CreateStakeOrderAttributesInput, required: true
 
     def resolve(order:)
-      currency_id = Currency.find_by!(name: "CAKE").id
       amount = -BigDecimal(order[:amount])
 
       ActiveRecord::Base.transaction do
         record = StakeOrder.find_or_initialize_by(
           pool_name: order[:pool_name],
           user_id: current_user.id,
-          currency_id: currency_id,
           status: :processing
         )
 

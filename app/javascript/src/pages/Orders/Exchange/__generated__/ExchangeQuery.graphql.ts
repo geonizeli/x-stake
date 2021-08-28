@@ -6,12 +6,14 @@ import { ConcreteRequest } from "relay-runtime";
 import { FragmentRefs } from "relay-runtime";
 export type ExchangeQueryVariables = {};
 export type ExchangeQueryResponse = {
-    readonly fiatBalances: {
-        readonly " $fragmentRefs": FragmentRefs<"ExchangePanel_fiatBalances">;
-    };
-    readonly balances: {
-        readonly " $fragmentRefs": FragmentRefs<"ExchangePanel_balances">;
-    };
+    readonly currentUser: {
+        readonly fiatBalance: {
+            readonly " $fragmentRefs": FragmentRefs<"ExchangePanel_fiatBalances">;
+        };
+        readonly balance: {
+            readonly " $fragmentRefs": FragmentRefs<"ExchangePanel_balances">;
+        };
+    } | null;
     readonly buyCryptoOrders: {
         readonly " $fragmentRefs": FragmentRefs<"ExchangeHistory_buyCryptoOrders">;
     };
@@ -28,11 +30,16 @@ export type ExchangeQuery = {
 
 /*
 query ExchangeQuery {
-  fiatBalances {
-    ...ExchangePanel_fiatBalances
-  }
-  balances {
-    ...ExchangePanel_balances
+  currentUser {
+    fiatBalance {
+      ...ExchangePanel_fiatBalances
+      id
+    }
+    balance {
+      ...ExchangePanel_balances
+      id
+    }
+    id
   }
   buyCryptoOrders {
     ...ExchangeHistory_buyCryptoOrders
@@ -50,10 +57,6 @@ fragment ExchangeHistory_buyCryptoOrders on BuyCryptoOrderConnection {
       createdAt
       paidAmountCents
       receivedAmount
-      currency {
-        name
-        id
-      }
       __typename
     }
   }
@@ -67,34 +70,17 @@ fragment ExchangeHistory_sellCryptoOrders on SellCryptoOrderConnection {
       paidAmount
       receivedAmountCents
       createdAt
-      currency {
-        name
-        id
-      }
       __typename
     }
   }
 }
 
-fragment ExchangePanel_balances on BalanceConnection {
-  edges {
-    node {
-      amount
-      currency {
-        id
-      }
-      id
-    }
-  }
+fragment ExchangePanel_balances on Balance {
+  amount
 }
 
-fragment ExchangePanel_fiatBalances on FiatBalanceConnection {
-  edges {
-    node {
-      amountCents
-      id
-    }
-  }
+fragment ExchangePanel_fiatBalances on FiatBalance {
+  amountCents
 }
 */
 
@@ -123,25 +109,6 @@ v2 = {
 v3 = {
   "alias": null,
   "args": null,
-  "concreteType": "Currency",
-  "kind": "LinkedField",
-  "name": "currency",
-  "plural": false,
-  "selections": [
-    {
-      "alias": null,
-      "args": null,
-      "kind": "ScalarField",
-      "name": "name",
-      "storageKey": null
-    },
-    (v0/*: any*/)
-  ],
-  "storageKey": null
-},
-v4 = {
-  "alias": null,
-  "args": null,
   "kind": "ScalarField",
   "name": "__typename",
   "storageKey": null
@@ -156,31 +123,42 @@ return {
       {
         "alias": null,
         "args": null,
-        "concreteType": "FiatBalanceConnection",
+        "concreteType": "User",
         "kind": "LinkedField",
-        "name": "fiatBalances",
+        "name": "currentUser",
         "plural": false,
         "selections": [
           {
+            "alias": null,
             "args": null,
-            "kind": "FragmentSpread",
-            "name": "ExchangePanel_fiatBalances"
-          }
-        ],
-        "storageKey": null
-      },
-      {
-        "alias": null,
-        "args": null,
-        "concreteType": "BalanceConnection",
-        "kind": "LinkedField",
-        "name": "balances",
-        "plural": false,
-        "selections": [
+            "concreteType": "FiatBalance",
+            "kind": "LinkedField",
+            "name": "fiatBalance",
+            "plural": false,
+            "selections": [
+              {
+                "args": null,
+                "kind": "FragmentSpread",
+                "name": "ExchangePanel_fiatBalances"
+              }
+            ],
+            "storageKey": null
+          },
           {
+            "alias": null,
             "args": null,
-            "kind": "FragmentSpread",
-            "name": "ExchangePanel_balances"
+            "concreteType": "Balance",
+            "kind": "LinkedField",
+            "name": "balance",
+            "plural": false,
+            "selections": [
+              {
+                "args": null,
+                "kind": "FragmentSpread",
+                "name": "ExchangePanel_balances"
+              }
+            ],
+            "storageKey": null
           }
         ],
         "storageKey": null
@@ -230,94 +208,50 @@ return {
       {
         "alias": null,
         "args": null,
-        "concreteType": "FiatBalanceConnection",
+        "concreteType": "User",
         "kind": "LinkedField",
-        "name": "fiatBalances",
+        "name": "currentUser",
         "plural": false,
         "selections": [
           {
             "alias": null,
             "args": null,
-            "concreteType": "FiatBalanceEdge",
+            "concreteType": "FiatBalance",
             "kind": "LinkedField",
-            "name": "edges",
-            "plural": true,
+            "name": "fiatBalance",
+            "plural": false,
             "selections": [
               {
                 "alias": null,
                 "args": null,
-                "concreteType": "FiatBalance",
-                "kind": "LinkedField",
-                "name": "node",
-                "plural": false,
-                "selections": [
-                  {
-                    "alias": null,
-                    "args": null,
-                    "kind": "ScalarField",
-                    "name": "amountCents",
-                    "storageKey": null
-                  },
-                  (v0/*: any*/)
-                ],
+                "kind": "ScalarField",
+                "name": "amountCents",
                 "storageKey": null
-              }
+              },
+              (v0/*: any*/)
             ],
             "storageKey": null
-          }
-        ],
-        "storageKey": null
-      },
-      {
-        "alias": null,
-        "args": null,
-        "concreteType": "BalanceConnection",
-        "kind": "LinkedField",
-        "name": "balances",
-        "plural": false,
-        "selections": [
+          },
           {
             "alias": null,
             "args": null,
-            "concreteType": "BalanceEdge",
+            "concreteType": "Balance",
             "kind": "LinkedField",
-            "name": "edges",
-            "plural": true,
+            "name": "balance",
+            "plural": false,
             "selections": [
               {
                 "alias": null,
                 "args": null,
-                "concreteType": "Balance",
-                "kind": "LinkedField",
-                "name": "node",
-                "plural": false,
-                "selections": [
-                  {
-                    "alias": null,
-                    "args": null,
-                    "kind": "ScalarField",
-                    "name": "amount",
-                    "storageKey": null
-                  },
-                  {
-                    "alias": null,
-                    "args": null,
-                    "concreteType": "Currency",
-                    "kind": "LinkedField",
-                    "name": "currency",
-                    "plural": false,
-                    "selections": [
-                      (v0/*: any*/)
-                    ],
-                    "storageKey": null
-                  },
-                  (v0/*: any*/)
-                ],
+                "kind": "ScalarField",
+                "name": "amount",
                 "storageKey": null
-              }
+              },
+              (v0/*: any*/)
             ],
             "storageKey": null
-          }
+          },
+          (v0/*: any*/)
         ],
         "storageKey": null
       },
@@ -362,8 +296,7 @@ return {
                     "name": "receivedAmount",
                     "storageKey": null
                   },
-                  (v3/*: any*/),
-                  (v4/*: any*/)
+                  (v3/*: any*/)
                 ],
                 "storageKey": null
               }
@@ -414,8 +347,7 @@ return {
                     "storageKey": null
                   },
                   (v2/*: any*/),
-                  (v3/*: any*/),
-                  (v4/*: any*/)
+                  (v3/*: any*/)
                 ],
                 "storageKey": null
               }
@@ -428,14 +360,14 @@ return {
     ]
   },
   "params": {
-    "cacheID": "424352bbffec52284c44f109ce54a441",
+    "cacheID": "3312f3d7aa6ac4b7051376b61f10c957",
     "id": null,
     "metadata": {},
     "name": "ExchangeQuery",
     "operationKind": "query",
-    "text": "query ExchangeQuery {\n  fiatBalances {\n    ...ExchangePanel_fiatBalances\n  }\n  balances {\n    ...ExchangePanel_balances\n  }\n  buyCryptoOrders {\n    ...ExchangeHistory_buyCryptoOrders\n  }\n  sellCryptoOrders {\n    ...ExchangeHistory_sellCryptoOrders\n  }\n}\n\nfragment ExchangeHistory_buyCryptoOrders on BuyCryptoOrderConnection {\n  edges {\n    node {\n      id\n      status\n      createdAt\n      paidAmountCents\n      receivedAmount\n      currency {\n        name\n        id\n      }\n      __typename\n    }\n  }\n}\n\nfragment ExchangeHistory_sellCryptoOrders on SellCryptoOrderConnection {\n  edges {\n    node {\n      id\n      status\n      paidAmount\n      receivedAmountCents\n      createdAt\n      currency {\n        name\n        id\n      }\n      __typename\n    }\n  }\n}\n\nfragment ExchangePanel_balances on BalanceConnection {\n  edges {\n    node {\n      amount\n      currency {\n        id\n      }\n      id\n    }\n  }\n}\n\nfragment ExchangePanel_fiatBalances on FiatBalanceConnection {\n  edges {\n    node {\n      amountCents\n      id\n    }\n  }\n}\n"
+    "text": "query ExchangeQuery {\n  currentUser {\n    fiatBalance {\n      ...ExchangePanel_fiatBalances\n      id\n    }\n    balance {\n      ...ExchangePanel_balances\n      id\n    }\n    id\n  }\n  buyCryptoOrders {\n    ...ExchangeHistory_buyCryptoOrders\n  }\n  sellCryptoOrders {\n    ...ExchangeHistory_sellCryptoOrders\n  }\n}\n\nfragment ExchangeHistory_buyCryptoOrders on BuyCryptoOrderConnection {\n  edges {\n    node {\n      id\n      status\n      createdAt\n      paidAmountCents\n      receivedAmount\n      __typename\n    }\n  }\n}\n\nfragment ExchangeHistory_sellCryptoOrders on SellCryptoOrderConnection {\n  edges {\n    node {\n      id\n      status\n      paidAmount\n      receivedAmountCents\n      createdAt\n      __typename\n    }\n  }\n}\n\nfragment ExchangePanel_balances on Balance {\n  amount\n}\n\nfragment ExchangePanel_fiatBalances on FiatBalance {\n  amountCents\n}\n"
   }
 };
 })();
-(node as any).hash = '3d09bb5b003cac17750666dc76088801';
+(node as any).hash = '85296680bd82d278a1f5d485b8b101f3';
 export default node;

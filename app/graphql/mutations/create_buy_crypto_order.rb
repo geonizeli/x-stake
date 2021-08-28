@@ -6,8 +6,6 @@ module Mutations
     argument :order, Inputs::CreateBuyCryptoOrderAttributesInput, required: true
 
     def resolve(order:)
-      currency_id = decode_id(order[:currency_id])
-
       ActiveRecord::Base.transaction do
         current_user
           .fiat_balance
@@ -15,7 +13,6 @@ module Mutations
 
         record = BuyCryptoOrder.create!(
           paid_amount_cents: order[:amount_cents],
-          currency_id: currency_id,
           user_id: current_user.id,
         )
 

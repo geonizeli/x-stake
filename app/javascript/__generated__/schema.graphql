@@ -1,42 +1,10 @@
 type Balance implements Node {
   amount: String!
-  currency: Currency!
   id: ID!
-}
-
-"""
-The connection type for Balance.
-"""
-type BalanceConnection {
-  """
-  A list of edges.
-  """
-  edges: [BalanceEdge!]!
-
-  """
-  Information to aid in pagination.
-  """
-  pageInfo: PageInfo!
-}
-
-"""
-An edge in a connection.
-"""
-type BalanceEdge {
-  """
-  A cursor for use in pagination.
-  """
-  cursor: String!
-
-  """
-  The item at the end of the edge.
-  """
-  node: Balance!
 }
 
 type BuyCryptoOrder implements Node {
   createdAt: ISO8601DateTime!
-  currency: Currency!
   id: ID!
   paidAmountCents: Int!
   receivedAmount: String
@@ -79,7 +47,6 @@ input CreateBuyCryptoOrderAttributesInput {
   Amount to be paid
   """
   amountCents: Int!
-  currencyId: ID!
 }
 
 """
@@ -114,7 +81,6 @@ input CreateSellCryptoOrderAttributesInput {
   Amount to be paid
   """
   amount: String!
-  currencyId: ID!
 }
 
 """
@@ -206,45 +172,10 @@ type CreateStakeRemoveOrderPayload {
   order: StakeOrder
 }
 
-type Currency implements Node {
-  id: ID!
-  name: String!
-}
-
 type FiatBalance implements Node {
   amountCents: Int!
   amountCurrency: String!
   id: ID!
-}
-
-"""
-The connection type for FiatBalance.
-"""
-type FiatBalanceConnection {
-  """
-  A list of edges.
-  """
-  edges: [FiatBalanceEdge!]!
-
-  """
-  Information to aid in pagination.
-  """
-  pageInfo: PageInfo!
-}
-
-"""
-An edge in a connection.
-"""
-type FiatBalanceEdge {
-  """
-  A cursor for use in pagination.
-  """
-  cursor: String!
-
-  """
-  The item at the end of the edge.
-  """
-  node: FiatBalance!
 }
 
 """
@@ -333,27 +264,6 @@ enum ProcessStatus {
 }
 
 type Query {
-  balances(
-    """
-    Returns the elements in the list that come after the specified cursor.
-    """
-    after: String
-
-    """
-    Returns the elements in the list that come before the specified cursor.
-    """
-    before: String
-
-    """
-    Returns the first _n_ elements from the list.
-    """
-    first: Int
-
-    """
-    Returns the last _n_ elements from the list.
-    """
-    last: Int
-  ): BalanceConnection!
   buyCryptoOrders(
     """
     Returns the elements in the list that come after the specified cursor.
@@ -376,27 +286,6 @@ type Query {
     last: Int
   ): BuyCryptoOrderConnection!
   currentUser: User
-  fiatBalances(
-    """
-    Returns the elements in the list that come after the specified cursor.
-    """
-    after: String
-
-    """
-    Returns the elements in the list that come before the specified cursor.
-    """
-    before: String
-
-    """
-    Returns the first _n_ elements from the list.
-    """
-    first: Int
-
-    """
-    Returns the last _n_ elements from the list.
-    """
-    last: Int
-  ): FiatBalanceConnection!
 
   """
   Fetches an object given its ID.
@@ -471,7 +360,6 @@ type RecordInvalid {
 
 type SellCryptoOrder implements Node {
   createdAt: ISO8601DateTime!
-  currency: Currency!
   id: ID!
   paidAmount: String!
   receivedAmountCents: Int
@@ -555,7 +443,9 @@ input StakeOrderFilterInput {
 }
 
 type User {
+  balance: Balance!
   email: String!
+  fiatBalance: FiatBalance!
   firstName: String!
   id: ID!
   lastName: String!
