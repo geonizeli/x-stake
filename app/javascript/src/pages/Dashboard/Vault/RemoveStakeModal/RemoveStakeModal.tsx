@@ -1,14 +1,11 @@
 import BigNumber from "bignumber.js";
 import type { ChangeEvent, FC } from "react";
 import React, { useState } from "react";
-import cx from "classnames";
 import { useRelayEnvironment } from "react-relay";
 
 import { Modal } from "../../../../components";
 import { commitCreateStakeRemoveOrderMutation } from "./commitCreateStakeRemoveOrder";
-
-const inputBaseStyles =
-  "rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent mb-3";
+import { Input } from "../../../../components/Input/Input";
 
 type RemoveStakeModal = {
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
@@ -72,8 +69,7 @@ export const RemoveStakeModal: FC<RemoveStakeModal> = ({
       <span className="mb-2">CAKE disponível: {stakedCake}</span>
       <form onSubmit={onSubmit} className="bg-white py-2">
         <div className="flex flex-row">
-          <input
-            className={cx(inputBaseStyles)}
+          <Input
             type="number"
             value={amountInput}
             onChange={handleInvestInput}
