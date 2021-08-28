@@ -10,13 +10,8 @@ export const commitCreateSellCryptoOrderMutation = (
 ) => {
   return commitMutation(environment, {
     mutation: graphql`
-      mutation createSellCryptoOrderMutation(
-        $currencyId: ID!
-        $amount: String!
-      ) {
-        createSellCryptoOrder(
-          input: { order: { currencyId: $currencyId, amount: $amount } }
-        ) {
+      mutation createSellCryptoOrderMutation($amount: String!) {
+        createSellCryptoOrder(input: { order: { amount: $amount } }) {
           errors {
             messages
           }
@@ -26,7 +21,7 @@ export const commitCreateSellCryptoOrderMutation = (
         }
       }
     `,
-    variables: { ...variables },
+    variables,
     onCompleted: (_response) => {
       window.location.reload();
     },

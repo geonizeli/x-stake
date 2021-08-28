@@ -4,7 +4,6 @@
 
 import { ConcreteRequest } from "relay-runtime";
 export type createSellCryptoOrderMutationVariables = {
-    currencyId: string;
     amount: string;
 };
 export type createSellCryptoOrderMutationResponse = {
@@ -26,10 +25,9 @@ export type createSellCryptoOrderMutation = {
 
 /*
 mutation createSellCryptoOrderMutation(
-  $currencyId: ID!
   $amount: String!
 ) {
-  createSellCryptoOrder(input: {order: {currencyId: $currencyId, amount: $amount}}) {
+  createSellCryptoOrder(input: {order: {amount: $amount}}) {
     errors {
       messages
     }
@@ -41,17 +39,14 @@ mutation createSellCryptoOrderMutation(
 */
 
 const node: ConcreteRequest = (function(){
-var v0 = {
-  "defaultValue": null,
-  "kind": "LocalArgument",
-  "name": "amount"
-},
-v1 = {
-  "defaultValue": null,
-  "kind": "LocalArgument",
-  "name": "currencyId"
-},
-v2 = [
+var v0 = [
+  {
+    "defaultValue": null,
+    "kind": "LocalArgument",
+    "name": "amount"
+  }
+],
+v1 = [
   {
     "alias": null,
     "args": [
@@ -63,11 +58,6 @@ v2 = [
                 "kind": "Variable",
                 "name": "amount",
                 "variableName": "amount"
-              },
-              {
-                "kind": "Variable",
-                "name": "currencyId",
-                "variableName": "currencyId"
               }
             ],
             "kind": "ObjectValue",
@@ -125,36 +115,30 @@ v2 = [
 ];
 return {
   "fragment": {
-    "argumentDefinitions": [
-      (v0/*: any*/),
-      (v1/*: any*/)
-    ],
+    "argumentDefinitions": (v0/*: any*/),
     "kind": "Fragment",
     "metadata": null,
     "name": "createSellCryptoOrderMutation",
-    "selections": (v2/*: any*/),
+    "selections": (v1/*: any*/),
     "type": "Mutation",
     "abstractKey": null
   },
   "kind": "Request",
   "operation": {
-    "argumentDefinitions": [
-      (v1/*: any*/),
-      (v0/*: any*/)
-    ],
+    "argumentDefinitions": (v0/*: any*/),
     "kind": "Operation",
     "name": "createSellCryptoOrderMutation",
-    "selections": (v2/*: any*/)
+    "selections": (v1/*: any*/)
   },
   "params": {
-    "cacheID": "2c81ae5adf76b4fa157bc5453df40fcc",
+    "cacheID": "d4cb659efe0d2b63262cce510327ae11",
     "id": null,
     "metadata": {},
     "name": "createSellCryptoOrderMutation",
     "operationKind": "mutation",
-    "text": "mutation createSellCryptoOrderMutation(\n  $currencyId: ID!\n  $amount: String!\n) {\n  createSellCryptoOrder(input: {order: {currencyId: $currencyId, amount: $amount}}) {\n    errors {\n      messages\n    }\n    order {\n      id\n    }\n  }\n}\n"
+    "text": "mutation createSellCryptoOrderMutation(\n  $amount: String!\n) {\n  createSellCryptoOrder(input: {order: {amount: $amount}}) {\n    errors {\n      messages\n    }\n    order {\n      id\n    }\n  }\n}\n"
   }
 };
 })();
-(node as any).hash = '073e3f84d5921279ded3149dd9ec7db9';
+(node as any).hash = '5ce66da95c141385c607a3be499805f7';
 export default node;

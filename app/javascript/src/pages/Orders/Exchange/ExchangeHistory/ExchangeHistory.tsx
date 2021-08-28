@@ -3,6 +3,7 @@ import type { FC } from "react";
 import React from "react";
 import { useFragment } from "react-relay";
 
+import { Messages } from "../../../../messages";
 import { centsToUnit } from "../../../../utils/fiatMoney";
 import type { CryptoExchangeOrderProps } from "./components/CryptoExchangeOrder";
 import { CryptoExchangeOrder } from "./components/CryptoExchangeOrder";
@@ -47,9 +48,6 @@ export const ExchangeHistory: FC<Props> = ({
             createdAt
             paidAmountCents
             receivedAmount
-            currency {
-              name
-            }
             __typename
           }
         }
@@ -68,9 +66,6 @@ export const ExchangeHistory: FC<Props> = ({
             paidAmount
             receivedAmountCents
             createdAt
-            currency {
-              name
-            }
             __typename
           }
         }
@@ -95,7 +90,7 @@ export const ExchangeHistory: FC<Props> = ({
       if (node?.__typename === "SellCryptoOrder") {
         return {
           id: node.id,
-          payed: `${node.paidAmount} ${node.currency.name}`,
+          payed: `${node.paidAmount} CAKE`,
           received: `${centsToUnit(node.receivedAmountCents)} BRL`,
           createdAt: new Date(node.createdAt as string).toLocaleString(),
           kind: node.__typename,
@@ -107,7 +102,7 @@ export const ExchangeHistory: FC<Props> = ({
         return {
           id: node.id,
           payed: `${centsToUnit(node.paidAmountCents)} BRL`,
-          received: `${node.receivedAmount} ${node.currency.name}`,
+          received: `${node.receivedAmount} CAKE`,
           createdAt: new Date(node.createdAt as string).toLocaleString(),
           kind: node.__typename,
           status: node.status,
@@ -117,7 +112,7 @@ export const ExchangeHistory: FC<Props> = ({
       return null;
     });
 
-  if (!orderRows.length) return null;
+  if (!orderRows.length) return <Messages.NoHistory historyName="troca" />;
 
   return (
     <div className="container mx-auto px-4 sm:px-8">

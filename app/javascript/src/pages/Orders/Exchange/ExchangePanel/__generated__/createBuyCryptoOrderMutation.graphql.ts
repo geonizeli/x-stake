@@ -4,7 +4,6 @@
 
 import { ConcreteRequest } from "relay-runtime";
 export type createBuyCryptoOrderMutationVariables = {
-    currencyId: string;
     amountCents: number;
 };
 export type createBuyCryptoOrderMutationResponse = {
@@ -26,10 +25,9 @@ export type createBuyCryptoOrderMutation = {
 
 /*
 mutation createBuyCryptoOrderMutation(
-  $currencyId: ID!
   $amountCents: Int!
 ) {
-  createBuyCryptoOrder(input: {order: {currencyId: $currencyId, amountCents: $amountCents}}) {
+  createBuyCryptoOrder(input: {order: {amountCents: $amountCents}}) {
     errors {
       messages
     }
@@ -41,17 +39,14 @@ mutation createBuyCryptoOrderMutation(
 */
 
 const node: ConcreteRequest = (function(){
-var v0 = {
-  "defaultValue": null,
-  "kind": "LocalArgument",
-  "name": "amountCents"
-},
-v1 = {
-  "defaultValue": null,
-  "kind": "LocalArgument",
-  "name": "currencyId"
-},
-v2 = [
+var v0 = [
+  {
+    "defaultValue": null,
+    "kind": "LocalArgument",
+    "name": "amountCents"
+  }
+],
+v1 = [
   {
     "alias": null,
     "args": [
@@ -63,11 +58,6 @@ v2 = [
                 "kind": "Variable",
                 "name": "amountCents",
                 "variableName": "amountCents"
-              },
-              {
-                "kind": "Variable",
-                "name": "currencyId",
-                "variableName": "currencyId"
               }
             ],
             "kind": "ObjectValue",
@@ -125,36 +115,30 @@ v2 = [
 ];
 return {
   "fragment": {
-    "argumentDefinitions": [
-      (v0/*: any*/),
-      (v1/*: any*/)
-    ],
+    "argumentDefinitions": (v0/*: any*/),
     "kind": "Fragment",
     "metadata": null,
     "name": "createBuyCryptoOrderMutation",
-    "selections": (v2/*: any*/),
+    "selections": (v1/*: any*/),
     "type": "Mutation",
     "abstractKey": null
   },
   "kind": "Request",
   "operation": {
-    "argumentDefinitions": [
-      (v1/*: any*/),
-      (v0/*: any*/)
-    ],
+    "argumentDefinitions": (v0/*: any*/),
     "kind": "Operation",
     "name": "createBuyCryptoOrderMutation",
-    "selections": (v2/*: any*/)
+    "selections": (v1/*: any*/)
   },
   "params": {
-    "cacheID": "d7cc0c483d893b14f46781408d9d3f2f",
+    "cacheID": "aad8a1ea13e8a77031c98f59b0c5e0db",
     "id": null,
     "metadata": {},
     "name": "createBuyCryptoOrderMutation",
     "operationKind": "mutation",
-    "text": "mutation createBuyCryptoOrderMutation(\n  $currencyId: ID!\n  $amountCents: Int!\n) {\n  createBuyCryptoOrder(input: {order: {currencyId: $currencyId, amountCents: $amountCents}}) {\n    errors {\n      messages\n    }\n    order {\n      id\n    }\n  }\n}\n"
+    "text": "mutation createBuyCryptoOrderMutation(\n  $amountCents: Int!\n) {\n  createBuyCryptoOrder(input: {order: {amountCents: $amountCents}}) {\n    errors {\n      messages\n    }\n    order {\n      id\n    }\n  }\n}\n"
   }
 };
 })();
-(node as any).hash = 'a272ce6d5ae676a9cdc4e38eb7cc3cbe';
+(node as any).hash = '1eceec2d8340693381f746a9e75476b8';
 export default node;

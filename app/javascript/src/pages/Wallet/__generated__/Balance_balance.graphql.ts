@@ -4,14 +4,14 @@
 
 import { ReaderFragment } from "relay-runtime";
 import { FragmentRefs } from "relay-runtime";
-export type ExchangePanel_balances = {
+export type Balance_balance = {
     readonly amount: string;
-    readonly " $refType": "ExchangePanel_balances";
+    readonly " $refType": "Balance_balance";
 };
-export type ExchangePanel_balances$data = ExchangePanel_balances;
-export type ExchangePanel_balances$key = {
-    readonly " $data"?: ExchangePanel_balances$data;
-    readonly " $fragmentRefs": FragmentRefs<"ExchangePanel_balances">;
+export type Balance_balance$data = Balance_balance;
+export type Balance_balance$key = {
+    readonly " $data"?: Balance_balance$data;
+    readonly " $fragmentRefs": FragmentRefs<"Balance_balance">;
 };
 
 
@@ -20,7 +20,7 @@ const node: ReaderFragment = {
   "argumentDefinitions": [],
   "kind": "Fragment",
   "metadata": null,
-  "name": "ExchangePanel_balances",
+  "name": "Balance_balance",
   "selections": [
     {
       "alias": null,
@@ -33,5 +33,5 @@ const node: ReaderFragment = {
   "type": "Balance",
   "abstractKey": null
 };
-(node as any).hash = '99736114264996104eaa4907673d9849';
+(node as any).hash = '3f420063f1e6ebfcd91bd05b7bbb492a';
 export default node;

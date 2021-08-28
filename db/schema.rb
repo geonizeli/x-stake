@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_18_185019) do
+ActiveRecord::Schema.define(version: 2021_08_28_041104) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -57,30 +57,20 @@ ActiveRecord::Schema.define(version: 2021_08_18_185019) do
 
   create_table "balances", force: :cascade do |t|
     t.bigint "user_id", null: false
-    t.bigint "currency_id", null: false
     t.decimal "amount", precision: 20, scale: 10, default: "0.0", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["currency_id"], name: "index_balances_on_currency_id"
     t.index ["user_id"], name: "index_balances_on_user_id"
   end
 
   create_table "buy_crypto_orders", force: :cascade do |t|
     t.bigint "user_id", null: false
-    t.bigint "currency_id", null: false
     t.string "status", null: false
     t.integer "paid_amount_cents", default: 0, null: false
     t.decimal "received_amount", precision: 20, scale: 10, default: "0.0", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["currency_id"], name: "index_buy_crypto_orders_on_currency_id"
     t.index ["user_id"], name: "index_buy_crypto_orders_on_user_id"
-  end
-
-  create_table "currencies", force: :cascade do |t|
-    t.string "name", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "fiat_balances", force: :cascade do |t|
@@ -94,13 +84,11 @@ ActiveRecord::Schema.define(version: 2021_08_18_185019) do
 
   create_table "sell_crypto_orders", force: :cascade do |t|
     t.bigint "user_id", null: false
-    t.bigint "currency_id", null: false
     t.string "status", null: false
     t.decimal "paid_amount", precision: 20, scale: 10, default: "0.0", null: false
     t.integer "received_amount_cents", default: 0, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["currency_id"], name: "index_sell_crypto_orders_on_currency_id"
     t.index ["user_id"], name: "index_sell_crypto_orders_on_user_id"
   end
 
@@ -111,8 +99,6 @@ ActiveRecord::Schema.define(version: 2021_08_18_185019) do
     t.decimal "amount", precision: 20, scale: 10, default: "0.0", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.bigint "currency_id"
-    t.index ["currency_id"], name: "index_stake_orders_on_currency_id"
     t.index ["user_id"], name: "index_stake_orders_on_user_id"
   end
 
@@ -151,14 +137,10 @@ ActiveRecord::Schema.define(version: 2021_08_18_185019) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "balances", "currencies"
   add_foreign_key "balances", "users"
-  add_foreign_key "buy_crypto_orders", "currencies"
   add_foreign_key "buy_crypto_orders", "users"
   add_foreign_key "fiat_balances", "users"
-  add_foreign_key "sell_crypto_orders", "currencies"
   add_foreign_key "sell_crypto_orders", "users"
-  add_foreign_key "stake_orders", "currencies"
   add_foreign_key "stake_orders", "users"
   add_foreign_key "user_documents", "users"
 end

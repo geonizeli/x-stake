@@ -24,13 +24,8 @@ class CreateUserBalances
   end
 
   def create_balances
-    Currency.in_batches.each do |relation|
-      relation.each do |currency|
-        Balance.find_or_create_by(
-          user_id: user.id,
-          currency_id: currency.id,
-        )
-      end
-    end
+    Balance.find_or_create_by(
+      user_id: user.id
+    )
   end
 end

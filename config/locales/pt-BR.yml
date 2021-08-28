@@ -9,10 +9,6 @@ pt-BR:
         one: Administrador
         other: Administradores
 
-      currency:
-        one: Moeda
-        other: Moedas
-
       balance:
         one: Saldo
         other: Saldos
@@ -45,9 +41,6 @@ pt-BR:
       fiat_balance:
         amount_formatted: Quantia
         amount_cents: Quantia
-
-      currency:
-        name: Nome
 
     errors:
       models:

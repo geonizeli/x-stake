@@ -11,11 +11,13 @@ export const Exchange = () => {
   const data = useLazyLoadQuery<ExchangeQuery>(
     graphql`
       query ExchangeQuery {
-        fiatBalances {
-          ...ExchangePanel_fiatBalances
-        }
-        balances {
-          ...ExchangePanel_balances
+        currentUser {
+          fiatBalance {
+            ...ExchangePanel_fiatBalances
+          }
+          balance {
+            ...ExchangePanel_balances
+          }
         }
         buyCryptoOrders {
           ...ExchangeHistory_buyCryptoOrders
@@ -30,10 +32,12 @@ export const Exchange = () => {
 
   return (
     <div className="w-full">
-      <ExchangePanel
-        balancesRefs={data.balances}
-        fiatBalancesRefs={data.fiatBalances}
-      />
+      {data.currentUser && (
+        <ExchangePanel
+          balancesRefs={data.currentUser.balance}
+          fiatBalancesRefs={data.currentUser.fiatBalance}
+        />
+      )}
 
       <ExchangeHistory
         sellCryptoOrdersRefs={data.sellCryptoOrders}

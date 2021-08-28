@@ -33,12 +33,9 @@ RSpec.describe(Mutations::CreateStakeOrder, type: :mutation) do
 
   context "when the user has enough balance" do
     it "withdraws from his account and creates a buy order" do
-      currency = create(:currency)
       user = create(
         :user,
-        balances: [
-          build(:balance, currency: currency, amount: 1.0034),
-        ]
+        balance: build(:balance, amount: 1.0034)
       )
 
       variables = {
@@ -68,18 +65,15 @@ RSpec.describe(Mutations::CreateStakeOrder, type: :mutation) do
         },
       }))
 
-      expect(user.balances.first.reload.amount.to_s).to(eq("0.2034"))
+      expect(user.balance.reload.amount.to_s).to(eq("0.2034"))
     end
   end
 
   context "when the user does not have enough balance" do
     it "returns withdrawl error" do
-      currency = create(:currency)
       user = create(
         :user,
-        balances: [
-          build(:balance, currency: currency, amount: 0.0034),
-        ]
+        balance: build(:balance, amount: 0.0034)
       )
 
       variables = {
@@ -109,7 +103,7 @@ RSpec.describe(Mutations::CreateStakeOrder, type: :mutation) do
         },
       }))
 
-      expect(user.balances.first.reload.amount.to_s).to(eq("0.0034"))
+      expect(user.balance.reload.amount.to_s).to(eq("0.0034"))
     end
   end
 end

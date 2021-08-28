@@ -5,16 +5,11 @@
 import { ConcreteRequest } from "relay-runtime";
 export type PoolListingQueryVariables = {};
 export type PoolListingQueryResponse = {
-    readonly balances: {
-        readonly edges: ReadonlyArray<{
-            readonly node: {
-                readonly currency: {
-                    readonly name: string;
-                };
-                readonly amount: string;
-            };
-        }>;
-    };
+    readonly currentUser: {
+        readonly balance: {
+            readonly amount: string;
+        };
+    } | null;
 };
 export type PoolListingQuery = {
     readonly response: PoolListingQueryResponse;
@@ -25,17 +20,12 @@ export type PoolListingQuery = {
 
 /*
 query PoolListingQuery {
-  balances {
-    edges {
-      node {
-        currency {
-          name
-          id
-        }
-        amount
-        id
-      }
+  currentUser {
+    balance {
+      amount
+      id
     }
+    id
   }
 }
 */
@@ -45,17 +35,10 @@ var v0 = {
   "alias": null,
   "args": null,
   "kind": "ScalarField",
-  "name": "name",
-  "storageKey": null
-},
-v1 = {
-  "alias": null,
-  "args": null,
-  "kind": "ScalarField",
   "name": "amount",
   "storageKey": null
 },
-v2 = {
+v1 = {
   "alias": null,
   "args": null,
   "kind": "ScalarField",
@@ -72,43 +55,20 @@ return {
       {
         "alias": null,
         "args": null,
-        "concreteType": "BalanceConnection",
+        "concreteType": "User",
         "kind": "LinkedField",
-        "name": "balances",
+        "name": "currentUser",
         "plural": false,
         "selections": [
           {
             "alias": null,
             "args": null,
-            "concreteType": "BalanceEdge",
+            "concreteType": "Balance",
             "kind": "LinkedField",
-            "name": "edges",
-            "plural": true,
+            "name": "balance",
+            "plural": false,
             "selections": [
-              {
-                "alias": null,
-                "args": null,
-                "concreteType": "Balance",
-                "kind": "LinkedField",
-                "name": "node",
-                "plural": false,
-                "selections": [
-                  {
-                    "alias": null,
-                    "args": null,
-                    "concreteType": "Currency",
-                    "kind": "LinkedField",
-                    "name": "currency",
-                    "plural": false,
-                    "selections": [
-                      (v0/*: any*/)
-                    ],
-                    "storageKey": null
-                  },
-                  (v1/*: any*/)
-                ],
-                "storageKey": null
-              }
+              (v0/*: any*/)
             ],
             "storageKey": null
           }
@@ -128,62 +88,39 @@ return {
       {
         "alias": null,
         "args": null,
-        "concreteType": "BalanceConnection",
+        "concreteType": "User",
         "kind": "LinkedField",
-        "name": "balances",
+        "name": "currentUser",
         "plural": false,
         "selections": [
           {
             "alias": null,
             "args": null,
-            "concreteType": "BalanceEdge",
+            "concreteType": "Balance",
             "kind": "LinkedField",
-            "name": "edges",
-            "plural": true,
+            "name": "balance",
+            "plural": false,
             "selections": [
-              {
-                "alias": null,
-                "args": null,
-                "concreteType": "Balance",
-                "kind": "LinkedField",
-                "name": "node",
-                "plural": false,
-                "selections": [
-                  {
-                    "alias": null,
-                    "args": null,
-                    "concreteType": "Currency",
-                    "kind": "LinkedField",
-                    "name": "currency",
-                    "plural": false,
-                    "selections": [
-                      (v0/*: any*/),
-                      (v2/*: any*/)
-                    ],
-                    "storageKey": null
-                  },
-                  (v1/*: any*/),
-                  (v2/*: any*/)
-                ],
-                "storageKey": null
-              }
+              (v0/*: any*/),
+              (v1/*: any*/)
             ],
             "storageKey": null
-          }
+          },
+          (v1/*: any*/)
         ],
         "storageKey": null
       }
     ]
   },
   "params": {
-    "cacheID": "6abf5e963429e49993af50df156f8e1c",
+    "cacheID": "6af4091073903ead7eb057e9f245a32c",
     "id": null,
     "metadata": {},
     "name": "PoolListingQuery",
     "operationKind": "query",
-    "text": "query PoolListingQuery {\n  balances {\n    edges {\n      node {\n        currency {\n          name\n          id\n        }\n        amount\n        id\n      }\n    }\n  }\n}\n"
+    "text": "query PoolListingQuery {\n  currentUser {\n    balance {\n      amount\n      id\n    }\n    id\n  }\n}\n"
   }
 };
 })();
-(node as any).hash = '4fefb238e24b79198799686599255e6c';
+(node as any).hash = 'e296b5abac1f659b33d8c77522fbfc55';
 export default node;

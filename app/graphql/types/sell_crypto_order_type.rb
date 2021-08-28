@@ -7,12 +7,6 @@ module Types
     graphql_name "SellCryptoOrder"
 
     field :id, ID, null: false
-
-    field :currency, CurrencyType, null: false
-    def currency
-      dataloader.with(Dataloader::Source, Currency).load(object.currency_id)
-    end
-
     field :status, ProcessStatusEnum, null: false
     field :paid_amount, String, null: false
     field :received_amount_cents, Integer, null: true

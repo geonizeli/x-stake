@@ -36,30 +36,19 @@ export const ExchangePanel: FC<Props> = ({
   const [cryptoDock, setCryptoDock] = useState<string>("0");
   const [fiatDock, setFiatDock] = useState<string>("0.00");
 
-  const fiatBalances = useFragment<ExchangePanel_fiatBalances$key>(
+  const fiatBalance = useFragment<ExchangePanel_fiatBalances$key>(
     graphql`
-      fragment ExchangePanel_fiatBalances on FiatBalanceConnection {
-        edges {
-          node {
-            amountCents
-          }
-        }
+      fragment ExchangePanel_fiatBalances on FiatBalance {
+        amountCents
       }
     `,
     fiatBalancesRefs
   );
 
-  const balances = useFragment<ExchangePanel_balances$key>(
+  const balance = useFragment<ExchangePanel_balances$key>(
     graphql`
-      fragment ExchangePanel_balances on BalanceConnection {
-        edges {
-          node {
-            amount
-            currency {
-              id
-            }
-          }
-        }
+      fragment ExchangePanel_balances on Balance {
+        amount
       }
     `,
     balancesRefs
@@ -67,12 +56,9 @@ export const ExchangePanel: FC<Props> = ({
 
   if (!isAuthenticated) return <Unauthenticated />;
 
-  const [crypto] = balances.edges;
-  const [fiat] = fiatBalances.edges;
-
-  const avaliableCrypto = new BigNumber(crypto.node.amount);
+  const avaliableCrypto = new BigNumber(balance.amount);
   const avaliableFiat = (
-    fiat.node.amountCents ? fiat.node.amountCents / 100 : 0
+    fiatBalance.amountCents ? fiatBalance.amountCents / 100 : 0
   ).toFixed(2);
 
   const handleSellTabClick = () => {
@@ -123,14 +109,12 @@ export const ExchangePanel: FC<Props> = ({
     if (exchangeOption === "SELL") {
       commitCreateSellCryptoOrderMutation(environment, {
         amount: cryptoDock,
-        currencyId: crypto.node.currency.id,
       });
     }
 
     if (exchangeOption === "BUY") {
       commitCreateBuyCryptoOrderMutation(environment, {
         amountCents: parseFloat(fiatDock) * 100,
-        currencyId: crypto.node.currency.id,
       });
     }
   };
@@ -172,7 +156,7 @@ export const ExchangePanel: FC<Props> = ({
       >
         <span className="mb-2">
           {exchangeOption === "SELL" ? "CAKE" : "BRL"} disponível:{" "}
-          {exchangeOption === "SELL" ? crypto.node.amount : avaliableFiat}
+          {exchangeOption === "SELL" ? balance.amount : avaliableFiat}
         </span>
         <div className="flex flex-row">
           {exchangeOption === "BUY" ? (

@@ -33,12 +33,9 @@ RSpec.describe(Mutations::CreateStakeRemoveOrder, type: :mutation) do
 
   context "when the user has enough balance" do
     it "withdraws from his account and creates a buy order" do
-      currency = create(:currency)
       user = create(
         :user,
-        balances: [
-          build(:balance, currency: currency, amount: 0),
-        ]
+        balance: build(:balance, amount: 0)
       )
 
       variables = {
@@ -72,15 +69,12 @@ RSpec.describe(Mutations::CreateStakeRemoveOrder, type: :mutation) do
 
   context "when it repeats the mutation with a request in `processing`" do
     it "update amount from the order" do
-      currency = create(:currency)
       user = create(
         :user,
-        balances: [
-          build(:balance, currency: currency, amount: 0),
-        ]
+        balance: build(:balance, amount: 0)
       )
 
-      create(:stake_order, amount: -200.8, user: user, pool_name: "CAKE/BNB", currency: currency)
+      create(:stake_order, amount: -200.8, user: user, pool_name: "CAKE/BNB")
 
       variables = {
         "amount": "200.80",

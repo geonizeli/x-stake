@@ -13,9 +13,6 @@ export type ExchangeHistory_sellCryptoOrders = {
             readonly paidAmount: string;
             readonly receivedAmountCents: number | null;
             readonly createdAt: unknown;
-            readonly currency: {
-                readonly name: string;
-            };
             readonly __typename: string;
         };
     }>;
@@ -89,24 +86,6 @@ const node: ReaderFragment = {
             {
               "alias": null,
               "args": null,
-              "concreteType": "Currency",
-              "kind": "LinkedField",
-              "name": "currency",
-              "plural": false,
-              "selections": [
-                {
-                  "alias": null,
-                  "args": null,
-                  "kind": "ScalarField",
-                  "name": "name",
-                  "storageKey": null
-                }
-              ],
-              "storageKey": null
-            },
-            {
-              "alias": null,
-              "args": null,
               "kind": "ScalarField",
               "name": "__typename",
               "storageKey": null
@@ -121,5 +100,5 @@ const node: ReaderFragment = {
   "type": "SellCryptoOrderConnection",
   "abstractKey": null
 };
-(node as any).hash = '384d1326525240c150d450555796a621';
+(node as any).hash = '0a6fbd33935e0dcd241ffa3270f1ea30';
 export default node;

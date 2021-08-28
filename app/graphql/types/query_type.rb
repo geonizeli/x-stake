@@ -10,16 +10,6 @@ module Types
       context[:current_user]
     end
 
-    field :balances, BalanceType.connection_type, null: false
-    def balances
-      Pundit.policy_scope(current_user, Balance)
-    end
-
-    field :fiat_balances, FiatBalanceType.connection_type, null: false
-    def fiat_balances
-      Pundit.policy_scope(current_user, FiatBalance)
-    end
-
     field :sell_crypto_orders, SellCryptoOrderType.connection_type, null: false
     def sell_crypto_orders
       Pundit.policy_scope(current_user, SellCryptoOrder)

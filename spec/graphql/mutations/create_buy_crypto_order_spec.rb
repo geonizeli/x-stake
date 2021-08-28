@@ -5,10 +5,9 @@ require "rails_helper"
 RSpec.describe(Mutations::CreateBuyCryptoOrder, type: :mutation) do
   let(:query_string) do
     <<~GQL
-      mutation($currencyId: ID!, $amountCents: Int!) {
+      mutation($amountCents: Int!) {
         createBuyCryptoOrder(input: {
           order: {
-            currencyId: $currencyId,
             amountCents: $amountCents,
           }
         }) {
@@ -22,9 +21,6 @@ RSpec.describe(Mutations::CreateBuyCryptoOrder, type: :mutation) do
             status
             paidAmountCents
             receivedAmount
-            currency {
-              name
-            }
           }
         }
       }
@@ -33,7 +29,6 @@ RSpec.describe(Mutations::CreateBuyCryptoOrder, type: :mutation) do
 
   context "when the user has enough balance" do
     it "withdraws from his account and creates a buy order" do
-      currency = create(:currency)
       user = create(
         :user,
         fiat_balance: build(
@@ -42,10 +37,7 @@ RSpec.describe(Mutations::CreateBuyCryptoOrder, type: :mutation) do
         ),
       )
 
-      currency_global_id = GraphQL::Schema::UniqueWithinType.encode("Currency", currency.id)
-
       variables = {
-        "currencyId": currency_global_id,
         "amountCents": 90_00,
       }
 
@@ -65,9 +57,6 @@ RSpec.describe(Mutations::CreateBuyCryptoOrder, type: :mutation) do
               "status" => "PROCESSING",
               "paidAmountCents" => 90_00,
               "receivedAmount" => "0.0",
-              "currency" => {
-                "name" => "CAKE",
-              },
             },
           },
         },
@@ -79,7 +68,6 @@ RSpec.describe(Mutations::CreateBuyCryptoOrder, type: :mutation) do
 
   context "when the user does not have enough balance" do
     it "returns withdrawl error" do
-      currency = create(:currency)
       user = create(
         :user,
         fiat_balance: build(
@@ -88,10 +76,7 @@ RSpec.describe(Mutations::CreateBuyCryptoOrder, type: :mutation) do
         ),
       )
 
-      currency_global_id = GraphQL::Schema::UniqueWithinType.encode("Currency", currency.id)
-
       variables = {
-        "currencyId": currency_global_id,
         "amountCents": 90_00,
       }
 

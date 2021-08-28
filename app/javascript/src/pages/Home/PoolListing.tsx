@@ -7,17 +7,12 @@ import { Pool } from "./Pool";
 import type { PoolListingQuery } from "./__generated__/PoolListingQuery.graphql";
 
 export const PoolListing = () => {
-  const { balances } = useLazyLoadQuery<PoolListingQuery>(
+  const { currentUser } = useLazyLoadQuery<PoolListingQuery>(
     graphql`
       query PoolListingQuery {
-        balances {
-          edges {
-            node {
-              currency {
-                name
-              }
-              amount
-            }
+        currentUser {
+          balance {
+            amount
           }
         }
       }
@@ -25,11 +20,7 @@ export const PoolListing = () => {
     {}
   );
 
-  const cakeBalance = balances.edges.find(
-    (edge) => edge.node.currency.name === "CAKE"
-  )?.node;
-
-  const balance = cakeBalance?.amount ?? "0";
+  const balance = currentUser?.balance.amount ?? "0";
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 place-items-center w-full gap-8 py-4 -mt-16 overflow-x-hidden">

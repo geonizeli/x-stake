@@ -5,11 +5,7 @@
 import { ReaderFragment } from "relay-runtime";
 import { FragmentRefs } from "relay-runtime";
 export type ExchangePanel_fiatBalances = {
-    readonly edges: ReadonlyArray<{
-        readonly node: {
-            readonly amountCents: number;
-        };
-    }>;
+    readonly amountCents: number;
     readonly " $refType": "ExchangePanel_fiatBalances";
 };
 export type ExchangePanel_fiatBalances$data = ExchangePanel_fiatBalances;
@@ -29,35 +25,13 @@ const node: ReaderFragment = {
     {
       "alias": null,
       "args": null,
-      "concreteType": "FiatBalanceEdge",
-      "kind": "LinkedField",
-      "name": "edges",
-      "plural": true,
-      "selections": [
-        {
-          "alias": null,
-          "args": null,
-          "concreteType": "FiatBalance",
-          "kind": "LinkedField",
-          "name": "node",
-          "plural": false,
-          "selections": [
-            {
-              "alias": null,
-              "args": null,
-              "kind": "ScalarField",
-              "name": "amountCents",
-              "storageKey": null
-            }
-          ],
-          "storageKey": null
-        }
-      ],
+      "kind": "ScalarField",
+      "name": "amountCents",
       "storageKey": null
     }
   ],
-  "type": "FiatBalanceConnection",
+  "type": "FiatBalance",
   "abstractKey": null
 };
-(node as any).hash = '14b79d15c8353d856f3e74bb7c181cf7';
+(node as any).hash = '9f9bd030f967a665c247facbf641b760';
 export default node;
