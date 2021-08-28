@@ -1,19 +1,16 @@
 import type { ChangeEvent, FC } from "react";
 import React, { useState } from "react";
-import cx from "classnames";
 import { BigNumber } from "bignumber.js";
 import { useRelayEnvironment } from "react-relay";
 
-import { Modal } from "../../../components";
+import { Button, Modal } from "../../../components";
 import { commitCreateStakeOrderMutation } from "./createStakeOrder";
+import { Input } from "../../../components/Input/Input";
 
 type Props = {
   poolName: string;
   balance: string;
 };
-
-const inputBaseStyles =
-  "rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent mb-3";
 
 export const StakeOrderModal: FC<Props> = ({ poolName, balance }) => {
   const environment = useRelayEnvironment();
@@ -72,8 +69,7 @@ export const StakeOrderModal: FC<Props> = ({ poolName, balance }) => {
         <span className="mb-2">CAKE disponível: {balance}</span>
         <form onSubmit={onSubmit} className="bg-white py-2">
           <div className="flex flex-row">
-            <input
-              className={cx(inputBaseStyles)}
+            <Input
               type="number"
               value={investAmountInput}
               onChange={handleInvestInput}
@@ -90,13 +86,9 @@ export const StakeOrderModal: FC<Props> = ({ poolName, balance }) => {
           {avaliableCake.isEqualTo(0) && (
             <span className="text-red-500 mb-1">Você não possuí saldo.</span>
           )}
-          <button
-            className="cursor-pointer py-2 px-4 disabled:opacity-50 disabled:cursor-default bg-blue-600 hover:bg-blue-700 focus:ring-blue-500 focus:ring-offset-blue-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg"
-            disabled={!stakeAvaliable}
-            type="submit"
-          >
+          <Button disabled={!stakeAvaliable} type="submit">
             Fazer Stake
-          </button>
+          </Button>
         </form>
       </Modal>
     </div>

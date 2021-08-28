@@ -11,15 +11,13 @@ import type { ExchangePanel_fiatBalances$key } from "./__generated__/ExchangePan
 import type { ExchangePanel_balances$key } from "./__generated__/ExchangePanel_balances.graphql";
 import { commitCreateSellCryptoOrderMutation } from "./createSellCryptoOrder";
 import { commitCreateBuyCryptoOrderMutation } from "./createBuyCryptoOrder";
+import { Input, Button } from "../../../../components";
 
 const tabBaseStyles =
   "w-full text-base font-bold text-black px-4 py-2 focus:ring-blue-500";
 
 const selectedTabStyles =
   "bg-blue-600 hover:bg-blue-700 rounded-l-frounded-full text-white";
-
-const inputBaseStyles =
-  "rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent mb-3";
 
 type Props = {
   fiatBalancesRefs: ExchangePanel_fiatBalances$key;
@@ -161,8 +159,7 @@ export const ExchangePanel: FC<Props> = ({
         <div className="flex flex-row">
           {exchangeOption === "BUY" ? (
             <>
-              <input
-                className={cx(inputBaseStyles)}
+              <Input
                 type="number"
                 value={fiatDock}
                 onChange={handleFiatAmountChange}
@@ -178,8 +175,7 @@ export const ExchangePanel: FC<Props> = ({
             </>
           ) : (
             <>
-              <input
-                className={cx(inputBaseStyles)}
+              <Input
                 type="number"
                 value={cryptoDock}
                 onChange={handleCryptoAmountChange}
@@ -196,13 +192,13 @@ export const ExchangePanel: FC<Props> = ({
           )}
         </div>
 
-        <button
+        <Button
           className="cursor-pointer py-2 px-4 disabled:opacity-50 disabled:cursor-default bg-blue-600 hover:bg-blue-700 focus:ring-blue-500 focus:ring-offset-blue-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg"
           type="submit"
           disabled={submitDisabled}
         >
           {exchangeOption === "BUY" ? "Comprar" : "Vender"} CAKE
-        </button>
+        </Button>
       </form>
     </div>
   );
