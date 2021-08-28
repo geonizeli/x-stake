@@ -2,9 +2,13 @@ import type { FC } from "react";
 import React, { useState } from "react";
 import cx from "classnames";
 import { XCircleIcon } from "@heroicons/react/outline";
+import { useLazyLoadQuery } from "react-relay";
+import { graphql } from "babel-plugin-relay/macro";
+import BigNumber from "bignumber.js";
 
 import type { Vault as VaultType } from "../../../types/yieldwatch";
 import { RemoveStakeModal } from "./RemoveStakeModal";
+import type { VaultQuery } from "./__generated__/VaultQuery.graphql";
 
 type VaultProps = {
   vault: Partial<VaultType>;
@@ -12,26 +16,71 @@ type VaultProps = {
 };
 
 export const Vault: FC<VaultProps> = ({ vault, isLoading }) => {
+  const { stakeOrders } = useLazyLoadQuery<VaultQuery>(
+    graphql`
+      query VaultQuery(
+        $status: ProcessStatus!
+        $poolName: String!
+        $amount: Float!
+      ) {
+        stakeOrders(
+          filter: {
+            status: [$status]
+            poolName: { eq: $poolName }
+            amount: { lt: $amount }
+          }
+        ) {
+          edges {
+            node {
+              amount
+            }
+          }
+        }
+      }
+    `,
+    {
+      status: "PROCESSING",
+      poolName: vault.name ?? "",
+      amount: 0,
+    }
+  );
+
   const [removeStakeModalIsOpen, setRemoveStakeModalIsOpen] =
     useState<boolean>(false);
-
-  const totalDepositedAndRewarded = (
-    (vault.depositedTokens ?? 0) + (vault.totalRewards ?? 0)
-  ).toFixed(4);
-
-  const totalDeposited = vault.depositedTokens?.toFixed(4);
-  const totalRewarded = vault.totalRewards?.toFixed(4);
 
   const handleRemoveStakeModal = () => {
     setRemoveStakeModalIsOpen(true);
   };
+
+  const alreadyOnUnstakeOrder = stakeOrders.edges.reduce((acc, current) => {
+    return BigNumber.sum(acc, current.node.amount);
+  }, new BigNumber(0));
+
+  const totalDepositedAndRewarded =
+    (vault.depositedTokens ?? 0) + (vault.totalRewards ?? 0);
+
+  let totalStaked = BigNumber.sum(
+    alreadyOnUnstakeOrder,
+    totalDepositedAndRewarded
+  );
+
+  totalStaked = totalStaked.isLessThan(0.0001) ? new BigNumber(0) : totalStaked;
+
+  const totalStakedFixed = totalStaked.toFixed(4);
+  const totalDeposited = (
+    totalStaked.isEqualTo(0) ? 0 : vault.depositedTokens
+  )?.toFixed(4);
+
+  const totalRewarded = (
+    totalStaked.isEqualTo(0) ? 0 : vault.totalRewards
+  )?.toFixed(4);
 
   return (
     <>
       <RemoveStakeModal
         isOpen={removeStakeModalIsOpen}
         setIsOpen={setRemoveStakeModalIsOpen}
-        stakedCake={totalDepositedAndRewarded}
+        stakedCake={totalStakedFixed}
         poolName={vault.name}
       />
       <div className="shadow-lg px-4 py-6 w-full bg-white dark:bg-gray-800 rounded-lg">
@@ -53,7 +102,7 @@ export const Vault: FC<VaultProps> = ({ vault, isLoading }) => {
                 : ""
             )}
           >
-            {!isLoading && totalDepositedAndRewarded}
+            {!isLoading && totalStakedFixed}
           </p>
         </div>
         <div className="dark:text-white">

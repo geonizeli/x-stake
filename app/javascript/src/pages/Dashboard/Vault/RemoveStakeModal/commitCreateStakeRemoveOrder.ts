@@ -2,16 +2,19 @@ import { graphql } from "babel-plugin-relay/macro";
 import type { Environment } from "react-relay";
 import { commitMutation } from "react-relay";
 
-import type { createStakeOrderMutationVariables } from "./__generated__/createStakeOrderMutation.graphql";
+import type { commitCreateStakeRemoveOrderMutationVariables } from "./__generated__/commitCreateStakeRemoveOrderMutation.graphql";
 
-export const commitCreateStakeOrderMutation = (
+export const commitCreateStakeRemoveOrderMutation = (
   environment: Environment,
-  variables: createStakeOrderMutationVariables
+  variables: commitCreateStakeRemoveOrderMutationVariables
 ) => {
   return commitMutation(environment, {
     mutation: graphql`
-      mutation createStakeOrderMutation($poolName: String!, $amount: String!) {
-        createStakeOrder(
+      mutation commitCreateStakeRemoveOrderMutation(
+        $poolName: String!
+        $amount: String!
+      ) {
+        createStakeRemoveOrder(
           input: { order: { poolName: $poolName, amount: $amount } }
         ) {
           order {
@@ -22,7 +25,7 @@ export const commitCreateStakeOrderMutation = (
     `,
     variables,
     onCompleted: (_response) => {
-      window.location.reload();
+      window.location.href = "/orders/stake";
     },
     onError: (_error) => {},
   });

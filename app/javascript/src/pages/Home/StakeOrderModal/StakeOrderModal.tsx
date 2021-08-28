@@ -10,17 +10,12 @@ import { commitCreateStakeOrderMutation } from "./createStakeOrder";
 type Props = {
   poolName: string;
   balance: string;
-  currencyId: string;
 };
 
 const inputBaseStyles =
   "rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent mb-3";
 
-export const StakeOrderModal: FC<Props> = ({
-  poolName,
-  balance,
-  currencyId,
-}) => {
+export const StakeOrderModal: FC<Props> = ({ poolName, balance }) => {
   const environment = useRelayEnvironment();
   const [isOpen, setIsOpen] = useState(false);
   const [investAmountInput, setInvestAmountInput] = useState("0");
@@ -34,7 +29,6 @@ export const StakeOrderModal: FC<Props> = ({
 
   const onSubmit = () => {
     commitCreateStakeOrderMutation(environment, {
-      currencyId,
       amount: investAmountInput,
       poolName,
     });

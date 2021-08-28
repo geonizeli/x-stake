@@ -6,7 +6,7 @@ module Mutations
     argument :order, Inputs::CreateStakeOrderAttributesInput, required: true
 
     def resolve(order:)
-      currency_id = decode_id(order[:currency_id])
+      currency_id = Currency.find_by!(name: "CAKE").id
       amount = BigDecimal(order[:amount])
 
       ActiveRecord::Base.transaction do

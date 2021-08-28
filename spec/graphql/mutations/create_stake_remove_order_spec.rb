@@ -6,13 +6,11 @@ RSpec.describe(Mutations::CreateStakeRemoveOrder, type: :mutation) do
   let(:query_string) do
     <<~GQL
       mutation(
-        $currencyId: ID!,
         $amount: String!,
         $poolName: String!,
       ) {
         createStakeRemoveOrder(input: {
           order: {
-            currencyId: $currencyId,
             amount: $amount,
             poolName: $poolName,
           }
@@ -43,11 +41,8 @@ RSpec.describe(Mutations::CreateStakeRemoveOrder, type: :mutation) do
         ]
       )
 
-      currency_global_id = GraphQL::Schema::UniqueWithinType.encode("Currency", currency.id)
-
       variables = {
-        "currencyId": currency_global_id,
-        "amount": "-200.80",
+        "amount": "200.80",
         "poolName": "CAKE/BNB",
         "status": "PROCESSING",
       }
@@ -85,13 +80,10 @@ RSpec.describe(Mutations::CreateStakeRemoveOrder, type: :mutation) do
         ]
       )
 
-      currency_global_id = GraphQL::Schema::UniqueWithinType.encode("Currency", currency.id)
-
       create(:stake_order, amount: -200.8, user: user, pool_name: "CAKE/BNB", currency: currency)
 
       variables = {
-        "currencyId": currency_global_id,
-        "amount": "-200.80",
+        "amount": "200.80",
         "poolName": "CAKE/BNB",
       }
 

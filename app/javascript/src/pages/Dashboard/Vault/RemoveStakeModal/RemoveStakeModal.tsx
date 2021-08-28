@@ -2,8 +2,10 @@ import BigNumber from "bignumber.js";
 import type { ChangeEvent, FC } from "react";
 import React, { useState } from "react";
 import cx from "classnames";
+import { useRelayEnvironment } from "react-relay";
 
-import { Modal } from "../../../components";
+import { Modal } from "../../../../components";
+import { commitCreateStakeRemoveOrderMutation } from "./commitCreateStakeRemoveOrder";
 
 const inputBaseStyles =
   "rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent mb-3";
@@ -18,18 +20,25 @@ type RemoveStakeModal = {
 export const RemoveStakeModal: FC<RemoveStakeModal> = ({
   setIsOpen,
   isOpen,
-  // stakedCake,
-  poolName,
+  stakedCake,
+  poolName = "",
 }) => {
+  const enviroment = useRelayEnvironment();
   const [amountInput, setAmountInput] = useState<string>("0");
-  const stakedCake = "44.00";
-  const avaliableCake = new BigNumber(stakedCake);
+  const avaliableCake = BigNumber.sum(stakedCake);
 
   const handleClose = () => {
     setIsOpen(false);
   };
 
-  const onSubmit = () => {};
+  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    commitCreateStakeRemoveOrderMutation(enviroment, {
+      poolName,
+      amount: amountInput,
+    });
+  };
 
   const handleInvestInput = ({
     currentTarget: { value },

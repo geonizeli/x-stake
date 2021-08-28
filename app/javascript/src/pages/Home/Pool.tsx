@@ -11,10 +11,9 @@ import { StakeOrderModal } from "./StakeOrderModal";
 type PoolProps = {
   pool: PoolConfig;
   balance: string;
-  currencyId: string;
 };
 
-export const Pool: FC<PoolProps> = ({ pool, balance, currencyId }) => {
+export const Pool: FC<PoolProps> = ({ pool, balance }) => {
   const {
     provider,
     pancake: { router },
@@ -36,7 +35,7 @@ export const Pool: FC<PoolProps> = ({ pool, balance, currencyId }) => {
       const totalStaked = await getTotalStaked(provider, pool);
 
       // eslint-disable-next-line no-console
-      console.log(
+      console.info(
         `Total Staked for ${pool.stakingToken.symbol} - ${
           pool.earningToken.symbol
         }: ${JSON.stringify(totalStaked)}`
@@ -94,7 +93,6 @@ export const Pool: FC<PoolProps> = ({ pool, balance, currencyId }) => {
         <StakeOrderModal
           poolName={pool.earningToken.symbol}
           balance={balance}
-          currencyId={currencyId}
         />
       </div>
     </div>
