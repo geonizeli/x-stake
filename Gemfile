@@ -28,6 +28,7 @@ gem "money-rails"
 gem "enumerize"
 gem "graphql"
 gem "pundit"
+gem "ransack", "~> 2.4"
 
 group :development, :test do
   gem "dotenv-rails"

@@ -33,6 +33,10 @@ class StakeOrder < ApplicationRecord
   validates :pool_name, presence: true
   validates :amount, presence: true
 
+  def self.ransackable_attributes(auth_object = nil)
+    super & ["pool_name", "amount"]
+  end
+
   private
 
   def notification_message

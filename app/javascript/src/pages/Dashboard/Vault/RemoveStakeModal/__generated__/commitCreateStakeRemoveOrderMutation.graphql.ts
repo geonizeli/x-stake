@@ -3,30 +3,30 @@
 // @ts-nocheck
 
 import { ConcreteRequest } from "relay-runtime";
-export type createStakeOrderMutationVariables = {
+export type commitCreateStakeRemoveOrderMutationVariables = {
     poolName: string;
     amount: string;
 };
-export type createStakeOrderMutationResponse = {
-    readonly createStakeOrder: {
+export type commitCreateStakeRemoveOrderMutationResponse = {
+    readonly createStakeRemoveOrder: {
         readonly order: {
             readonly id: string;
         } | null;
     } | null;
 };
-export type createStakeOrderMutation = {
-    readonly response: createStakeOrderMutationResponse;
-    readonly variables: createStakeOrderMutationVariables;
+export type commitCreateStakeRemoveOrderMutation = {
+    readonly response: commitCreateStakeRemoveOrderMutationResponse;
+    readonly variables: commitCreateStakeRemoveOrderMutationVariables;
 };
 
 
 
 /*
-mutation createStakeOrderMutation(
+mutation commitCreateStakeRemoveOrderMutation(
   $poolName: String!
   $amount: String!
 ) {
-  createStakeOrder(input: {order: {poolName: $poolName, amount: $amount}}) {
+  createStakeRemoveOrder(input: {order: {poolName: $poolName, amount: $amount}}) {
     order {
       id
     }
@@ -72,9 +72,9 @@ v2 = [
         "name": "input"
       }
     ],
-    "concreteType": "CreateStakeOrderPayload",
+    "concreteType": "CreateStakeRemoveOrderPayload",
     "kind": "LinkedField",
-    "name": "createStakeOrder",
+    "name": "createStakeRemoveOrder",
     "plural": false,
     "selections": [
       {
@@ -107,7 +107,7 @@ return {
     ],
     "kind": "Fragment",
     "metadata": null,
-    "name": "createStakeOrderMutation",
+    "name": "commitCreateStakeRemoveOrderMutation",
     "selections": (v2/*: any*/),
     "type": "Mutation",
     "abstractKey": null
@@ -119,18 +119,18 @@ return {
       (v0/*: any*/)
     ],
     "kind": "Operation",
-    "name": "createStakeOrderMutation",
+    "name": "commitCreateStakeRemoveOrderMutation",
     "selections": (v2/*: any*/)
   },
   "params": {
-    "cacheID": "e845ef953b2de9dd797930c0838f30f8",
+    "cacheID": "a3a646d6f52bf3ddc29e33b8fce4661b",
     "id": null,
     "metadata": {},
-    "name": "createStakeOrderMutation",
+    "name": "commitCreateStakeRemoveOrderMutation",
     "operationKind": "mutation",
-    "text": "mutation createStakeOrderMutation(\n  $poolName: String!\n  $amount: String!\n) {\n  createStakeOrder(input: {order: {poolName: $poolName, amount: $amount}}) {\n    order {\n      id\n    }\n  }\n}\n"
+    "text": "mutation commitCreateStakeRemoveOrderMutation(\n  $poolName: String!\n  $amount: String!\n) {\n  createStakeRemoveOrder(input: {order: {poolName: $poolName, amount: $amount}}) {\n    order {\n      id\n    }\n  }\n}\n"
   }
 };
 })();
-(node as any).hash = '36f248efe00b47bc1b27f597c5ab45c3';
+(node as any).hash = '561be0497e5317997815bea692b73da9';
 export default node;

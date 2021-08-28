@@ -2,14 +2,14 @@
 
 require "rails_helper"
 
-RSpec.describe(Mutations::CreateStakeOrder, type: :mutation) do
+RSpec.describe(Mutations::CreateStakeRemoveOrder, type: :mutation) do
   let(:query_string) do
     <<~GQL
       mutation(
         $amount: String!,
         $poolName: String!,
       ) {
-        createStakeOrder(input: {
+        createStakeRemoveOrder(input: {
           order: {
             amount: $amount,
             poolName: $poolName,
@@ -37,12 +37,12 @@ RSpec.describe(Mutations::CreateStakeOrder, type: :mutation) do
       user = create(
         :user,
         balances: [
-          build(:balance, currency: currency, amount: 1.0034),
+          build(:balance, currency: currency, amount: 0),
         ]
       )
 
       variables = {
-        "amount": "0.80",
+        "amount": "200.80",
         "poolName": "CAKE/BNB",
         "status": "PROCESSING",
       }
@@ -57,33 +57,33 @@ RSpec.describe(Mutations::CreateStakeOrder, type: :mutation) do
 
       expect(result).to(eq({
         "data" => {
-          "createStakeOrder" => {
+          "createStakeRemoveOrder" => {
             "errors" => nil,
             "order" => {
               "status" => "PROCESSING",
-              "amount" => "0.8",
+              "amount" => "-200.8",
               "poolName" => "CAKE/BNB",
             },
           },
         },
       }))
-
-      expect(user.balances.first.reload.amount.to_s).to(eq("0.2034"))
     end
   end
 
-  context "when the user does not have enough balance" do
-    it "returns withdrawl error" do
+  context "when it repeats the mutation with a request in `processing`" do
+    it "update amount from the order" do
       currency = create(:currency)
       user = create(
         :user,
         balances: [
-          build(:balance, currency: currency, amount: 0.0034),
+          build(:balance, currency: currency, amount: 0),
         ]
       )
 
+      create(:stake_order, amount: -200.8, user: user, pool_name: "CAKE/BNB", currency: currency)
+
       variables = {
-        "amount": "0.80",
+        "amount": "200.80",
         "poolName": "CAKE/BNB",
       }
 
@@ -97,19 +97,16 @@ RSpec.describe(Mutations::CreateStakeOrder, type: :mutation) do
 
       expect(result).to(eq({
         "data" => {
-          "createStakeOrder" => {
-            "errors" => [{
-              "fullMessages" => ["Quantia saldo insuficiente"],
-              "fieldName" => "amount",
-              "messages" => ["saldo insuficiente"],
-              "path" => ["attributes", "amount"],
-            }],
-            "order" => nil,
+          "createStakeRemoveOrder" => {
+            "errors" => nil,
+            "order" => {
+              "status" => "PROCESSING",
+              "amount" => "-401.6",
+              "poolName" => "CAKE/BNB",
+            },
           },
         },
       }))
-
-      expect(user.balances.first.reload.amount.to_s).to(eq("0.0034"))
     end
   end
 end

@@ -10,19 +10,9 @@ export const commitCreateStakeOrderMutation = (
 ) => {
   return commitMutation(environment, {
     mutation: graphql`
-      mutation createStakeOrderMutation(
-        $currencyId: ID!
-        $poolName: String!
-        $amount: String!
-      ) {
+      mutation createStakeOrderMutation($poolName: String!, $amount: String!) {
         createStakeOrder(
-          input: {
-            order: {
-              currencyId: $currencyId
-              poolName: $poolName
-              amount: $amount
-            }
-          }
+          input: { order: { poolName: $poolName, amount: $amount } }
         ) {
           order {
             id
@@ -30,7 +20,7 @@ export const commitCreateStakeOrderMutation = (
         }
       }
     `,
-    variables: { ...variables },
+    variables,
     onCompleted: (_response) => {
       window.location.reload();
     },
