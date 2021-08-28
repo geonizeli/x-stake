@@ -1,7 +1,7 @@
 import type { ChangeEvent } from "react";
 import React from "react";
 
-export type Props = React.DetailedHTMLProps<
+type Props = React.DetailedHTMLProps<
   React.InputHTMLAttributes<HTMLInputElement>,
   HTMLInputElement
 >;

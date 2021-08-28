@@ -3,9 +3,8 @@ import type { ChangeEvent, FC } from "react";
 import React, { useState } from "react";
 import { useRelayEnvironment } from "react-relay";
 
-import { Modal } from "../../../../components";
+import { Button, Modal, Input } from "../../../../components";
 import { commitCreateStakeRemoveOrderMutation } from "./commitCreateStakeRemoveOrder";
-import { Input } from "../../../../components/Input/Input";
 
 type RemoveStakeModal = {
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
@@ -86,13 +85,9 @@ export const RemoveStakeModal: FC<RemoveStakeModal> = ({
         {avaliableCake.isEqualTo(0) && (
           <span className="text-red-500 mb-1">Você não possuí saldo.</span>
         )}
-        <button
-          className="cursor-pointer py-2 px-4 disabled:opacity-50 disabled:cursor-default bg-red-600 hover:bg-red-700 focus:ring-red-500 focus:ring-offset-red-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg"
-          disabled={!stakeAvaliable}
-          type="submit"
-        >
+        <Button variant="dangeour" disabled={!stakeAvaliable} type="submit">
           Remover Stake
-        </button>
+        </Button>
       </form>
     </Modal>
   );

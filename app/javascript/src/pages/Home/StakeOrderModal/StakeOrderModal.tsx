@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { BigNumber } from "bignumber.js";
 import { useRelayEnvironment } from "react-relay";
 
-import { Modal } from "../../../components";
+import { Button, Modal } from "../../../components";
 import { commitCreateStakeOrderMutation } from "./createStakeOrder";
 import { Input } from "../../../components/Input/Input";
 
@@ -86,13 +86,9 @@ export const StakeOrderModal: FC<Props> = ({ poolName, balance }) => {
           {avaliableCake.isEqualTo(0) && (
             <span className="text-red-500 mb-1">Você não possuí saldo.</span>
           )}
-          <button
-            className="cursor-pointer py-2 px-4 disabled:opacity-50 disabled:cursor-default bg-blue-600 hover:bg-blue-700 focus:ring-blue-500 focus:ring-offset-blue-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg"
-            disabled={!stakeAvaliable}
-            type="submit"
-          >
+          <Button disabled={!stakeAvaliable} type="submit">
             Fazer Stake
-          </button>
+          </Button>
         </form>
       </Modal>
     </div>
