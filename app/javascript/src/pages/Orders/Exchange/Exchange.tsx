@@ -12,12 +12,7 @@ export const Exchange = () => {
     graphql`
       query ExchangeQuery {
         currentUser {
-          fiatBalance {
-            ...ExchangePanel_fiatBalances
-          }
-          balance {
-            ...ExchangePanel_balances
-          }
+          ...ExchangePanel_user
         }
         buyCryptoOrders {
           ...ExchangeHistory_buyCryptoOrders
@@ -32,13 +27,7 @@ export const Exchange = () => {
 
   return (
     <div className="w-full">
-      {data.currentUser && (
-        <ExchangePanel
-          balancesRefs={data.currentUser.balance}
-          fiatBalancesRefs={data.currentUser.fiatBalance}
-        />
-      )}
-
+      <ExchangePanel userRef={data.currentUser} />
       <ExchangeHistory
         sellCryptoOrdersRefs={data.sellCryptoOrders}
         buyCryptoOrdersRefs={data.buyCryptoOrders}

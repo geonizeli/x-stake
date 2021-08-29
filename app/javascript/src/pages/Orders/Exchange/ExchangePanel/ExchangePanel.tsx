@@ -5,13 +5,10 @@ import { useFragment, useRelayEnvironment } from "react-relay";
 import { BigNumber } from "bignumber.js";
 import cx from "classnames";
 
-import { useCurrentUser } from "../../../../contexts/UserProvider";
-import { Unauthenticated } from "../../../../messages/Unauthenticated";
-import type { ExchangePanel_fiatBalances$key } from "./__generated__/ExchangePanel_fiatBalances.graphql";
-import type { ExchangePanel_balances$key } from "./__generated__/ExchangePanel_balances.graphql";
 import { commitCreateSellCryptoOrderMutation } from "./createSellCryptoOrder";
 import { commitCreateBuyCryptoOrderMutation } from "./createBuyCryptoOrder";
 import { Input, Button } from "../../../../components";
+import type { ExchangePanel_user$key } from "./__generated__/ExchangePanel_user.graphql";
 
 const tabBaseStyles =
   "w-full text-base font-bold text-black px-4 py-2 focus:ring-blue-500";
@@ -20,43 +17,35 @@ const selectedTabStyles =
   "bg-blue-600 hover:bg-blue-700 rounded-l-frounded-full text-white";
 
 type Props = {
-  fiatBalancesRefs: ExchangePanel_fiatBalances$key;
-  balancesRefs: ExchangePanel_balances$key;
+  userRef: ExchangePanel_user$key | null;
 };
 
-export const ExchangePanel: FC<Props> = ({
-  fiatBalancesRefs,
-  balancesRefs,
-}) => {
-  const { isAuthenticated } = useCurrentUser();
+export const ExchangePanel: FC<Props> = ({ userRef }) => {
   const environment = useRelayEnvironment();
   const [exchangeOption, setExchangeOption] = useState<"BUY" | "SELL">("BUY");
   const [cryptoDock, setCryptoDock] = useState<string>("0");
   const [fiatDock, setFiatDock] = useState<string>("0.00");
 
-  const fiatBalance = useFragment<ExchangePanel_fiatBalances$key>(
+  const user = useFragment<ExchangePanel_user$key>(
     graphql`
-      fragment ExchangePanel_fiatBalances on FiatBalance {
-        amountCents
+      fragment ExchangePanel_user on User {
+        fiatBalance {
+          amountCents
+        }
+        balance {
+          amount
+        }
       }
     `,
-    fiatBalancesRefs
+    userRef
   );
 
-  const balance = useFragment<ExchangePanel_balances$key>(
-    graphql`
-      fragment ExchangePanel_balances on Balance {
-        amount
-      }
-    `,
-    balancesRefs
-  );
+  const balanceAmount = user?.balance?.amount ?? 0;
+  const fiatBalanceAmount = user?.fiatBalance.amountCents ?? 0;
 
-  if (!isAuthenticated) return <Unauthenticated />;
-
-  const avaliableCrypto = new BigNumber(balance.amount);
+  const avaliableCrypto = new BigNumber(balanceAmount);
   const avaliableFiat = (
-    fiatBalance.amountCents ? fiatBalance.amountCents / 100 : 0
+    fiatBalanceAmount ? fiatBalanceAmount / 100 : 0
   ).toFixed(2);
 
   const handleSellTabClick = () => {
@@ -154,7 +143,7 @@ export const ExchangePanel: FC<Props> = ({
       >
         <span className="mb-2">
           {exchangeOption === "SELL" ? "CAKE" : "BRL"} disponível:{" "}
-          {exchangeOption === "SELL" ? balance.amount : avaliableFiat}
+          {exchangeOption === "SELL" ? balanceAmount : avaliableFiat}
         </span>
         <div className="flex flex-row">
           {exchangeOption === "BUY" ? (
