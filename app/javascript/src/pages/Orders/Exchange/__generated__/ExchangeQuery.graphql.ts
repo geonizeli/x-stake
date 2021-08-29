@@ -7,12 +7,7 @@ import { FragmentRefs } from "relay-runtime";
 export type ExchangeQueryVariables = {};
 export type ExchangeQueryResponse = {
     readonly currentUser: {
-        readonly fiatBalance: {
-            readonly " $fragmentRefs": FragmentRefs<"ExchangePanel_fiatBalances">;
-        };
-        readonly balance: {
-            readonly " $fragmentRefs": FragmentRefs<"ExchangePanel_balances">;
-        };
+        readonly " $fragmentRefs": FragmentRefs<"ExchangePanel_user">;
     } | null;
     readonly buyCryptoOrders: {
         readonly " $fragmentRefs": FragmentRefs<"ExchangeHistory_buyCryptoOrders">;
@@ -31,14 +26,7 @@ export type ExchangeQuery = {
 /*
 query ExchangeQuery {
   currentUser {
-    fiatBalance {
-      ...ExchangePanel_fiatBalances
-      id
-    }
-    balance {
-      ...ExchangePanel_balances
-      id
-    }
+    ...ExchangePanel_user
     id
   }
   buyCryptoOrders {
@@ -75,12 +63,15 @@ fragment ExchangeHistory_sellCryptoOrders on SellCryptoOrderConnection {
   }
 }
 
-fragment ExchangePanel_balances on Balance {
-  amount
-}
-
-fragment ExchangePanel_fiatBalances on FiatBalance {
-  amountCents
+fragment ExchangePanel_user on User {
+  fiatBalance {
+    amountCents
+    id
+  }
+  balance {
+    amount
+    id
+  }
 }
 */
 
@@ -129,36 +120,9 @@ return {
         "plural": false,
         "selections": [
           {
-            "alias": null,
             "args": null,
-            "concreteType": "FiatBalance",
-            "kind": "LinkedField",
-            "name": "fiatBalance",
-            "plural": false,
-            "selections": [
-              {
-                "args": null,
-                "kind": "FragmentSpread",
-                "name": "ExchangePanel_fiatBalances"
-              }
-            ],
-            "storageKey": null
-          },
-          {
-            "alias": null,
-            "args": null,
-            "concreteType": "Balance",
-            "kind": "LinkedField",
-            "name": "balance",
-            "plural": false,
-            "selections": [
-              {
-                "args": null,
-                "kind": "FragmentSpread",
-                "name": "ExchangePanel_balances"
-              }
-            ],
-            "storageKey": null
+            "kind": "FragmentSpread",
+            "name": "ExchangePanel_user"
           }
         ],
         "storageKey": null
@@ -360,14 +324,14 @@ return {
     ]
   },
   "params": {
-    "cacheID": "3312f3d7aa6ac4b7051376b61f10c957",
+    "cacheID": "fdc958a4c6802df3461f7a625f94729c",
     "id": null,
     "metadata": {},
     "name": "ExchangeQuery",
     "operationKind": "query",
-    "text": "query ExchangeQuery {\n  currentUser {\n    fiatBalance {\n      ...ExchangePanel_fiatBalances\n      id\n    }\n    balance {\n      ...ExchangePanel_balances\n      id\n    }\n    id\n  }\n  buyCryptoOrders {\n    ...ExchangeHistory_buyCryptoOrders\n  }\n  sellCryptoOrders {\n    ...ExchangeHistory_sellCryptoOrders\n  }\n}\n\nfragment ExchangeHistory_buyCryptoOrders on BuyCryptoOrderConnection {\n  edges {\n    node {\n      id\n      status\n      createdAt\n      paidAmountCents\n      receivedAmount\n      __typename\n    }\n  }\n}\n\nfragment ExchangeHistory_sellCryptoOrders on SellCryptoOrderConnection {\n  edges {\n    node {\n      id\n      status\n      paidAmount\n      receivedAmountCents\n      createdAt\n      __typename\n    }\n  }\n}\n\nfragment ExchangePanel_balances on Balance {\n  amount\n}\n\nfragment ExchangePanel_fiatBalances on FiatBalance {\n  amountCents\n}\n"
+    "text": "query ExchangeQuery {\n  currentUser {\n    ...ExchangePanel_user\n    id\n  }\n  buyCryptoOrders {\n    ...ExchangeHistory_buyCryptoOrders\n  }\n  sellCryptoOrders {\n    ...ExchangeHistory_sellCryptoOrders\n  }\n}\n\nfragment ExchangeHistory_buyCryptoOrders on BuyCryptoOrderConnection {\n  edges {\n    node {\n      id\n      status\n      createdAt\n      paidAmountCents\n      receivedAmount\n      __typename\n    }\n  }\n}\n\nfragment ExchangeHistory_sellCryptoOrders on SellCryptoOrderConnection {\n  edges {\n    node {\n      id\n      status\n      paidAmount\n      receivedAmountCents\n      createdAt\n      __typename\n    }\n  }\n}\n\nfragment ExchangePanel_user on User {\n  fiatBalance {\n    amountCents\n    id\n  }\n  balance {\n    amount\n    id\n  }\n}\n"
   }
 };
 })();
-(node as any).hash = '85296680bd82d278a1f5d485b8b101f3';
+(node as any).hash = '88aea5fd6077cc7a1b4fe6369c34a4ec';
 export default node;
