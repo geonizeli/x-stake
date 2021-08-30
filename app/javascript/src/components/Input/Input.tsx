@@ -27,4 +27,6 @@ const Component: React.ForwardRefRenderFunction<unknown, Props> = (props) => {
   );
 };
 
-export const Input = React.forwardRef<unknown, Props>(Component);
+export const Input = React.forwardRef<HTMLInputElement, Props>((props, ref) => {
+  return <Component {...props} ref={ref} />;
+});

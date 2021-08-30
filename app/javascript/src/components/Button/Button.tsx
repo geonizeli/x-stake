@@ -39,4 +39,8 @@ const Component: React.ForwardRefRenderFunction<unknown, Props> = (props) => {
   );
 };
 
-export const Button = React.forwardRef<unknown, Props>(Component);
+export const Button = React.forwardRef<HTMLButtonElement, Props>(
+  (props, ref) => {
+    return <Component {...props} ref={ref} />;
+  }
+);
