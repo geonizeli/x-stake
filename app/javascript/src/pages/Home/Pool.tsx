@@ -7,9 +7,6 @@ import { getApr } from "../../utils/apr";
 import { getPriceInBusd } from "../../utils/getPrice";
 import { getTotalStaked } from "../../utils/getTotalStaked";
 import { StakeOrderModal } from "./StakeOrderModal";
-import { ethers } from "ethers";
-import sousChef from "../../abi/sousChef.json"
-import { getEndBlock } from "../../utils/getEndBlock";
 
 type PoolProps = {
   pool: PoolConfig;
@@ -32,14 +29,6 @@ export const Pool: FC<PoolProps> = ({ pool, balance }) => {
 
   React.useEffect(() => {
     (async () => {
-      
-      const chef = new ethers.Contract(
-        pool.contractAddress[56],
-        new ethers.utils.Interface(sousChef),
-        provider
-      );
-      
-
       const stakingPrice = await getPriceInBusd(router, pool.stakingToken);
       const earningPrice = await getPriceInBusd(router, pool.earningToken);
 
