@@ -11,7 +11,7 @@ class FiatBalanceDashboard < Administrate::BaseDashboard
   ATTRIBUTE_TYPES = {
     id: Field::Number,
     user: Field::BelongsTo,
-    amount_formatted: Field::String,
+    amount_formatted: Field::String.with_options(searchable: false),
     amount_cents: Field::String,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
