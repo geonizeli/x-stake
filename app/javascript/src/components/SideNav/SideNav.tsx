@@ -1,6 +1,7 @@
 import * as React from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { Transition } from "@headlessui/react";
+import cs from "classnames";
 
 import { useApp } from "../../contexts/AppProvider";
 
@@ -34,6 +35,7 @@ const MenuItems: MenuItem[] = [
 
 export const SideNav = () => {
   const { sideNavExpanded, setSideNavExpanded } = useApp();
+  const location = useLocation();
 
   const handleCloseSideNav = () => {
     setSideNavExpanded(false);
@@ -74,7 +76,10 @@ export const SideNav = () => {
             <Link to={item.path} key={item.label}>
               <li
                 key={item.label}
-                className="text-xl p-4 px-8 hover:bg-gray-100 cursor-pointer"
+                className={cs(
+                  "text-xl p-4 px-8 hover:bg-gray-100 cursor-pointer",
+                  location.pathname === item.path ? "bg-gray-200" : ""
+                )}
               >
                 {item.label}
               </li>
