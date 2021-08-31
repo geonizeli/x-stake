@@ -2635,3 +2635,5 @@ export const pools: PoolConfig[] = [
     isFinished: true,
   },
 ];
+
+export const unfinishedPools = pools.filter((pool) => !pool.isFinished);
