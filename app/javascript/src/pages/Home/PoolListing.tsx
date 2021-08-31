@@ -69,9 +69,16 @@ export const PoolListing = () => {
     })();
   }, [provider]);
 
+  if (isLoadingPools) {
+    return (
+      <div className="w-full grid place-items-center mt-12">
+        <Spinner />
+      </div>
+    );
+  }
+
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 place-items-center w-full gap-8 py-4 -mt-16 overflow-x-hidden">
-      {isLoadingPools && <Spinner />}
       {validPools
         .sort((a, b) => (a.sortOrder ?? 0) - (b.sortOrder ?? 0))
         .map((pool) => (

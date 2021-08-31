@@ -2,20 +2,18 @@ import type { FC } from "react";
 import React from "react";
 import cs from "classnames";
 
+import spinner from "../../assets/vectors/spinner.svg";
+
 type Props = {
-  sizeClasses?: string;
+  width?: string;
 };
 
-export const Spinner: FC<Props> = ({ sizeClasses }) => {
+export const Spinner: FC<Props> = ({ width }) => {
   return (
-    <div className="absolute right-1/2 bottom-1/2  transform translate-x-1/2 translate-y-1/2 ">
-      <div
-        style={{ borderTopColor: "transparent" }}
-        className={cs(
-          "border-solid animate-spin  rounded-full border-gray-300 border-8",
-          sizeClasses ?? "h-20 w-20"
-        )}
-      />
-    </div>
+    <img
+      className={cs("", width ? `h-${width} w-${width}` : "h-20 w-20")}
+      alt="loading spinner"
+      src={spinner}
+    />
   );
 };
