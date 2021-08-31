@@ -12,10 +12,16 @@ import { getEndBlock } from "../../utils/getEndBlock";
 import type { PoolListingQuery } from "./__generated__/PoolListingQuery.graphql";
 import { notEmpty } from "../../utils/notEmpty";
 import { Spinner } from "../../components";
+import { usePersistedState } from "../../hooks/usePersistedState";
 
 export const PoolListing = () => {
   const { provider } = useBsc();
-  const [validPools, setValidPools] = useState<PoolConfig[]>([]);
+  const [validPools, setValidPools] = usePersistedState<PoolConfig[]>(
+    "validPools",
+    [],
+    1200000 // 20 minutes
+  );
+
   const [isLoadingPools, setIsLoadingPools] = useState(true);
 
   const { currentUser } = useLazyLoadQuery<PoolListingQuery>(
@@ -35,6 +41,8 @@ export const PoolListing = () => {
 
   useEffect(() => {
     (async () => {
+      if (validPools.length) return;
+
       const blockNumber = await provider.getBlockNumber();
 
       const getChef = (pool: PoolConfig) => {
@@ -67,9 +75,9 @@ export const PoolListing = () => {
         setValidPools(pools.filter(notEmpty));
       });
     })();
-  }, [provider]);
+  }, [provider, setValidPools, validPools.length]);
 
-  if (isLoadingPools) {
+  if (isLoadingPools && !validPools.length) {
     return (
       <div className="w-full grid place-items-center mt-12">
         <Spinner />
