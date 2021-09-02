@@ -6,6 +6,7 @@ import { useRelayEnvironment } from "react-relay";
 import { Button, Modal } from "../../../components";
 import { commitCreateStakeOrderMutation } from "./createStakeOrder";
 import { Input } from "../../../components/Input/Input";
+import { useCurrentUser } from "../../../contexts/UserProvider";
 
 type Props = {
   poolName: string;
@@ -14,6 +15,7 @@ type Props = {
 
 export const StakeOrderModal: FC<Props> = ({ poolName, balance }) => {
   const environment = useRelayEnvironment();
+  const { isAuthenticated } = useCurrentUser();
   const [isOpen, setIsOpen] = useState(false);
   const [investAmountInput, setInvestAmountInput] = useState("0");
 
@@ -21,7 +23,11 @@ export const StakeOrderModal: FC<Props> = ({ poolName, balance }) => {
   const investAmount = new BigNumber(investAmountInput);
 
   const handleButtonClick = () => {
-    setIsOpen((prevState) => !prevState);
+    if (!isAuthenticated) {
+      window.location.href = "/users/sign_in";
+    } else {
+      setIsOpen((prevState) => !prevState);
+    }
   };
 
   const onSubmit = () => {
@@ -59,7 +65,7 @@ export const StakeOrderModal: FC<Props> = ({ poolName, balance }) => {
         type="button"
         className="py-2 px-4 text-blue-600 border-2 border-blue-600 hover:bg-blue-100 w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md rounded-lg "
       >
-        Stake
+        Investir
       </button>
       <Modal
         isOpen={isOpen}
@@ -87,7 +93,7 @@ export const StakeOrderModal: FC<Props> = ({ poolName, balance }) => {
             <span className="text-red-500 mb-1">Você não possuí saldo.</span>
           )}
           <Button disabled={!stakeAvaliable} type="submit">
-            Fazer Stake
+            Investir
           </Button>
         </form>
       </Modal>

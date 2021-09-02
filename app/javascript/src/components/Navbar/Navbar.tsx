@@ -1,5 +1,6 @@
 import * as React from "react";
 import { MenuIcon } from "@heroicons/react/outline";
+import cs from "classnames";
 
 import XStakeLogo from "../../assets/images/logo.png";
 import { useApp } from "../../contexts/AppProvider";
@@ -9,12 +10,11 @@ const linkStyles =
   "cursor-pointer bg-transparent hover:bg-gray-100 h-full px-4 font-bold flex items-center";
 
 export const Navbar = () => {
+  const { isAuthenticated } = useCurrentUser();
   const { setSideNavExpanded } = useApp();
   const handleExpandSideNav = () => {
     setSideNavExpanded((prevState) => !prevState);
   };
-
-  const { isAuthenticated } = useCurrentUser();
 
   const csrfToken =
     document
@@ -24,7 +24,10 @@ export const Navbar = () => {
   return (
     <nav className="w-full h-16 flex bg-white shadow items-center px-4 space-x-2 z-50">
       <button
-        className="w-12 mr-2 md:w-10 h-12 md:h-10 xl:hidden fixed md:relative bottom-8 md:bottom-auto right-8 md:right-auto bg-white rounded-full p-3 md:p-0 shadow md:shadow-none"
+        className={cs(
+          "w-12 mr-2 md:w-10 h-12 md:h-10 xl:hidden fixed md:relative bottom-8 md:bottom-auto right-8 md:right-auto bg-white rounded-full p-3 md:p-0 shadow md:shadow-none",
+          isAuthenticated ? "" : "hidden"
+        )}
         onClick={() => handleExpandSideNav()}
       >
         <MenuIcon />
