@@ -25,6 +25,7 @@ type BuyCryptoOrderConnection {
   Information to aid in pagination.
   """
   pageInfo: PageInfo!
+  totalCount: Int!
 }
 
 """
@@ -205,6 +206,7 @@ type DepositOrder implements Node {
   paidAmountCents: Int!
   receivedAmountCents: Int!
   status: ProcessStatus!
+  transactionId: String!
   updatedAt: ISO8601DateTime!
 }
 
@@ -221,6 +223,7 @@ type DepositOrderConnection {
   Information to aid in pagination.
   """
   pageInfo: PageInfo!
+  totalCount: Int!
 }
 
 """
@@ -478,6 +481,7 @@ type SellCryptoOrderConnection {
   Information to aid in pagination.
   """
   pageInfo: PageInfo!
+  totalCount: Int!
 }
 
 """
@@ -517,6 +521,7 @@ type StakeOrderConnection {
   Information to aid in pagination.
   """
   pageInfo: PageInfo!
+  totalCount: Int!
 }
 
 """

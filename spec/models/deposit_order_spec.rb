@@ -10,6 +10,7 @@
 #  status                :string           not null
 #  created_at            :datetime         not null
 #  updated_at            :datetime         not null
+#  transaction_id        :uuid             not null
 #  user_id               :bigint           not null
 #
 # Indexes

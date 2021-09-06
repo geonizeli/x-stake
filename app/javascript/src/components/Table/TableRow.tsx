@@ -3,11 +3,19 @@ import React from "react";
 
 type Props = {
   items?: Array<ReactNode | string>;
+  id?: string;
+  onClick?: (itemId: string) => void;
 };
 
-export const TableRow: FC<Props> = ({ items }) => {
+export const TableRow: FC<Props> = ({ items, id, onClick }) => {
+  const handleClick = () => {
+    if (onClick && id) {
+      onClick(id);
+    }
+  };
+
   return (
-    <tr>
+    <tr onClick={handleClick}>
       {items?.map((item, index) => (
         <td
           key={index}
