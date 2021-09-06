@@ -32,9 +32,13 @@ module Types
       ransack(scope, filter)
     end
 
-    field :deposit_orders, DepositOrderType.connection_type, null: false
-    def deposit_orders
-      Pundit.policy_scope(current_user, DepositOrder)
+    field :deposit_orders, DepositOrderType.connection_type, null: false do
+      argument :filter, Inputs::DepositOrderFilterInput, required: false
+    end
+
+    def deposit_orders(filter: nil)
+      scope = Pundit.policy_scope(current_user, DepositOrder)
+      scope.where(status: filter.status) if filter&.status
     end
   end
 end

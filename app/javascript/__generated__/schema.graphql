@@ -211,6 +211,10 @@ type DepositOrderEdge {
   node: DepositOrder!
 }
 
+input DepositOrderFilterInput {
+  status: [ProcessStatus!]
+}
+
 type FiatBalance implements Node {
   amountCents: Int!
   amountCurrency: String!
@@ -335,6 +339,7 @@ type Query {
     Returns the elements in the list that come before the specified cursor.
     """
     before: String
+    filter: DepositOrderFilterInput
 
     """
     Returns the first _n_ elements from the list.
