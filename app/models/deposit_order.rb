@@ -24,9 +24,20 @@
 class DepositOrder < ApplicationRecord
   include Processable
   include Trackable
+  include Notifiable
 
   belongs_to :user
 
   monetize :paid_amount_cents
   monetize :received_amount_cents
+
+  private
+
+  def notification_message
+    "
+    💸 New deposit order! 💸\n
+    user: #{user.email} \n
+    amount: #{paid_amount.format}
+    "
+  end
 end
