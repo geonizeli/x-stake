@@ -3,6 +3,7 @@ import type { FC } from "react";
 import React from "react";
 import { useFragment } from "react-relay";
 
+import { Table } from "../../../../components";
 import { Messages } from "../../../../messages";
 import { centsToUnit } from "../../../../utils/fiatMoney";
 import type { CryptoExchangeOrderProps } from "./components/CryptoExchangeOrder";
@@ -119,41 +120,13 @@ export const ExchangeHistory: FC<Props> = ({
       <div className="py-8">
         <div className="-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto">
           <div className="inline-block min-w-full shadow rounded-lg overflow-hidden">
-            <table className="min-w-full leading-normal">
-              <thead>
-                <tr>
-                  <th
-                    scope="col"
-                    className="px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-normal"
-                  >
-                    Valor pago
-                  </th>
-                  <th
-                    scope="col"
-                    className="px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-normal"
-                  >
-                    Valor recebido
-                  </th>
-                  <th
-                    scope="col"
-                    className="px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-normal"
-                  >
-                    Criado em
-                  </th>
-                  <th
-                    scope="col"
-                    className="px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-normal"
-                  >
-                    Status
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                {orderRows.map((order) => {
-                  return <CryptoExchangeOrder key={order?.id} {...order} />;
-                })}
-              </tbody>
-            </table>
+            <Table
+              columns={["Valor pago", "Valor recebido", "Criado em", "Status"]}
+            >
+              {orderRows.map((order) => {
+                return <CryptoExchangeOrder key={order?.id} {...order} />;
+              })}
+            </Table>
           </div>
         </div>
       </div>
