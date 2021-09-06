@@ -29,6 +29,7 @@ export const Form: FC<Props> = ({ className, submitCallback }) => {
   };
 
   const amount = amountInput ?? 0;
+  const fees = amount * 0.05;
 
   return (
     <form onSubmit={onSubmit} className={className}>
@@ -36,8 +37,8 @@ export const Form: FC<Props> = ({ className, submitCallback }) => {
         <p className="text-gray-900 mb-1">Quantia em BRL</p>
         <Input value={amountInput} onChange={handleAmountChange} />
       </div>
-      <div className="flex">Você recebe: {amount + amount * 0.05} BRL</div>
-      <div className="flex">Taxa de transação: {amount * 0.05} BRL</div>
+      <div className="flex">Você recebe: {amount - fees} BRL</div>
+      <div className="flex">Taxa de transação: {fees} BRL</div>
       <Button className="mt-2" type="submit" disabled={!amountInput}>
         Confirmar
       </Button>
