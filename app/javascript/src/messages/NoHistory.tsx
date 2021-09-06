@@ -7,7 +7,7 @@ type Props = {
   historyName: string;
 };
 
-export const NoHistory: FC<Props> = ({ historyName }) => {
+export const NoHistory: FC<Props> = ({ historyName, children }) => {
   return (
     <section className="text-gray-600 body-font w-full">
       <div className="container mx-auto flex px-5 py-24 items-center justify-center flex-col">
@@ -21,6 +21,7 @@ export const NoHistory: FC<Props> = ({ historyName }) => {
             Você não possui históricos de {historyName}
           </h1>
         </div>
+        {children}
       </div>
     </section>
   );

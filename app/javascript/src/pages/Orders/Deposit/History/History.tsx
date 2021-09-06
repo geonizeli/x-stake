@@ -1,6 +1,7 @@
+/* eslint-disable relay/must-colocate-fragment-spreads */
 import { graphql } from "babel-plugin-relay/macro";
 import type { FC } from "react";
-import React, { useState } from "react";
+import React from "react";
 import cs from "classnames";
 import { useFragment } from "react-relay";
 
@@ -8,14 +9,14 @@ import { Table, TableRow } from "../../../../components";
 import { getStatusTextAndColors } from "../../utils/processStatus";
 import { centsToUnit } from "../../../../utils/fiatMoney";
 import type { History_depositOrders$key } from "./__generated__/History_depositOrders.graphql";
-import { Show } from "../Show";
+import { useDepositContext } from "../DepositProvider";
 
 type Props = {
   ordersRef: History_depositOrders$key;
 };
 
 export const History: FC<Props> = ({ ordersRef }) => {
-  const [openOrderId, setOpenOrderId] = useState<string | null>(null);
+  const { setOpenOrder } = useDepositContext();
 
   const { edges } = useFragment<History_depositOrders$key>(
     graphql`
@@ -35,12 +36,8 @@ export const History: FC<Props> = ({ ordersRef }) => {
     ordersRef
   );
 
-  const openOrder = edges.find(({ node }) => node.id === openOrderId);
-  const onClose = () => setOpenOrderId(null);
-
   return (
-    <>
-      {openOrder && <Show orderRef={openOrder.node} onClose={onClose} />}
+    <div className="inline-block min-w-full shadow rounded-lg overflow-hidden">
       <Table
         columns={["Montante pago", "Montante recebido", "Criado em", "Status"]}
       >
@@ -70,7 +67,7 @@ export const History: FC<Props> = ({ ordersRef }) => {
           return (
             <TableRow
               key={node.id}
-              onClick={(orderId) => setOpenOrderId(orderId)}
+              onClick={() => setOpenOrder(node)}
               id={node.id}
               items={[
                 `${centsToUnit(node.paidAmountCents)} BRL`,
@@ -82,6 +79,6 @@ export const History: FC<Props> = ({ ordersRef }) => {
           );
         })}
       </Table>
-    </>
+    </div>
   );
 };

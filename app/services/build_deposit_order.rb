@@ -4,7 +4,7 @@ class BuildDepositOrder
 
   attr_reader :paid_amount_cents, :user_id
 
-  def initilize(paid_amount_cents:, user_id:)
+  def initialize(paid_amount_cents:, user_id:)
     @paid_amount_cents = paid_amount_cents
     @user_id = user_id
   end
