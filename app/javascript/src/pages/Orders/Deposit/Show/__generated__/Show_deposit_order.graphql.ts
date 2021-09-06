@@ -6,6 +6,7 @@ import { ReaderFragment } from "relay-runtime";
 import { FragmentRefs } from "relay-runtime";
 export type ProcessStatus = "CANCELED" | "COMPLETED" | "PROCESSING" | "%future added value";
 export type Show_deposit_order = {
+    readonly id: string;
     readonly transactionId: string;
     readonly paidAmountCents: number;
     readonly receivedAmountCents: number;
@@ -27,6 +28,13 @@ const node: ReaderFragment = {
   "metadata": null,
   "name": "Show_deposit_order",
   "selections": [
+    {
+      "alias": null,
+      "args": null,
+      "kind": "ScalarField",
+      "name": "id",
+      "storageKey": null
+    },
     {
       "alias": null,
       "args": null,
@@ -66,5 +74,5 @@ const node: ReaderFragment = {
   "type": "DepositOrder",
   "abstractKey": null
 };
-(node as any).hash = '73e84cef63c17faa3087f19ba2c73e69';
+(node as any).hash = '7bda3158834b0532ddabf9da61984049';
 export default node;

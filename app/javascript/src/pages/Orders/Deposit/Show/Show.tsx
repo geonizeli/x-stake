@@ -9,16 +9,20 @@ import { usePixQr } from "./hooks/usePixQr";
 import type { Show_deposit_order$key } from "./__generated__/Show_deposit_order.graphql";
 import { centsToUnit } from "../../../../utils/fiatMoney";
 import { getStatusTextAndColors } from "../../utils/processStatus";
+import { useDepositContext } from "../DepositProvider";
 
 type Props = {
   orderRef: Show_deposit_order$key;
   onClose: () => void;
 };
 
-export const Show: FC<Props> = ({ orderRef, onClose }) => {
+const ShowModal: FC<Props> = ({ orderRef, onClose }) => {
+  const { setFetchKey } = useDepositContext();
+
   const order = useFragment<Show_deposit_order$key>(
     graphql`
       fragment Show_deposit_order on DepositOrder {
+        id
         transactionId
         paidAmountCents
         receivedAmountCents
@@ -36,6 +40,7 @@ export const Show: FC<Props> = ({ orderRef, onClose }) => {
 
   const handleClose = (_value: boolean) => {
     onClose();
+    setFetchKey(order.id);
   };
 
   const handleCopy = () => {
@@ -91,4 +96,16 @@ export const Show: FC<Props> = ({ orderRef, onClose }) => {
       </div>
     </Modal>
   );
+};
+
+export const Show: FC = () => {
+  const { setOpenOrder, openOrder } = useDepositContext();
+
+  if (!openOrder) return null;
+
+  const handleClose = () => {
+    setOpenOrder(null);
+  };
+
+  return <ShowModal orderRef={openOrder} onClose={handleClose} />;
 };

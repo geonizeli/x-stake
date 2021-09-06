@@ -40,6 +40,7 @@ fragment History_depositOrders on DepositOrderConnection {
 }
 
 fragment Show_deposit_order on DepositOrder {
+  id
   transactionId
   paidAmountCents
   receivedAmountCents
@@ -169,12 +170,12 @@ return {
     ]
   },
   "params": {
-    "cacheID": "99f3fbbd023ef8a38b0490275cb58aa6",
+    "cacheID": "c89f24bbd553272fc712f18bb6da0886",
     "id": null,
     "metadata": {},
     "name": "DepositQuery",
     "operationKind": "query",
-    "text": "query DepositQuery {\n  depositOrders {\n    totalCount\n    ...History_depositOrders\n  }\n}\n\nfragment History_depositOrders on DepositOrderConnection {\n  edges {\n    node {\n      id\n      status\n      createdAt\n      paidAmountCents\n      receivedAmountCents\n      ...Show_deposit_order\n    }\n  }\n}\n\nfragment Show_deposit_order on DepositOrder {\n  transactionId\n  paidAmountCents\n  receivedAmountCents\n  status\n  createdAt\n}\n"
+    "text": "query DepositQuery {\n  depositOrders {\n    totalCount\n    ...History_depositOrders\n  }\n}\n\nfragment History_depositOrders on DepositOrderConnection {\n  edges {\n    node {\n      id\n      status\n      createdAt\n      paidAmountCents\n      receivedAmountCents\n      ...Show_deposit_order\n    }\n  }\n}\n\nfragment Show_deposit_order on DepositOrder {\n  id\n  transactionId\n  paidAmountCents\n  receivedAmountCents\n  status\n  createdAt\n}\n"
   }
 };
 })();
