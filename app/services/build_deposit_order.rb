@@ -13,7 +13,7 @@ class BuildDepositOrder
     DepositOrder.new(
       user_id: user_id,
       paid_amount_cents: paid_amount_cents,
-      received_amount_cents: paid_amount_cents + (paid_amount_cents * DEPOSIT_FEE)
+      received_amount_cents: paid_amount_cents - (paid_amount_cents * DEPOSIT_FEE)
     )
   end
 end
