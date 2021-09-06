@@ -38,7 +38,10 @@ module Types
 
     def deposit_orders(filter: nil)
       scope = Pundit.policy_scope(current_user, DepositOrder)
-      scope.where(status: filter.status) if filter&.status
+
+      return scope.where(status: filter.status) if filter&.status
+
+      scope
     end
   end
 end

@@ -177,7 +177,7 @@ type DepositOrder implements Node {
   id: ID!
   paidAmountCents: Int!
   receivedAmountCents: Int!
-  status: String!
+  status: ProcessStatus!
   updatedAt: ISO8601DateTime!
 }
 

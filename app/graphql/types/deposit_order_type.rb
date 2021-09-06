@@ -7,7 +7,7 @@ module Types
     graphql_name "DepositOrder"
 
     field :id, ID, null: false
-    field :status, String, null: false
+    field :status, ProcessStatusEnum, null: false
     field :received_amount_cents, Integer, null: false
     field :paid_amount_cents, Integer, null: false
     field :created_at, GraphQL::Types::ISO8601DateTime, null: false

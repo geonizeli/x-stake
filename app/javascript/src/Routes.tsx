@@ -22,6 +22,9 @@ export const Routes: FC = () => {
       <Route exact path="/orders/stake">
         <Orders.Stake />
       </Route>
+      <Route exact path="/orders/deposit">
+        <Orders.Deposit />
+      </Route>
     </Switch>
   );
 };
