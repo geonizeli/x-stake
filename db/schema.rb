@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_28_041104) do
+ActiveRecord::Schema.define(version: 2021_09_05_234913) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -71,6 +71,16 @@ ActiveRecord::Schema.define(version: 2021_08_28_041104) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id"], name: "index_buy_crypto_orders_on_user_id"
+  end
+
+  create_table "deposit_orders", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "status", null: false
+    t.integer "received_amount_cents", default: 0, null: false
+    t.integer "paid_amount_cents", default: 0, null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_deposit_orders_on_user_id"
   end
 
   create_table "fiat_balances", force: :cascade do |t|
@@ -139,6 +149,7 @@ ActiveRecord::Schema.define(version: 2021_08_28_041104) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "balances", "users"
   add_foreign_key "buy_crypto_orders", "users"
+  add_foreign_key "deposit_orders", "users"
   add_foreign_key "fiat_balances", "users"
   add_foreign_key "sell_crypto_orders", "users"
   add_foreign_key "stake_orders", "users"

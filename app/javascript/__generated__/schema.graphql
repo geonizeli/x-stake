@@ -172,6 +172,45 @@ type CreateStakeRemoveOrderPayload {
   order: StakeOrder
 }
 
+type DepositOrder implements Node {
+  createdAt: ISO8601DateTime!
+  id: ID!
+  paidAmountCents: Int!
+  receivedAmountCents: Int!
+  status: String!
+  updatedAt: ISO8601DateTime!
+}
+
+"""
+The connection type for DepositOrder.
+"""
+type DepositOrderConnection {
+  """
+  A list of edges.
+  """
+  edges: [DepositOrderEdge!]!
+
+  """
+  Information to aid in pagination.
+  """
+  pageInfo: PageInfo!
+}
+
+"""
+An edge in a connection.
+"""
+type DepositOrderEdge {
+  """
+  A cursor for use in pagination.
+  """
+  cursor: String!
+
+  """
+  The item at the end of the edge.
+  """
+  node: DepositOrder!
+}
+
 type FiatBalance implements Node {
   amountCents: Int!
   amountCurrency: String!
@@ -286,6 +325,27 @@ type Query {
     last: Int
   ): BuyCryptoOrderConnection!
   currentUser: User
+  depositOrders(
+    """
+    Returns the elements in the list that come after the specified cursor.
+    """
+    after: String
+
+    """
+    Returns the elements in the list that come before the specified cursor.
+    """
+    before: String
+
+    """
+    Returns the first _n_ elements from the list.
+    """
+    first: Int
+
+    """
+    Returns the last _n_ elements from the list.
+    """
+    last: Int
+  ): DepositOrderConnection!
 
   """
   Fetches an object given its ID.

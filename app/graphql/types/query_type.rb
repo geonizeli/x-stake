@@ -31,5 +31,10 @@ module Types
 
       ransack(scope, filter)
     end
+
+    field :deposit_orders, DepositOrderType.connection_type, null: false
+    def deposit_orders
+      Pundit.policy_scope(current_user, DepositOrder)
+    end
   end
 end

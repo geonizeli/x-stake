@@ -14,6 +14,8 @@ class XStakeSchema < GraphQL::Schema
       Types::SellCryptoOrderType
     when BuyCryptoOrder
       Types::BuyCryptoOrderType
+    when DepositOrder
+      Types::DepositOrderType
     else
       raise(GraphQL::RequiredImplementationMissingError, "Unexpected object: #{obj}")
     end
