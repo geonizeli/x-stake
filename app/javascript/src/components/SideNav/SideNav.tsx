@@ -4,6 +4,7 @@ import { Transition } from "@headlessui/react";
 import cs from "classnames";
 
 import { useApp } from "../../contexts/AppProvider";
+import { useCurrentUser } from "../../contexts/UserProvider";
 
 type MenuItem = {
   label: string;
@@ -38,6 +39,7 @@ const MenuItems: MenuItem[] = [
 ];
 
 export const SideNav = () => {
+  const { isAuthenticated } = useCurrentUser();
   const { sideNavExpanded, setSideNavExpanded } = useApp();
   const location = useLocation();
 
@@ -50,6 +52,8 @@ export const SideNav = () => {
       handleCloseSideNav();
     }
   };
+
+  if (!isAuthenticated) return null;
 
   return (
     <>
