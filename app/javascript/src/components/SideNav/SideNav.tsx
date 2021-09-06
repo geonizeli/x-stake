@@ -21,19 +21,19 @@ const MenuItems: MenuItem[] = [
     path: "/dashboard",
   },
   {
+    label: "Histórico de Investimentos",
+    path: "/orders/stake",
+  },
+  {
     label: "Carteira",
     path: "/wallet",
   },
   {
-    label: "Ordem de Troca",
+    label: "Pedidos de Troca",
     path: "/orders/exchange",
   },
   {
-    label: "Ordem de Stake",
-    path: "/orders/stake",
-  },
-  {
-    label: "Ordem de Depósito",
+    label: "Pedidos de Depósito",
     path: "/orders/deposit",
   },
 ];
