@@ -12,6 +12,7 @@ Rails.application.routes.draw do
     resources :buy_crypto_orders
     resources :sell_crypto_orders
     resources :stake_orders
+    resources :deposit_orders
     resources :admin_users
 
     root to: "users#index"

@@ -29,6 +29,10 @@ pt-BR:
         one: Pedido de Stake
         other: Pedidos de Stake
 
+      deposit_order:
+        one: Pedido de Depósito
+        other: Pedidos de Depósito
+
     attributes:
       user:
         first_name: Primeiro nome
