@@ -4,12 +4,12 @@
 
 import { ConcreteRequest } from "relay-runtime";
 export type ProcessStatus = "CANCELED" | "COMPLETED" | "PROCESSING" | "%future added value";
-export type VaultQueryVariables = {
+export type VaultCardQueryVariables = {
     status: ProcessStatus;
     poolName: string;
     amount: number;
 };
-export type VaultQueryResponse = {
+export type VaultCardQueryResponse = {
     readonly stakeOrders: {
         readonly edges: ReadonlyArray<{
             readonly node: {
@@ -18,15 +18,15 @@ export type VaultQueryResponse = {
         }>;
     };
 };
-export type VaultQuery = {
-    readonly response: VaultQueryResponse;
-    readonly variables: VaultQueryVariables;
+export type VaultCardQuery = {
+    readonly response: VaultCardQueryResponse;
+    readonly variables: VaultCardQueryVariables;
 };
 
 
 
 /*
-query VaultQuery(
+query VaultCardQuery(
   $status: ProcessStatus!
   $poolName: String!
   $amount: Float!
@@ -115,7 +115,7 @@ return {
     ],
     "kind": "Fragment",
     "metadata": null,
-    "name": "VaultQuery",
+    "name": "VaultCardQuery",
     "selections": [
       {
         "alias": null,
@@ -163,7 +163,7 @@ return {
       (v0/*: any*/)
     ],
     "kind": "Operation",
-    "name": "VaultQuery",
+    "name": "VaultCardQuery",
     "selections": [
       {
         "alias": null,
@@ -209,14 +209,14 @@ return {
     ]
   },
   "params": {
-    "cacheID": "6565697f7f43e955abee8a8a1eeb8e9b",
+    "cacheID": "1bbb395dae29c85a1be62eb32995458d",
     "id": null,
     "metadata": {},
-    "name": "VaultQuery",
+    "name": "VaultCardQuery",
     "operationKind": "query",
-    "text": "query VaultQuery(\n  $status: ProcessStatus!\n  $poolName: String!\n  $amount: Float!\n) {\n  stakeOrders(filter: {status: [$status], poolName: {eq: $poolName}, amount: {lt: $amount}}) {\n    edges {\n      node {\n        amount\n        id\n      }\n    }\n  }\n}\n"
+    "text": "query VaultCardQuery(\n  $status: ProcessStatus!\n  $poolName: String!\n  $amount: Float!\n) {\n  stakeOrders(filter: {status: [$status], poolName: {eq: $poolName}, amount: {lt: $amount}}) {\n    edges {\n      node {\n        amount\n        id\n      }\n    }\n  }\n}\n"
   }
 };
 })();
-(node as any).hash = 'e5dced4589579717b408bc2f555b98ab';
+(node as any).hash = 'dbf07265190b32d9f6f4e66c5e3d851f';
 export default node;

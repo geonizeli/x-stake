@@ -6,19 +6,19 @@ import { useLazyLoadQuery } from "react-relay";
 import { graphql } from "babel-plugin-relay/macro";
 import BigNumber from "bignumber.js";
 
-import type { Vault as VaultType } from "../../../types/yieldwatch";
+import type { Vault } from "../../../types/yieldwatch";
 import { RemoveStakeModal } from "./RemoveStakeModal";
-import type { VaultQuery } from "./__generated__/VaultQuery.graphql";
+import { formatTokenBalance } from "../../../utils/tokenBalance";
+import type { VaultCardQuery } from "./__generated__/VaultCardQuery.graphql";
 
 type VaultProps = {
-  vault: Partial<VaultType>;
-  isLoading: boolean;
+  vault: Vault;
 };
 
-export const Vault: FC<VaultProps> = ({ vault, isLoading }) => {
-  const { stakeOrders } = useLazyLoadQuery<VaultQuery>(
+export const VaultCard: FC<VaultProps> = ({ vault }) => {
+  const { stakeOrders } = useLazyLoadQuery<VaultCardQuery>(
     graphql`
-      query VaultQuery(
+      query VaultCardQuery(
         $status: ProcessStatus!
         $poolName: String!
         $amount: Float!
@@ -40,7 +40,7 @@ export const Vault: FC<VaultProps> = ({ vault, isLoading }) => {
     `,
     {
       status: "PROCESSING",
-      poolName: vault.name ?? "",
+      poolName: vault.name,
       amount: 0,
     }
   );
@@ -56,8 +56,7 @@ export const Vault: FC<VaultProps> = ({ vault, isLoading }) => {
     return BigNumber.sum(acc, current.node.amount);
   }, new BigNumber(0));
 
-  const totalDepositedAndRewarded =
-    (vault.depositedTokens ?? 0) + (vault.totalRewards ?? 0);
+  const totalDepositedAndRewarded = vault.depositedTokens + vault.totalRewards;
 
   let totalStaked = BigNumber.sum(
     alreadyOnUnstakeOrder,
@@ -67,13 +66,8 @@ export const Vault: FC<VaultProps> = ({ vault, isLoading }) => {
   totalStaked = totalStaked.isLessThan(0.0001) ? new BigNumber(0) : totalStaked;
 
   const totalStakedFixed = totalStaked.toFixed(4);
-  const totalDeposited = (
-    totalStaked.isEqualTo(0) ? 0 : vault.depositedTokens
-  )?.toFixed(4);
-
-  const totalRewarded = (
-    totalStaked.isEqualTo(0) ? 0 : vault.totalRewards
-  )?.toFixed(4);
+  const totalDeposited = formatTokenBalance(vault.depositedTokens);
+  const totalRewarded = formatTokenBalance(vault.totalRewards);
 
   return (
     <>
@@ -83,53 +77,29 @@ export const Vault: FC<VaultProps> = ({ vault, isLoading }) => {
         stakedCake={totalStakedFixed}
         poolName={vault.name}
       />
-      <div className="shadow-lg px-4 py-6 w-full bg-white dark:bg-gray-800 rounded-lg">
+      <div className="shadow-lg px-4 py-6 mb-4 w-full bg-white rounded-lg">
         <div className="flex justify-between">
-          <p className="text-sm w-max text-gray-700 dark:text-white font-semibold border-b border-gray-200">
+          <p className="text-sm w-max text-gray-700 font-semibold border-b border-gray-200">
             {vault.name}
           </p>
-
           <button onClick={handleRemoveStakeModal} aria-label="Remover Stake">
             <XCircleIcon className="h-5 w-5 text-red-500" />
           </button>
         </div>
-        <div className="flex items-end space-x-2 my-6">
-          <p
-            className={cx(
-              "text-5xl text-black dark:text-white font-bold",
-              isLoading
-                ? "w-36 h-10 inline-block animate-pulse bg-gray-300 rounded"
-                : ""
-            )}
-          >
-            {!isLoading && totalStakedFixed}
-          </p>
-        </div>
-        <div className="dark:text-white">
+
+        <div className="mt-6">
           <div className="flex items-center pb-2 mb-2 text-sm space-x-12 md:space-x-24 justify-between border-b border-gray-200">
             <p>Depositado</p>
-            <div
-              className={cx(
-                "flex items-end text-xs",
-                isLoading
-                  ? "w-10 h-4 inline-block animate-pulse bg-gray-300 rounded"
-                  : ""
-              )}
-            >
-              {!isLoading && totalDeposited}
-            </div>
+            <div className={cx("flex items-end text-xs")}>{totalDeposited}</div>
+          </div>
+          <div className="flex items-center pb-2 mb-2 text-sm space-x-12 md:space-x-24 justify-between border-b border-gray-200">
+            <p>Ganho</p>
+            <div className={cx("flex items-end text-xs")}>{totalRewarded}</div>
           </div>
           <div className="flex items-center text-sm space-x-12 md:space-x-24 justify-between">
-            <p>Ganho</p>
-            <div
-              className={cx(
-                "flex items-end text-xs",
-                isLoading
-                  ? "w-10 h-4 inline-block animate-pulse bg-gray-300 rounded"
-                  : ""
-              )}
-            >
-              {!isLoading && totalRewarded}
+            <p>Rendimento</p>
+            <div className={cx("flex items-end text-xs whitespace-nowrap")}>
+              {`${(vault.poolInfo.apr * 100).toFixed(2)} %`}
             </div>
           </div>
         </div>

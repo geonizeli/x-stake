@@ -21,7 +21,7 @@ const MenuItems: MenuItem[] = [
     path: "/dashboard",
   },
   {
-    label: "Histórico de Investimentos",
+    label: "Pedidos de Investimentos",
     path: "/orders/stake",
   },
   {
