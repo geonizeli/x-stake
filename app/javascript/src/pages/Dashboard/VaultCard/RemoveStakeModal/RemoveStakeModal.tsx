@@ -63,7 +63,7 @@ export const RemoveStakeModal: FC<RemoveStakeModal> = ({
     <Modal
       isOpen={isOpen}
       setIsOpen={handleClose}
-      title={`Remover investido em ${poolName}`}
+      title={`Remover investimento em ${poolName}`}
     >
       <span className="mb-2">CAKE disponível: {stakedCake}</span>
       <form onSubmit={onSubmit} className="bg-white py-2">
@@ -83,7 +83,9 @@ export const RemoveStakeModal: FC<RemoveStakeModal> = ({
           </button>
         </div>
         {avaliableCake.isEqualTo(0) && (
-          <span className="text-red-500 mb-1">Você não possuí saldo.</span>
+          <span className="text-red-500 mb-1">
+            Você não possuí saldo investido.
+          </span>
         )}
         <Button variant="dangeour" disabled={!stakeAvaliable} type="submit">
           Remover Stake

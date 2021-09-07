@@ -6,7 +6,7 @@ import { Spinner } from "../../components";
 import { useCurrentUser } from "../../contexts/UserProvider";
 import { Messages } from "../../messages";
 import type { YieldwatchResponse } from "../../types/yieldwatch";
-import { VaultCard } from "./Vault";
+import { VaultCard } from "./VaultCard";
 
 export const Dashbaord: FC = () => {
   const { user } = useCurrentUser();
