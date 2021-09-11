@@ -4,7 +4,7 @@
 
 import { ReaderFragment } from "relay-runtime";
 import { FragmentRefs } from "relay-runtime";
-export type ProcessStatus = "CANCELED" | "COMPLETED" | "PROCESSING" | "%future added value";
+export type ProcessStatus = "CANCELED" | "COMPLETED" | "PROCESSING";
 export type History_depositOrders = {
     readonly edges: ReadonlyArray<{
         readonly node: {

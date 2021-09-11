@@ -1,9 +1,4 @@
-type ProcessStatus =
-  | "CANCELED"
-  | "COMPLETED"
-  | "PROCESSING"
-  // eslint-disable-next-line relay/no-future-added-value
-  | "%future added value";
+type ProcessStatus = "CANCELED" | "COMPLETED" | "PROCESSING";
 
 export const getStatusTextAndColors = (status: ProcessStatus) => {
   if (status === "PROCESSING") {

@@ -3,7 +3,7 @@
 // @ts-nocheck
 
 import { ConcreteRequest } from "relay-runtime";
-export type ProcessStatus = "CANCELED" | "COMPLETED" | "PROCESSING" | "%future added value";
+export type ProcessStatus = "CANCELED" | "COMPLETED" | "PROCESSING";
 export type StakeQueryVariables = {};
 export type StakeQueryResponse = {
     readonly stakeOrders: {
