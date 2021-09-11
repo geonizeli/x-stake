@@ -26,7 +26,11 @@ export const TableRow: FC<Props> = ({ items, id, onClick }) => {
     >
       {items?.map((item, index) => (
         <td key={index} className="px-5 py-5 border-b border-gray-200 text-sm">
-          <p className="text-gray-900 whitespace-nowrap">{item}</p>
+          {typeof item === "string" ? (
+            <p className="text-gray-900 whitespace-nowrap">{item}</p>
+          ) : (
+            item
+          )}
         </td>
       ))}
     </tr>
