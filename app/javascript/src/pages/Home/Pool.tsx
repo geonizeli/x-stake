@@ -8,6 +8,8 @@ import { getPriceInBusd } from "../../utils/getPrice";
 import { getTotalStaked } from "../../utils/getTotalStaked";
 import { StakeOrderModal } from "./StakeOrderModal";
 
+const INVESTMENT_FEE_PERCENTAGE = 20;
+
 type PoolProps = {
   pool: PoolConfig;
   balance: string;
@@ -51,7 +53,7 @@ export const Pool: FC<PoolProps> = ({ pool, balance }) => {
       if (aprValue) {
         setApr({
           loading: false,
-          value: aprValue.toFixed(2),
+          value: (aprValue - INVESTMENT_FEE_PERCENTAGE).toFixed(2),
         });
       }
     })();
