@@ -9,10 +9,6 @@ module Mutations
       amount = BigDecimal(order[:amount])
 
       ActiveRecord::Base.transaction do
-        current_user
-          .balance
-          .withdrawal!(amount)
-
         record = StakeOrder.create!(
           amount: amount,
           pool_name: order[:pool_name],

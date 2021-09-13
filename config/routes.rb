@@ -7,7 +7,6 @@ Rails.application.routes.draw do
 
   namespace :admin do
     resources :users
-    resources :balances
     resources :fiat_balances
     resources :buy_crypto_orders
     resources :sell_crypto_orders

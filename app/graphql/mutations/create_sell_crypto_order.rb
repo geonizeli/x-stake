@@ -9,10 +9,6 @@ module Mutations
       amount = BigDecimal(order[:amount])
 
       ActiveRecord::Base.transaction do
-        current_user
-          .balance
-          .withdrawal!(amount)
-
         record = SellCryptoOrder.create!(
           paid_amount: amount,
           user_id: current_user.id,

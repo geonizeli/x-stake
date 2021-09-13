@@ -10,22 +10,9 @@ class CreateUserBalances
     return nil if Rails.env.test?
 
     ActiveRecord::Base.transaction do
-      create_fiat_balance
-      create_balances
+      FiatBalance.find_or_create_by!(
+        user_id: user.id
+      )
     end
-  end
-
-  private
-
-  def create_fiat_balance
-    FiatBalance.find_or_create_by!(
-      user_id: user.id
-    )
-  end
-
-  def create_balances
-    Balance.find_or_create_by(
-      user_id: user.id
-    )
   end
 end

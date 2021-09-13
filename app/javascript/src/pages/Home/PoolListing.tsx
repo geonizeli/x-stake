@@ -1,6 +1,4 @@
-import { graphql } from "babel-plugin-relay/macro";
 import React, { useEffect, useState } from "react";
-import { useLazyLoadQuery } from "react-relay";
 import { ethers } from "ethers";
 
 import { unfinishedPools } from "../../constants/Pools";
@@ -9,7 +7,6 @@ import type { PoolConfig } from "../../types";
 import { Pool } from "./Pool";
 import sousChef from "../../abi/sousChef.json";
 import { getEndBlock } from "../../utils/getEndBlock";
-import type { PoolListingQuery } from "./__generated__/PoolListingQuery.graphql";
 import { notEmpty } from "../../utils/notEmpty";
 import { Spinner } from "../../components";
 import { usePersistedState } from "../../hooks/usePersistedState";
@@ -24,20 +21,8 @@ export const PoolListing = () => {
 
   const [isLoadingPools, setIsLoadingPools] = useState(true);
 
-  const { currentUser } = useLazyLoadQuery<PoolListingQuery>(
-    graphql`
-      query PoolListingQuery {
-        currentUser {
-          balance {
-            amount
-          }
-        }
-      }
-    `,
-    {}
-  );
-
-  const balance = currentUser?.balance.amount ?? "0";
+  // TODO<wallet>: puxar valor da wallet
+  const balance = "0";
 
   useEffect(() => {
     (async () => {

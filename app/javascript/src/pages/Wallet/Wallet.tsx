@@ -18,9 +18,6 @@ export const Wallet: FC = () => {
           fiatBalance {
             ...FiatBalance_fiatBalance
           }
-          balance {
-            ...Balance_balance
-          }
         }
       }
     `,
@@ -34,7 +31,7 @@ export const Wallet: FC = () => {
       <div className="container mx-auto px-4 sm:px-8 max-w-3xl">
         <div className="py-8">
           <FiatBalance fiatBalancesRef={currentUser.fiatBalance} />
-          <Balance balancesRef={currentUser.balance} />
+          <Balance />
         </div>
       </div>
     </div>

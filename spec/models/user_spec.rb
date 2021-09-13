@@ -33,7 +33,6 @@ RSpec.describe(User, type: :model) do
   describe "associations" do
     it { is_expected.to(have_many(:documents)) }
     it { is_expected.to(have_many(:stake_orders)) }
-    it { is_expected.to(have_one(:balance)) }
     it { is_expected.to(have_one(:fiat_balance)) }
   end
 end
