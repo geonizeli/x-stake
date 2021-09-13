@@ -8,8 +8,10 @@ import { getStatusTextAndColors } from "../utils/processStatus";
 import type { StakeQuery } from "./__generated__/StakeQuery.graphql";
 import { Messages } from "../../../messages";
 import { Table, TableRow } from "../../../components";
+import { useCurrentUser } from "../../../contexts/UserProvider";
 
 export const Stake: FC = () => {
+  const { isAuthenticated } = useCurrentUser();
   const { stakeOrders } = useLazyLoadQuery<StakeQuery>(
     graphql`
       query StakeQuery {
@@ -28,6 +30,8 @@ export const Stake: FC = () => {
     `,
     {}
   );
+
+  if (!isAuthenticated) return <Messages.Unauthenticated />;
 
   if (!stakeOrders.edges.length)
     return <Messages.NoHistory historyName="Stake" />;

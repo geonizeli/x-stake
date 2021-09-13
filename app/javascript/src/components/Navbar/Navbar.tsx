@@ -25,8 +25,7 @@ export const Navbar = () => {
     <nav className="w-full h-16 flex bg-white shadow items-center px-4 space-x-2 z-50">
       <button
         className={cs(
-          "w-12 mr-2 md:w-10 h-12 md:h-10 xl:hidden fixed md:relative bottom-8 md:bottom-auto right-8 md:right-auto bg-white rounded-full p-3 md:p-0 shadow md:shadow-none",
-          isAuthenticated ? "" : "hidden"
+          "w-12 mr-2 md:w-10 h-12 md:h-10 xl:hidden fixed md:relative bottom-8 md:bottom-auto right-8 md:right-auto bg-white rounded-full p-3 md:p-0 shadow md:shadow-none"
         )}
         onClick={() => handleExpandSideNav()}
       >

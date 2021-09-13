@@ -6,8 +6,11 @@ import { useLazyLoadQuery } from "react-relay";
 import { ExchangePanel } from "./ExchangePanel";
 import { ExchangeHistory } from "./ExchangeHistory";
 import type { ExchangeQuery } from "./__generated__/ExchangeQuery.graphql";
+import { Messages } from "../../../messages";
+import { useCurrentUser } from "../../../contexts/UserProvider";
 
 export const Exchange = () => {
+  const { isAuthenticated } = useCurrentUser();
   const data = useLazyLoadQuery<ExchangeQuery>(
     graphql`
       query ExchangeQuery {
@@ -24,6 +27,8 @@ export const Exchange = () => {
     `,
     {}
   );
+
+  if (!isAuthenticated) return <Messages.Unauthenticated />;
 
   return (
     <div className="w-full">

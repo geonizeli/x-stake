@@ -9,8 +9,10 @@ import { History } from "./History";
 import { Create } from "./Create";
 import { DepositProvider, useDepositContext } from "./DepositProvider";
 import { Show } from "./Show";
+import { useCurrentUser } from "../../../contexts/UserProvider";
 
 const Component: FC = () => {
+  const { isAuthenticated } = useCurrentUser();
   const { fetchKey } = useDepositContext();
 
   const { depositOrders } = useLazyLoadQuery<DepositQuery>(
@@ -28,6 +30,8 @@ const Component: FC = () => {
       fetchPolicy: "network-only",
     }
   );
+
+  if (!isAuthenticated) return <Messages.Unauthenticated />;
 
   if (!depositOrders.totalCount)
     return (
