@@ -10,9 +10,6 @@ export type WalletQueryResponse = {
         readonly fiatBalance: {
             readonly " $fragmentRefs": FragmentRefs<"FiatBalance_fiatBalance">;
         };
-        readonly balance: {
-            readonly " $fragmentRefs": FragmentRefs<"Balance_balance">;
-        };
     } | null;
 };
 export type WalletQuery = {
@@ -29,16 +26,8 @@ query WalletQuery {
       ...FiatBalance_fiatBalance
       id
     }
-    balance {
-      ...Balance_balance
-      id
-    }
     id
   }
-}
-
-fragment Balance_balance on Balance {
-  amount
 }
 
 fragment FiatBalance_fiatBalance on FiatBalance {
@@ -82,22 +71,6 @@ return {
                 "args": null,
                 "kind": "FragmentSpread",
                 "name": "FiatBalance_fiatBalance"
-              }
-            ],
-            "storageKey": null
-          },
-          {
-            "alias": null,
-            "args": null,
-            "concreteType": "Balance",
-            "kind": "LinkedField",
-            "name": "balance",
-            "plural": false,
-            "selections": [
-              {
-                "args": null,
-                "kind": "FragmentSpread",
-                "name": "Balance_balance"
               }
             ],
             "storageKey": null
@@ -149,25 +122,6 @@ return {
             ],
             "storageKey": null
           },
-          {
-            "alias": null,
-            "args": null,
-            "concreteType": "Balance",
-            "kind": "LinkedField",
-            "name": "balance",
-            "plural": false,
-            "selections": [
-              {
-                "alias": null,
-                "args": null,
-                "kind": "ScalarField",
-                "name": "amount",
-                "storageKey": null
-              },
-              (v0/*: any*/)
-            ],
-            "storageKey": null
-          },
           (v0/*: any*/)
         ],
         "storageKey": null
@@ -175,14 +129,14 @@ return {
     ]
   },
   "params": {
-    "cacheID": "d0537f2712255befa46df80db6c7246b",
+    "cacheID": "4397ad78f82d23c0a186b71bea7c3898",
     "id": null,
     "metadata": {},
     "name": "WalletQuery",
     "operationKind": "query",
-    "text": "query WalletQuery {\n  currentUser {\n    fiatBalance {\n      ...FiatBalance_fiatBalance\n      id\n    }\n    balance {\n      ...Balance_balance\n      id\n    }\n    id\n  }\n}\n\nfragment Balance_balance on Balance {\n  amount\n}\n\nfragment FiatBalance_fiatBalance on FiatBalance {\n  amountCents\n  amountCurrency\n}\n"
+    "text": "query WalletQuery {\n  currentUser {\n    fiatBalance {\n      ...FiatBalance_fiatBalance\n      id\n    }\n    id\n  }\n}\n\nfragment FiatBalance_fiatBalance on FiatBalance {\n  amountCents\n  amountCurrency\n}\n"
   }
 };
 })();
-(node as any).hash = '61fbc56a1e87c83a8a0a4460c231be53';
+(node as any).hash = '83fd609428103b13e79c14d20fefaabe';
 export default node;

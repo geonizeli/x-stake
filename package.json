@@ -4,8 +4,8 @@
   "version": "0.1.0",
   "scripts": {
     "dev": "./bin/webpack-dev-server",
-    "lint": "eslint --ext .jsx,.js,.tsx,.ts app/javascript/",
-    "lint:fix": "eslint --fix --ext .jsx,.js,.tsx,.ts app/javascript/",
+    "lint": "eslint --ext .tsx,.ts app/javascript/",
+    "lint:fix": "eslint --fix --ext .tsx,.ts app/javascript/",
     "tsc": "tsc --noEmit",
     "relay": "relay-compiler",
     "relay:watch": "yarn relay --watch"
@@ -16,7 +16,7 @@
     }
   },
   "lint-staged": {
-    "*.{js,jsx,ts,tsx}": [
+    "*.{ts,tsx}": [
       "yarn lint"
     ]
   },

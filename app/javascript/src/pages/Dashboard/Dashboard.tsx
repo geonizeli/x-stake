@@ -9,13 +9,15 @@ import type { YieldwatchResponse } from "../../types/yieldwatch";
 import { VaultCard } from "./VaultCard";
 
 export const Dashbaord: FC = () => {
-  const { user } = useCurrentUser();
+  const { user, isAuthenticated } = useCurrentUser();
   const { data } = useSWR<YieldwatchResponse>(
     `https://www.yieldwatch.net/api/all/${user?.walletAddress}?platforms=pancake`
   );
 
   const isLoading = !data;
   const vaults = data?.result?.PancakeSwap?.staking?.vaults;
+
+  if (!isAuthenticated) return <Messages.Unauthenticated />;
 
   if (isLoading)
     return (

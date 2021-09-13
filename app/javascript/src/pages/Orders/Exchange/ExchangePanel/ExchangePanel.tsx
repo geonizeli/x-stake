@@ -32,15 +32,14 @@ export const ExchangePanel: FC<Props> = ({ userRef }) => {
         fiatBalance {
           amountCents
         }
-        balance {
-          amount
-        }
       }
     `,
     userRef
   );
 
-  const balanceAmount = user?.balance?.amount ?? 0;
+  // TODO<wallet>: puxar valor da wallet
+  const balanceAmount = 0;
+
   const fiatBalanceAmount = user?.fiatBalance.amountCents ?? 0;
 
   const avaliableCrypto = new BigNumber(balanceAmount);

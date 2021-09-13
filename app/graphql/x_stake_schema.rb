@@ -6,8 +6,6 @@ class XStakeSchema < GraphQL::Schema
 
   def self.resolve_type(abstract_type, obj, ctx)
     case obj
-    when Balance
-      Types::BalanceType
     when FiatBalance
       Types::FiatBalanceType
     when SellCryptoOrder

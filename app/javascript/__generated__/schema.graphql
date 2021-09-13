@@ -1,8 +1,3 @@
-type Balance implements Node {
-  amount: String!
-  id: ID!
-}
-
 type BuyCryptoOrder implements Node {
   createdAt: ISO8601DateTime!
   id: ID!
@@ -553,7 +548,6 @@ input StakeOrderFilterInput {
 }
 
 type User {
-  balance: Balance!
   email: String!
   fiatBalance: FiatBalance!
   firstName: String!

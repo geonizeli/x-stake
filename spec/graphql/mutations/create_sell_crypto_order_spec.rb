@@ -27,12 +27,9 @@ RSpec.describe(Mutations::CreateSellCryptoOrder, type: :mutation) do
     GQL
   end
 
-  context "when the user has enough balance" do
-    it "withdraws from his account and creates a buy order" do
-      user = create(
-        :user,
-        balance: build(:balance, amount: 1.0034)
-      )
+  context "when attributes are valid " do
+    it "creates a buy order" do
+      user = create(:user)
 
       variables = {
         "amount": "0.80",
@@ -58,45 +55,6 @@ RSpec.describe(Mutations::CreateSellCryptoOrder, type: :mutation) do
           },
         },
       }))
-
-      expect(user.balance.reload.amount.to_s).to(eq("0.2034"))
-    end
-  end
-
-  context "when the user does not have enough balance" do
-    it "returns withdrawl error" do
-      user = create(
-        :user,
-        balance: build(:balance, amount: 0.0034)
-      )
-
-      variables = {
-        "amount": "0.80",
-      }
-
-      context = { current_user: user }
-
-      result = XStakeSchema.execute(
-        query_string,
-        variables: variables,
-        context: context
-      ).to_h.with_indifferent_access
-
-      expect(result).to(eq({
-        "data" => {
-          "createSellCryptoOrder" => {
-            "errors" => [{
-              "fullMessages" => ["Quantia saldo insuficiente"],
-              "fieldName" => "amount",
-              "messages" => ["saldo insuficiente"],
-              "path" => ["attributes", "amount"],
-            }],
-            "order" => nil,
-          },
-        },
-      }))
-
-      expect(user.balance.reload.amount.to_s).to(eq("0.0034"))
     end
   end
 end

@@ -1,26 +1,13 @@
-import { graphql } from "babel-plugin-relay/macro";
 import type { FC } from "react";
 import React from "react";
-import { useFragment } from "react-relay";
 
 import { Table, TableRow } from "../../components";
 import { getCurrencyLogo } from "../../utils/getCurrencyLogo";
-import type { Balance_balance$key } from "./__generated__/Balance_balance.graphql";
 
-type Props = {
-  balancesRef: Balance_balance$key;
-};
-export const Balance: FC<Props> = ({ balancesRef }) => {
-  const node = useFragment<Balance_balance$key>(
-    graphql`
-      fragment Balance_balance on Balance {
-        amount
-      }
-    `,
-    balancesRef
-  );
-
-  if (!node) return null;
+export const Balance: FC = () => {
+  const node = {
+    amount: "PUXAR VALOR DA CARTEIRA",
+  };
 
   return (
     <div className="-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto">
