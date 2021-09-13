@@ -9,10 +9,6 @@ pt-BR:
         one: Administrador
         other: Administradores
 
-      balance:
-        one: Saldo
-        other: Saldos
-
       fiat_balance:
         one: Saldo Fiat
         other: Saldos Fiat
@@ -39,19 +35,12 @@ pt-BR:
         last_name: Último nome
         full_name: Nome completo
 
-      balance:
-        amount: Quantia
-
       fiat_balance:
         amount_formatted: Quantia
         amount_cents: Quantia
 
     errors:
       models:
-        balance:
-          attributes:
-            amount:
-              greater_than_or_equal_to: saldo insuficiente
         fiat_balance:
           attributes:
             amount_cents:
