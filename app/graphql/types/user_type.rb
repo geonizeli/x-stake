@@ -10,7 +10,10 @@ module Types
     field :email, String, null: false
     field :first_name, String, null: false
     field :last_name, String, null: false
-    field :wallet_address, String, null: true
     field :fiat_balance, FiatBalanceType, null: false
+    field :wallet, WalletType, null: false
+    def wallet
+      Wallet.new(object)
+    end
   end
 end

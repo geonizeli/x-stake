@@ -1,13 +1,30 @@
+import { graphql } from "babel-plugin-relay/macro";
 import type { FC } from "react";
 import React from "react";
+import { useFragment } from "react-relay";
 
 import { Table, TableRow } from "../../components";
+import { formatCake } from "../../utils/cake";
 import { getCurrencyLogo } from "../../utils/getCurrencyLogo";
+import type { Balance_wallet$key } from "./__generated__/Balance_wallet.graphql";
 
-export const Balance: FC = () => {
-  const node = {
-    amount: "PUXAR VALOR DA CARTEIRA",
-  };
+type Props = {
+  userRef: Balance_wallet$key;
+};
+
+export const Balance: FC<Props> = ({ userRef }) => {
+  const { wallet } = useFragment<Balance_wallet$key>(
+    graphql`
+      fragment Balance_wallet on User {
+        wallet {
+          cakeBalance
+        }
+      }
+    `,
+    userRef
+  );
+
+  const cakeBalance = formatCake(wallet.cakeBalance);
 
   return (
     <div className="-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto">
@@ -27,7 +44,7 @@ export const Balance: FC = () => {
                   <p className="text-gray-900 whitespace-no-wrap">CAKE</p>
                 </div>
               </div>,
-              node.amount,
+              cakeBalance,
             ]}
           />
         </Table>

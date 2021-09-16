@@ -15,9 +15,8 @@ export const Wallet: FC = () => {
     graphql`
       query WalletQuery {
         currentUser {
-          fiatBalance {
-            ...FiatBalance_fiatBalance
-          }
+          ...FiatBalance_fiatBalance
+          ...Balance_wallet
         }
       }
     `,
@@ -30,8 +29,8 @@ export const Wallet: FC = () => {
     <div className="flex flex-col h-full w-full overflow-x-hidden">
       <div className="container mx-auto px-4 sm:px-8 max-w-3xl">
         <div className="py-8">
-          <FiatBalance fiatBalancesRef={currentUser.fiatBalance} />
-          <Balance />
+          <FiatBalance userRef={currentUser} />
+          <Balance userRef={currentUser} />
         </div>
       </div>
     </div>

@@ -27,7 +27,9 @@ query AppQuery {
 
 fragment UserProvider_user on User {
   firstName
-  walletAddress
+  wallet {
+    address
+  }
 }
 */
 
@@ -82,8 +84,19 @@ const node: ConcreteRequest = {
           {
             "alias": null,
             "args": null,
-            "kind": "ScalarField",
-            "name": "walletAddress",
+            "concreteType": "Wallet",
+            "kind": "LinkedField",
+            "name": "wallet",
+            "plural": false,
+            "selections": [
+              {
+                "alias": null,
+                "args": null,
+                "kind": "ScalarField",
+                "name": "address",
+                "storageKey": null
+              }
+            ],
             "storageKey": null
           },
           {
@@ -99,12 +112,12 @@ const node: ConcreteRequest = {
     ]
   },
   "params": {
-    "cacheID": "56b4be302cf9b9ec226ad8145170961b",
+    "cacheID": "ae618245e5a3baf946034e1efe3682de",
     "id": null,
     "metadata": {},
     "name": "AppQuery",
     "operationKind": "query",
-    "text": "query AppQuery {\n  currentUser {\n    ...UserProvider_user\n    id\n  }\n}\n\nfragment UserProvider_user on User {\n  firstName\n  walletAddress\n}\n"
+    "text": "query AppQuery {\n  currentUser {\n    ...UserProvider_user\n    id\n  }\n}\n\nfragment UserProvider_user on User {\n  firstName\n  wallet {\n    address\n  }\n}\n"
   }
 };
 (node as any).hash = 'aac57a65620cf50754d54f3c8d6495cf';

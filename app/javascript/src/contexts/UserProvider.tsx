@@ -33,7 +33,9 @@ export const UserProvider: FC<Props> = ({ userRef, children }) => {
     graphql`
       fragment UserProvider_user on User {
         firstName
-        walletAddress
+        wallet {
+          address
+        }
       }
     `,
     userRef
@@ -42,7 +44,7 @@ export const UserProvider: FC<Props> = ({ userRef, children }) => {
   const user = userData
     ? {
         firstName: userData.firstName,
-        walletAddress: userData.walletAddress,
+        walletAddress: userData.wallet.address,
       }
     : null;
 

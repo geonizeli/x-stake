@@ -9,6 +9,7 @@ import { commitCreateSellCryptoOrderMutation } from "./createSellCryptoOrder";
 import { commitCreateBuyCryptoOrderMutation } from "./createBuyCryptoOrder";
 import { Input, Button } from "../../../../components";
 import type { ExchangePanel_user$key } from "./__generated__/ExchangePanel_user.graphql";
+import { formatCake } from "../../../../utils/cake";
 
 const tabBaseStyles =
   "w-full text-base font-bold text-black px-4 py-2 focus:ring-blue-500";
@@ -32,14 +33,15 @@ export const ExchangePanel: FC<Props> = ({ userRef }) => {
         fiatBalance {
           amountCents
         }
+        wallet {
+          cakeBalance
+        }
       }
     `,
     userRef
   );
 
-  // TODO<wallet>: puxar valor da wallet
-  const balanceAmount = 0;
-
+  const balanceAmount = formatCake(user?.wallet.cakeBalance);
   const fiatBalanceAmount = user?.fiatBalance.amountCents ?? 0;
 
   const avaliableCrypto = new BigNumber(balanceAmount);

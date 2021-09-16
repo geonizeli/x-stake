@@ -4,17 +4,16 @@
 
 import { ReaderFragment } from "relay-runtime";
 import { FragmentRefs } from "relay-runtime";
-export type UserProvider_user = {
-    readonly firstName: string;
+export type Balance_wallet = {
     readonly wallet: {
-        readonly address: string | null;
+        readonly cakeBalance: string;
     };
-    readonly " $refType": "UserProvider_user";
+    readonly " $refType": "Balance_wallet";
 };
-export type UserProvider_user$data = UserProvider_user;
-export type UserProvider_user$key = {
-    readonly " $data"?: UserProvider_user$data;
-    readonly " $fragmentRefs": FragmentRefs<"UserProvider_user">;
+export type Balance_wallet$data = Balance_wallet;
+export type Balance_wallet$key = {
+    readonly " $data"?: Balance_wallet$data;
+    readonly " $fragmentRefs": FragmentRefs<"Balance_wallet">;
 };
 
 
@@ -23,15 +22,8 @@ const node: ReaderFragment = {
   "argumentDefinitions": [],
   "kind": "Fragment",
   "metadata": null,
-  "name": "UserProvider_user",
+  "name": "Balance_wallet",
   "selections": [
-    {
-      "alias": null,
-      "args": null,
-      "kind": "ScalarField",
-      "name": "firstName",
-      "storageKey": null
-    },
     {
       "alias": null,
       "args": null,
@@ -44,7 +36,7 @@ const node: ReaderFragment = {
           "alias": null,
           "args": null,
           "kind": "ScalarField",
-          "name": "address",
+          "name": "cakeBalance",
           "storageKey": null
         }
       ],
@@ -54,5 +46,5 @@ const node: ReaderFragment = {
   "type": "User",
   "abstractKey": null
 };
-(node as any).hash = '4f6b86f489ce0df288106cd92060b889';
+(node as any).hash = '27ddb42954aa66b033735eeea5746516';
 export default node;

@@ -68,6 +68,9 @@ fragment ExchangePanel_user on User {
     amountCents
     id
   }
+  wallet {
+    cakeBalance
+  }
 }
 */
 
@@ -192,6 +195,24 @@ return {
             ],
             "storageKey": null
           },
+          {
+            "alias": null,
+            "args": null,
+            "concreteType": "Wallet",
+            "kind": "LinkedField",
+            "name": "wallet",
+            "plural": false,
+            "selections": [
+              {
+                "alias": null,
+                "args": null,
+                "kind": "ScalarField",
+                "name": "cakeBalance",
+                "storageKey": null
+              }
+            ],
+            "storageKey": null
+          },
           (v0/*: any*/)
         ],
         "storageKey": null
@@ -301,12 +322,12 @@ return {
     ]
   },
   "params": {
-    "cacheID": "30aa6f9d81cfe033aee64b8577d15936",
+    "cacheID": "2168c066ea4bb43d5ab066a00a35a33b",
     "id": null,
     "metadata": {},
     "name": "ExchangeQuery",
     "operationKind": "query",
-    "text": "query ExchangeQuery {\n  currentUser {\n    ...ExchangePanel_user\n    id\n  }\n  buyCryptoOrders {\n    ...ExchangeHistory_buyCryptoOrders\n  }\n  sellCryptoOrders {\n    ...ExchangeHistory_sellCryptoOrders\n  }\n}\n\nfragment ExchangeHistory_buyCryptoOrders on BuyCryptoOrderConnection {\n  edges {\n    node {\n      id\n      status\n      createdAt\n      paidAmountCents\n      receivedAmount\n      __typename\n    }\n  }\n}\n\nfragment ExchangeHistory_sellCryptoOrders on SellCryptoOrderConnection {\n  edges {\n    node {\n      id\n      status\n      paidAmount\n      receivedAmountCents\n      createdAt\n      __typename\n    }\n  }\n}\n\nfragment ExchangePanel_user on User {\n  fiatBalance {\n    amountCents\n    id\n  }\n}\n"
+    "text": "query ExchangeQuery {\n  currentUser {\n    ...ExchangePanel_user\n    id\n  }\n  buyCryptoOrders {\n    ...ExchangeHistory_buyCryptoOrders\n  }\n  sellCryptoOrders {\n    ...ExchangeHistory_sellCryptoOrders\n  }\n}\n\nfragment ExchangeHistory_buyCryptoOrders on BuyCryptoOrderConnection {\n  edges {\n    node {\n      id\n      status\n      createdAt\n      paidAmountCents\n      receivedAmount\n      __typename\n    }\n  }\n}\n\nfragment ExchangeHistory_sellCryptoOrders on SellCryptoOrderConnection {\n  edges {\n    node {\n      id\n      status\n      paidAmount\n      receivedAmountCents\n      createdAt\n      __typename\n    }\n  }\n}\n\nfragment ExchangePanel_user on User {\n  fiatBalance {\n    amountCents\n    id\n  }\n  wallet {\n    cakeBalance\n  }\n}\n"
   }
 };
 })();

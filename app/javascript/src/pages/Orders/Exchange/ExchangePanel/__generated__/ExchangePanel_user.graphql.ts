@@ -8,6 +8,9 @@ export type ExchangePanel_user = {
     readonly fiatBalance: {
         readonly amountCents: number;
     };
+    readonly wallet: {
+        readonly cakeBalance: string;
+    };
     readonly " $refType": "ExchangePanel_user";
 };
 export type ExchangePanel_user$data = ExchangePanel_user;
@@ -41,10 +44,28 @@ const node: ReaderFragment = {
         }
       ],
       "storageKey": null
+    },
+    {
+      "alias": null,
+      "args": null,
+      "concreteType": "Wallet",
+      "kind": "LinkedField",
+      "name": "wallet",
+      "plural": false,
+      "selections": [
+        {
+          "alias": null,
+          "args": null,
+          "kind": "ScalarField",
+          "name": "cakeBalance",
+          "storageKey": null
+        }
+      ],
+      "storageKey": null
     }
   ],
   "type": "User",
   "abstractKey": null
 };
-(node as any).hash = '2058ddb20a60f148a524083fa0a680ea';
+(node as any).hash = '88cc0dedfa3a3b9bb73d6b4745e0cf5a';
 export default node;
