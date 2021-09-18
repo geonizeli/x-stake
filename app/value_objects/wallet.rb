@@ -11,12 +11,24 @@ class Wallet
   private
 
   def total_cake
-    return "0" if address.blank?
+    return 0 if address.blank?
 
     BscClient.new.token_balance(
-      "0x0e09fabb73bd3ade0a17ecc321fd13a19e81ce82",
-      18,
-      address,
-    )
+      contract: "0x0e09fabb73bd3ade0a17ecc321fd13a19e81ce82",
+      digits: 18,
+      wallet_address: address,
+    ) - total_cake_debit
+  end
+
+  def total_cake_debit
+    total_cake_stake_debit + total_cake_sell_debit
+  end
+
+  def total_cake_stake_debit
+    user.stake_orders.processing.add.sum(&:amount).to_f
+  end
+
+  def total_cake_sell_debit
+    user.sell_crypto_orders.processing.sum(&:paid_amount).to_f
   end
 end

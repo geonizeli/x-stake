@@ -10,12 +10,12 @@ class BscClient
     }
   end
 
-  def token_balance(token, token_decimals, wallet_address)
+  def token_balance(contract:, digits:, wallet_address:)
     result = self.class.get(
-      "https://api-eu1.tatum.io/v3/blockchain/token/balance/BSC/#{token}/#{wallet_address}",
+      "https://api-eu1.tatum.io/v3/blockchain/token/balance/BSC/#{contract}/#{wallet_address}",
       headers: @headers
     ).parsed_response["balance"]
 
-    result.to_f / (10**token_decimals)
+    (result.to_f / (10**digits)).round(5)
   end
 end
