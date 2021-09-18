@@ -5,6 +5,10 @@ module Processable
 
   included do
     enumerize :status, in: [:processing, :completed, :canceled], default: :processing
+
+    status.values.each do |value|
+      scope value, -> { where(status: value) }
+    end
   end
 
   def processing?

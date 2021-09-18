@@ -29,6 +29,7 @@ gem "enumerize"
 gem "graphql"
 gem "pundit"
 gem "ransack", "~> 2.4"
+gem "httparty", "~> 0.19.0"
 
 group :development, :test do
   gem "dotenv-rails"

@@ -33,6 +33,9 @@ class StakeOrder < ApplicationRecord
     super & ["pool_name", "amount"]
   end
 
+  scope :add, -> { where("amount > 0") }
+  scope :remove, -> { where("amount < 0") }
+
   private
 
   def notification_message

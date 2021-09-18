@@ -7,9 +7,7 @@ import { FragmentRefs } from "relay-runtime";
 export type WalletQueryVariables = {};
 export type WalletQueryResponse = {
     readonly currentUser: {
-        readonly fiatBalance: {
-            readonly " $fragmentRefs": FragmentRefs<"FiatBalance_fiatBalance">;
-        };
+        readonly " $fragmentRefs": FragmentRefs<"FiatBalance_fiatBalance" | "Balance_wallet">;
     } | null;
 };
 export type WalletQuery = {
@@ -22,17 +20,24 @@ export type WalletQuery = {
 /*
 query WalletQuery {
   currentUser {
-    fiatBalance {
-      ...FiatBalance_fiatBalance
-      id
-    }
+    ...FiatBalance_fiatBalance
+    ...Balance_wallet
     id
   }
 }
 
-fragment FiatBalance_fiatBalance on FiatBalance {
-  amountCents
-  amountCurrency
+fragment Balance_wallet on User {
+  wallet {
+    cakeBalance
+  }
+}
+
+fragment FiatBalance_fiatBalance on User {
+  fiatBalance {
+    amountCents
+    amountCurrency
+    id
+  }
 }
 */
 
@@ -60,20 +65,14 @@ return {
         "plural": false,
         "selections": [
           {
-            "alias": null,
             "args": null,
-            "concreteType": "FiatBalance",
-            "kind": "LinkedField",
-            "name": "fiatBalance",
-            "plural": false,
-            "selections": [
-              {
-                "args": null,
-                "kind": "FragmentSpread",
-                "name": "FiatBalance_fiatBalance"
-              }
-            ],
-            "storageKey": null
+            "kind": "FragmentSpread",
+            "name": "FiatBalance_fiatBalance"
+          },
+          {
+            "args": null,
+            "kind": "FragmentSpread",
+            "name": "Balance_wallet"
           }
         ],
         "storageKey": null
@@ -122,6 +121,24 @@ return {
             ],
             "storageKey": null
           },
+          {
+            "alias": null,
+            "args": null,
+            "concreteType": "Wallet",
+            "kind": "LinkedField",
+            "name": "wallet",
+            "plural": false,
+            "selections": [
+              {
+                "alias": null,
+                "args": null,
+                "kind": "ScalarField",
+                "name": "cakeBalance",
+                "storageKey": null
+              }
+            ],
+            "storageKey": null
+          },
           (v0/*: any*/)
         ],
         "storageKey": null
@@ -129,14 +146,14 @@ return {
     ]
   },
   "params": {
-    "cacheID": "4397ad78f82d23c0a186b71bea7c3898",
+    "cacheID": "4631f43e84d22d8fdfa82706d907f478",
     "id": null,
     "metadata": {},
     "name": "WalletQuery",
     "operationKind": "query",
-    "text": "query WalletQuery {\n  currentUser {\n    fiatBalance {\n      ...FiatBalance_fiatBalance\n      id\n    }\n    id\n  }\n}\n\nfragment FiatBalance_fiatBalance on FiatBalance {\n  amountCents\n  amountCurrency\n}\n"
+    "text": "query WalletQuery {\n  currentUser {\n    ...FiatBalance_fiatBalance\n    ...Balance_wallet\n    id\n  }\n}\n\nfragment Balance_wallet on User {\n  wallet {\n    cakeBalance\n  }\n}\n\nfragment FiatBalance_fiatBalance on User {\n  fiatBalance {\n    amountCents\n    amountCurrency\n    id\n  }\n}\n"
   }
 };
 })();
-(node as any).hash = '83fd609428103b13e79c14d20fefaabe';
+(node as any).hash = 'a91fc17a25b5a68672b3016813de17bc';
 export default node;

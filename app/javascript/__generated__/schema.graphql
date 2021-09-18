@@ -553,5 +553,10 @@ type User {
   firstName: String!
   id: ID!
   lastName: String!
-  walletAddress: String
+  wallet: Wallet!
+}
+
+type Wallet {
+  address: String
+  cakeBalance: String!
 }

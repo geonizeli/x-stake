@@ -1,14 +1,30 @@
 import React from "react";
+import { useLazyLoadQuery } from "react-relay";
+import { graphql } from "babel-plugin-relay/macro";
 
 import { Pool } from "./Pool";
 import { Spinner } from "../../components";
 import { usePoolListing } from "./hooks";
+import type { PoolListingQuery } from "./__generated__/PoolListingQuery.graphql";
+import { formatCake } from "../../utils/cake";
 
 export const PoolListing = () => {
   const { isLoading, validPools } = usePoolListing();
 
-  // TODO<wallet>: puxar valor da wallet
-  const balance = "0";
+  const { currentUser } = useLazyLoadQuery<PoolListingQuery>(
+    graphql`
+      query PoolListingQuery {
+        currentUser {
+          wallet {
+            cakeBalance
+          }
+        }
+      }
+    `,
+    {}
+  );
+
+  const balance = formatCake(currentUser?.wallet.cakeBalance);
 
   if (isLoading && !validPools.length) {
     return (
