@@ -3,8 +3,8 @@ import BigNumber from "bignumber.js";
 import { BLOCKS_PER_YEAR } from "../constants";
 
 type Props = {
-  stakingTokenPrice: number;
-  rewardTokenPrice: number;
+  stakingTokenPrice: BigNumber;
+  rewardTokenPrice: BigNumber;
   totalStaked: number;
   tokenPerBlock: number;
 };

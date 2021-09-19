@@ -39,14 +39,14 @@ export const Pool: FC<PoolProps> = ({ pool, balance }) => {
       const aprValue = getApr({
         rewardTokenPrice: earningPrice,
         stakingTokenPrice: stakingPrice,
-        tokenPerBlock: parseFloat(pool.tokenPerBlock) / 1e-18,
+        tokenPerBlock: parseFloat(pool.tokenPerBlock),
         totalStaked,
       });
 
       if (aprValue) {
         setApr({
           loading: false,
-          value: (aprValue - INVESTMENT_FEE_PERCENTAGE).toFixed(2),
+          value: (aprValue * (1 - INVESTMENT_FEE_PERCENTAGE / 100)).toFixed(2),
         });
       }
     })();
@@ -82,11 +82,11 @@ export const Pool: FC<PoolProps> = ({ pool, balance }) => {
       </div>
       <div className="mt-4 p-2">
         <p>
-          <span className="font-medium">Investir:</span>
+          <span className="font-medium mr-1">Investir:</span>
           {pool.stakingToken.symbol}
         </p>
         <p>
-          <span className="font-medium">Receber:</span>
+          <span className="font-medium mr-1">Receber:</span>
           {pool.earningToken.symbol}
         </p>
         <div className="flex items-center">
