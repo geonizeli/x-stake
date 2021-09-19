@@ -36,13 +36,6 @@ export const Pool: FC<PoolProps> = ({ pool, balance }) => {
 
       const totalStaked = await getTotalStaked(provider, pool);
 
-      // eslint-disable-next-line no-console
-      console.info(
-        `Total Staked for ${pool.stakingToken.symbol} - ${
-          pool.earningToken.symbol
-        }: ${JSON.stringify(totalStaked)}`
-      );
-
       const aprValue = getApr({
         rewardTokenPrice: earningPrice,
         stakingTokenPrice: stakingPrice,
@@ -75,14 +68,26 @@ export const Pool: FC<PoolProps> = ({ pool, balance }) => {
           zIndex: -1,
         }}
       />
-      <img
-        className="shadow-xl rounded-full w-24"
-        src={`https://pancakeswap.finance/images/tokens/${pool.earningToken.address["56"]}.svg`}
-        alt={`${pool.earningToken.symbol} icon`}
-      />
+      <div className="relative w-24 h-24">
+        <img
+          className="shadow-xl rounded-full w-24 absolute"
+          src={`https://pancakeswap.finance/images/tokens/${pool.earningToken.address["56"]}.svg`}
+          alt={`${pool.earningToken.symbol} icon`}
+        />
+        <img
+          className="shadow-xl rounded-full w-10 absolute bottom-0 right-0"
+          src={`https://pancakeswap.finance/images/tokens/${pool.stakingToken.address["56"]}.svg`}
+          alt={`${pool.earningToken.symbol} icon`}
+        />
+      </div>
       <div className="mt-4 p-2">
         <p>
-          <span className="font-medium">Pool:</span> {pool.earningToken.symbol}
+          <span className="font-medium">Investir:</span>
+          {pool.stakingToken.symbol}
+        </p>
+        <p>
+          <span className="font-medium">Receber:</span>
+          {pool.earningToken.symbol}
         </p>
         <div className="flex items-center">
           <span className="font-medium mr-1">Rendimento:</span>
