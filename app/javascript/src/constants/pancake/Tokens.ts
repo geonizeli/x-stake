@@ -1711,4 +1711,85 @@ export const tokens: Record<string, Token> = {
     decimals: 18,
     projectLink: "https://decentral.games/",
   },
+  safemoon: {
+    symbol: "SAFEMOON",
+    address: {
+      "56": "0x8076C74C5e3F5852037F31Ff0093Eeb8c8ADd8D3",
+      "97": "",
+    },
+    decimals: 9,
+    projectLink: "https://safemoon.net/",
+  },
+  axs: {
+    symbol: "AXS",
+    address: {
+      "56": "0x715D400F88C167884bbCc41C5FeA407ed4D2f8A0",
+      "97": "",
+    },
+    decimals: 18,
+    projectLink: "https://axieinfinity.com/",
+  },
+  c98: {
+    symbol: "c98",
+    address: {
+      "56": "0xaEC945e04baF28b135Fa7c640f624f8D90F1C3a6",
+      "97": "",
+    },
+    decimals: 18,
+    projectLink: "https://coin98.com/",
+  },
+  pots: {
+    symbol: "POTS",
+    address: {
+      "56": "0x3Fcca8648651E5b974DD6d3e50F61567779772A8",
+      "97": "",
+    },
+    decimals: 18,
+    projectLink: "https://moonpot.com/",
+  },
+  gnt: {
+    symbol: "GNT",
+    address: {
+      "56": "0xF750A26EB0aCf95556e8529E72eD530f3b60f348",
+      "97": "",
+    },
+    decimals: 18,
+    projectLink: "https://www.greentrusttoken.com/",
+  },
+  rusd: {
+    symbol: "rUSD",
+    address: {
+      "56": "0x07663837218A003e66310a01596af4bf4e44623D",
+      "97": "",
+    },
+    decimals: 18,
+    projectLink: "https://appv2.rampdefi.com/#/",
+  },
+  bp: {
+    symbol: "BP",
+    address: {
+      "56": "0xACB8f52DC63BB752a51186D1c55868ADbFfEe9C1",
+      "97": "",
+    },
+    decimals: 18,
+    projectLink: "https://www.bunnypark.com/",
+  },
+  sfund: {
+    symbol: "SFUND",
+    address: {
+      "56": "0x477bC8d23c634C154061869478bce96BE6045D12",
+      "97": "",
+    },
+    decimals: 18,
+    projectLink: "https://seedify.fund/",
+  },
+  naos: {
+    symbol: "NAOS",
+    address: {
+      "56": "0x758d08864fB6cCE3062667225ca10b8F00496cc2",
+      "97": "",
+    },
+    decimals: 18,
+    projectLink: "https://naos.finance/",
+  },
 };
