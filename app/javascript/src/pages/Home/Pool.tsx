@@ -31,8 +31,8 @@ export const Pool: FC<PoolProps> = ({ pool, balance }) => {
 
   React.useEffect(() => {
     (async () => {
-      const stakingPrice = await getPriceInBusd(router, pool.stakingToken);
-      const earningPrice = await getPriceInBusd(router, pool.earningToken);
+      const stakingPrice = await getPriceInBusd(pool.stakingToken);
+      const earningPrice = await getPriceInBusd(pool.earningToken);
 
       const totalStaked = await getTotalStaked(provider, pool);
 

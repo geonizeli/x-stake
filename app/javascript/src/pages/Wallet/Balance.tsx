@@ -4,6 +4,8 @@ import React from "react";
 import { useFragment } from "react-relay";
 
 import { Table, TableRow } from "../../components";
+import { tokens } from "../../constants/pancake/Tokens";
+import { useBusdExpectation } from "../../hooks/useBusdExpectation";
 import { formatCake } from "../../utils/cake";
 import { getCurrencyLogo } from "../../utils/getCurrencyLogo";
 import type { Balance_wallet$key } from "./__generated__/Balance_wallet.graphql";
@@ -26,10 +28,15 @@ export const Balance: FC<Props> = ({ userRef }) => {
 
   const cakeBalance = formatCake(wallet.cakeBalance);
 
+  const { total } = useBusdExpectation(
+    tokens.cake,
+    parseFloat(wallet.cakeBalance)
+  );
+
   return (
     <div className="-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto">
       <div className="inline-block min-w-full shadow rounded-lg overflow-hidden">
-        <Table columns={["Moeda", "Saldo"]}>
+        <Table columns={["Moeda", "Saldo", "Expectativa em Dólar"]}>
           <TableRow
             items={[
               <div className="flex items-center" key="pancake coin">
@@ -45,6 +52,7 @@ export const Balance: FC<Props> = ({ userRef }) => {
                 </div>
               </div>,
               cakeBalance,
+              total,
             ]}
           />
         </Table>
